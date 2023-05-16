@@ -14,7 +14,7 @@ public class Archivo {
     public String guardarArchivo(MultipartFile archivo) {
 		String uniqueFilename = UUID.randomUUID().toString() + "_" + archivo.getOriginalFilename();
 
-		Path rootPath = Paths.get("src/").resolve(uniqueFilename);
+		Path rootPath = Paths.get("uploads/").resolve(uniqueFilename);
 		Path rootAbsolutPath = rootPath.toAbsolutePath();
 
 		log.info("rootPath: " + rootPath);

@@ -16,10 +16,10 @@ public class MvcConfig implements WebMvcConfigurer{
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		WebMvcConfigurer.super.addResourceHandlers(registry);
 
-		String resourcePath = Paths.get("src").toAbsolutePath().toUri().toString();
+		String resourcePath = Paths.get("uploads").toAbsolutePath().toUri().toString();
 		log.info(resourcePath);
 		
-		registry.addResourceHandler("/src/**")
+		registry.addResourceHandler("/uploads/**")
 		.addResourceLocations(resourcePath);
 	}
 }

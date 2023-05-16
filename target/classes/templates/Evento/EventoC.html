@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+    <head th:replace="layout/layoutMain :: head"></head>
+
+    <body data-col="2-columns" class=" 2-columns ">
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+    <div class="wrapper nav-collapsed menu-collapsed">
+        <div th:replace="layout/layoutMain :: menuLateral"></div>
+        <div th:replace="layout/layoutMain :: menuNavbar"></div>
+
+        <div class="main-panel">
+            <div class="main-content">
+                <div class="content-wrapper">
+                    <div class="container-fluid">
+                        <section id="alert">
+                            <div class="row match-height">
+                                <div class="col-sm-12">
+                                    <h2 class="content-header">EVENTOS 2023</h2>
+                                </div>
+                            </div>
+                            <!--Alert States Starts-->
+                            <div class="row match-height">
+                                <div class="col-sm-12">
+                                    <div class="row card-deck">
+                                        <div class="col-lg-4 col-sm-12" th:each="ev : ${eventos}" th:if="${ev.estado != 'X'}">
+                                            <div class="card h-100">
+                                                <th:Block th:if="${ev.habilitado != 'H'}">
+                                                    <img class="card-img-top" th:src="@{'/uploads/' + ${ev.img_evento}}" alt="Card image cap">
+                                                </th:Block>
+                                                <th:Block th:if="${ev.habilitado == 'H'}">
+                                                    <a th:href="@{'../../../../sectorC/'+ ${ev.id_evento}}">
+                                                        <img class="card-img-top" th:src="@{'/uploads/' + ${ev.img_evento}}" alt="Card image cap">
+                                                    </a>
+                                                </th:Block>
+                                                <div class="card-body">
+                                                    <div class="card-block">
+                                                    <h5 class="card-title" th:text="${ev.desc_evento}">Card title</h5>
+                                                    <p class="card-text" th:text="${ev.tipoEvento.desc_tipoEvento}"></p>
+                                                    <p class="card-text" th:text="${ev.lugar.nom_lugar}"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <th:Block th:if="${ev.habilitado != 'H'}">
+                                                        <a class="btn btn-danger btn-lg btn-block" disabled>Agotado</a>
+                                                    </th:Block>
+                                                    <th:Block th:if="${ev.habilitado == 'H'}">
+                                                        <a th:href="@{'../../../../eventoCR/'+ ${ev.id_evento}}" class="btn btn-warning btn-lg btn-block">Comprar Tickets</a>
+                                                    </th:Block>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer footer-static footer-light">
+            <p class="clearfix text-muted text-center px-2"><span>Copyright  &copy; 2018 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" id="pixinventLink" target="_blank" class="text-bold-800 primary darken-2">PIXINVENT </a>, All rights reserved. </span></p>
+            </footer>
+
+        </div>
+    </div>
+        <div th:replace="layout/layoutMain :: scripts"></div>
+    </body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head th:replace="layout/layoutMain :: head"></head>
+
+    <body data-col="2-columns" class=" 2-columns ">
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+    <div class="wrapper nav-collapsed menu-collapsed">
+        <div th:replace="layout/layoutMain :: menuLateral"></div>
+        <div th:replace="layout/layoutMain :: menuNavbar"></div>    
+        <div class="main-panel">
+            <div class="main-content">
+                <div class="content-wrapper">
+                    <div class="container-fluid">
+                        <section id="alert">
+                            <div class="row match-height">
+                                <div class="col-sm-12">
+                                    <h2 class="content-header">REGISTRO DE EVENTO</h2>
+                                </div>
+                            </div>
+                            <!--Alert States Starts-->
+                            <div class="row match-height">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="card-title-wrap bar-success">
+                                                <h1 style="font-size: 50px; color: #28D094;" class="card-title"><i class="fa fa-user"></i> Nuevo Evento</h1>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-block">
+                                                <form action="../../../../eventoF" method="POST" enctype="multipart/form-data" novalidate>
+                                                    <input type="hidden" th:field="${evento.id_evento}">
+                                                    <div class="form-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-4 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="eventRegInput1">Descripción del evento</label>                                        
+                                                                    <input onkeyup="javascript:this.value=this.value.toUpperCase();" style="text-transform:uppercase;" type="text" id="eventRegInput1" class="form-control" th:field="${evento.desc_evento}" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label>Subir Banner</label>
+                                                                    <input accept="image/png,image/jpeg" name="archivo" class="form-control-file" id="projectinput7" type="file" >
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label>Subir imagen de la sala</label>
+                                                                    <input accept="image/png,image/jpeg" name="archivo2" class="form-control-file" id="projectinput8" type="file" >
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput5">Lugar</label><br>
+                                                                    <select class="js-states form-control numero" style="width: 80%;" id="s1" name="lugar" required>
+
+                                                                    <th:block th:each="l : ${lugars}" th:if="${evento.id_evento == null}">
+                                                                        <option th:if="${l.estado != 'X'}" th:value="${l.id_lugar}" selected th:text="${l.nom_lugar}"></option>
+                                                                    </th:block>
+
+                                                                    <option th:if="${evento.id_evento == null}" selected disable hidden></option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput5">Tipo Evento</label><br>
+                                                                    <select class="js-states form-control numero" style="width: 80%;" id="s2" name="tipoEvento" required>
+
+                                                                    <th:block th:each="t : ${tipoEventos}" th:if="${evento.id_evento == null}">
+                                                                        <option th:if="${t.estado != 'X'}" th:value="${t.id_tipoEvento}" selected th:text="${t.desc_tipoEvento}"></option>
+                                                                    </th:block>
+
+                                                                    <option th:if="${evento.id_evento == null}" selected disable hidden></option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="eventRegInput1">Filas</label>                                        
+                                                                    <input type="number" id="eventRegInput67" class="form-control" th:field="${evento.filas}" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="eventRegInput1">Columnas</label>                                        
+                                                                    <input type="number" id="eventRegInput68" class="form-control" th:field="${evento.columnas}" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-sm-12">
+                                                                <button class="btn btn-success" type="submit" id="Enviar" >
+                                                                    <i class="icon-note"></i> Guardar
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row match-height">
+                                <div class="col-sm-12">
+                                    <h2 class="content-header">LISTA DE EVENTOS</h2>
+                                </div>
+                            </div>
+                            <div class="row match-height">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="card-title-wrap bar-success">
+                                                <h1 style="font-size: 50px; color: #FF9149;" class="card-title"><i class="fa fa-list-alt"></i>Eventos registrados</h1>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-block">
+                                                <table class="table display nowrap table-striped table-bordered scroll-horizontal">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>EVENTO</th>
+                                                            <th>BANNER</th>
+                                                            <th>FONDO</th>
+                                                            <th>FILAS</th>
+                                                            <th>COLUMNAS</th>
+                                                            <th>LUGAR</th>
+                                                            <th>HABILITADO</th>
+                                                            <th>TIPO EVENTO</th>
+                                                            <th>EDITAR SECTORES</th>
+                                                            <th>ESTADO</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr th:each ="e : ${eventos}" th:if="${e.estado != 'X'}">
+                                                            <td th:text = "${e.desc_evento}"></td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-outline-dark" data-toggle="modal"  th:attr="data-target='#default'+${e.id_evento}" ><i class="fa fa-eye font-medium-3"></i>&nbsp;Ver</button>
+                                                            </td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-outline-dark" data-toggle="modal"  th:attr="data-target='#default1'+${e.id_evento}" ><i class="fa fa-eye font-medium-3"></i>&nbsp;Ver</button>
+                                                            </td>
+                                                            <td th:text = "${e.filas}"></td>
+                                                            <td th:text = "${e.columnas}"></td>
+                                                            <td th:text = "${e.lugar.nom_lugar}"></td>
+                                                            <td th:text = "${e.habilitado}"></td>
+                                                            <td th:text = "${e.tipoEvento.desc_tipoEvento}"></td>
+                                                            <td>
+                                                                <a th:href="@{'../../../../eventoAR/'+ ${e.id_evento}}" type="button" class="btn btn-outline-dark" ><i class="fa fa-th"></i></a>
+                                                            </td>
+                                                            <td th:text = "${e.estado}"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <th:block  th:each ="e : ${eventos}" th:if="${e.estado != 'X'}">
+                                                    <div class="modal fade text-left" th:id="${'default'+e.id_evento}" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true" >
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content" >
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title" id="myModalLabel1">Imagen del Banner</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-12 text-center" >
+                                                                        <img th:src="@{'/src/' + ${e.img_evento}}" style="width: 100%; height: 100%;" alt="Sin banner">
+                                                                        </div>
+                                                                    </div>    
+                                                                    <div class="modal-footer text-center" >                                
+                                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>                                                                
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </th:block>
+
+                                                <th:block  th:each ="e1 : ${eventos}" th:if="${e1.estado != 'X'}">
+                                                    <div class="modal fade text-left" th:id="${'default1'+e1.id_evento}" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true" >
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content" >
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title" id="myModalLabel1">Imagen de Fondo</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-12 text-center" >
+                                                                        <img th:src="@{'/src/' + ${e1.img_sala}}" style="width: 100%; height: 100%;" alt="Sin imagen">
+                                                                        </div>
+                                                                    </div>    
+                                                                    <div class="modal-footer text-center" >                                
+                                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>                                                                
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </th:block>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                            
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer footer-static footer-light">
+            <p class="clearfix text-muted text-center px-2"><span>Copyright  &copy; 2018 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" id="pixinventLink" target="_blank" class="text-bold-800 primary darken-2">PIXINVENT </a>, All rights reserved. </span></p>
+            </footer>
+
+        </div>
+    </div>
+    <div th:replace="layout/layoutMain :: scripts"></div>
+    <script>
+        $("#s1").select2({
+            placeholder: "Seleccione...",
+            type: "number;"
+        });
+        $("#s2").select2({
+            placeholder: "Seleccione...",
+            type: "number;"
+        });
+    </script>
+    </body> 
+</html>

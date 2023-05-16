@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head th:replace="layout/layoutMain :: head"></head>
+
+    <body data-col="2-columns" class=" 2-columns ">
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+    <div class="wrapper nav-collapsed menu-collapsed">
+        <div th:replace="layout/layoutMain :: menuLateral"></div>
+        <div th:replace="layout/layoutMain :: menuNavbar"></div>    
+        <div class="main-panel">
+            <div class="main-content">
+                <div class="content-wrapper">
+                    <div class="container-fluid">
+                        <section id="alert">
+                            <div class="row match-height">
+                                <div class="col-sm-12">
+                                    <h2 class="content-header">LISTA DE PERSONAS</h2>
+                                </div>
+                            </div>
+                            <div class="row match-height">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="card-title-wrap bar-success">
+                                                <h1 style="font-size: 50px; color: #FF9149;" class="card-title"><i class="fa fa-list-alt"></i>Personas registradas</h1>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-block">
+                                                <table class="table display nowrap table-striped table-bordered scroll-horizontal">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>NOMBRE</th>
+                                                            <th>APELLIDO P</th>
+                                                            <th>APELLIDO M</th>
+                                                            <th>CI</th>
+                                                            <th>N° CELULAR</th>
+                                                            <th>USUARIO</th>
+                                                            <th>CONTRASENA</th>
+                                                            <th>ESTADO</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr th:each ="u : ${usuarios}" th:if="${u.estado != 'X'}">
+                                                            <td th:text = "${u.persona.nombre}"></td>
+                                                            <td th:text = "${u.persona.apellido_p}"></td>
+                                                            <td th:text = "${u.persona.apellido_m}"></td>
+                                                            <td th:text = "${u.persona.ci}"></td>
+                                                            <td th:text = "${u.persona.num_celular}"></td>
+                                                            <td th:text = "${u.usuario_nom}"></td>
+                                                            <td th:text = "${u.contrasena}"></td>
+                                                            <td th:text = "${u.estado}"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                            </div>
+                            <div class="row match-height">
+                                <div class="col-sm-12">
+                                    <h2 class="content-header">REGISTRO DE PERSONA</h2>
+                                </div>
+                            </div>
+                            <!--Alert States Starts-->
+                            <div class="row match-height">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="card-title-wrap bar-success">
+                                                <h1 style="font-size: 50px; color: #28D094;" class="card-title"><i class="fa fa-user"></i> Nueva persona</h1>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-block">
+                                                <form action="../../../../personaF" method="POST">
+                                                    <input type="hidden" th:field="${persona.id_persona}">
+                                                    <div class="form-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-4 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="eventRegInput1">Nombre</label>                                        
+                                                                    <input onkeyup="javascript:this.value=this.value.toUpperCase();" style="text-transform:uppercase;" type="text" id="eventRegInput1" class="form-control" th:field="${persona.nombre}" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="eventRegInput1">Apellido Paterno</label>                                        
+                                                                    <input onkeyup="javascript:this.value=this.value.toUpperCase();" style="text-transform:uppercase;" type="text" id="eventRegInput2" class="form-control" th:field="${persona.apellido_p}" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="eventRegInput1">Apellido Materno</label>                                        
+                                                                    <input onkeyup="javascript:this.value=this.value.toUpperCase();" style="text-transform:uppercase;" type="text" id="eventRegInput3" class="form-control" th:field="${persona.apellido_m}" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="eventRegInput1">CI</label>                                        
+                                                                    <input onkeyup="javascript:this.value=this.value.toUpperCase();" style="text-transform:uppercase;" type="text" id="eventRegInput4" class="form-control" th:field="${persona.ci}" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="eventRegInput1">Numero de celular</label>
+                                                                    <input type="number" id="eventRegInput5" class="form-control" th:field="${persona.num_celular}" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-sm-12">
+                                                                <button class="btn btn-success" type="submit" id="Enviar" >
+                                                                    <i class="icon-note"></i> Guardar
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer footer-static footer-light">
+            <p class="clearfix text-muted text-center px-2"><span>Copyright  &copy; 2018 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" id="pixinventLink" target="_blank" class="text-bold-800 primary darken-2">PIXINVENT </a>, All rights reserved. </span></p>
+            </footer>
+
+        </div>
+    </div>
+    <div th:replace="layout/layoutMain :: scripts"></div>
+    </body> 
+</html>

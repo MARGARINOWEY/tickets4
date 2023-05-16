@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+    <head th:replace="layout/layoutMain :: head"></head>
+
+    <body data-col="2-columns" class=" 2-columns ">
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+    <div class="wrapper nav-collapsed menu-collapsed">
+        <div th:replace="layout/layoutMain :: menuLateral"></div>
+        <div th:replace="layout/layoutMain :: menuNavbar"></div>
+
+        <div class="main-panel">
+            <div class="main-content">
+                <div class="content-wrapper">
+                    <div class="container-fluid">
+                        <section id="alert">
+                            <div class="row match-height">
+                                <div class="col-sm-12">
+                                    <h2 class="content-header">Administrar Compras</h2>
+                                </div>
+                            </div>
+                            <!--Alert States Starts-->
+                            <div class="row match-height">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="card-title-wrap bar-success">
+                                                <h4 class="card-title">Lista de Compras de los clientes</h4>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-block">
+                                                <table class="table display nowrap table-striped table-bordered scroll-horizontal">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>NOMBRE DEL CLIENTE</th>
+                                                            <th>TICKETS</th>
+                                                            <th>MONTO A PAGAR</th>
+                                                            <th>COMPROBANTE</th>
+                                                            <th>FECHA COMPRA</th>
+                                                            <th>ESTADO DE LA COMPRA</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr th:each ="c : ${compras}">
+                                                            <td th:text = "${c.usuario.persona.nombre+' '+c.usuario.persona.apellido_p+' '+c.usuario.persona.apellido_m}"></td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-outline-dark" data-toggle="modal"  th:attr="data-target='#default'+${c.id_compra}" ><i class="fa fa-eye font-medium-3"></i>&nbsp;Ver</button>
+                                                            </td>
+                                                            <td th:text = "${c.monto_pagar+' Bs.'}"></td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-outline-dark" data-toggle="modal"  th:attr="data-target='#default2'+${c.id_compra}" ><i class="fa fa-eye font-medium-3"></i>&nbsp;Comprobante</button>
+                                                            </td>
+                                                            <td th:text = "${c.fecha_compra}"></td>
+                                                            <td>
+                                                                <th:block th:if="${c.estado == 'NT'}">
+                                                                    <button style="width: 100%;" type="button" class="btn btn-primary"><i class="icon-clock font-medium-3"></i>&nbsp;No terminado</button>
+                                                                </th:block>
+                                                                <th:block th:if="${c.estado == 'P'}">
+                                                                    <a th:href="${'../../../../Compra_editarA/'+c.id_compra}" style="width: 100%;" type="button" class="btn btn-warning"><i class="icon-info font-medium-3"></i>&nbsp;Pendiente</a>
+                                                                </th:block>
+                                                                <th:block th:if="${c.estado == 'V'}">
+                                                                    <button style="width: 100%;" type="button" class="btn btn-success"><i class="icon-check font-medium-3"></i>&nbsp;Verificado</button>
+                                                                </th:block>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <th:block  th:each ="c1 : ${compras}">
+                                                    <div class="modal fade text-left" th:id="${'default'+c1.id_compra}" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true" >
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content" >
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title" id="myModalLabel1">Tickets Comprados</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-12" >
+                                                                            <div class="table-responsive">
+                                                                                <table class="table display nowrap table-striped table-bordered">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>EVENTO</th>
+                                                                                            <th>SECTOR</th>
+                                                                                            <th>ESTADO DE UTILIZADO</th>
+                                                                                            <th>ESTADO DE VALIDADO</th>
+                                                                                            <th>FECHA DE ULTIMO USO</th>
+                                                                                            <th>ESTADO</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <tr th:each ="t : ${tickets}" th:if="${t.compra.id_compra == c1.id_compra}">
+                                                                                            <td th:text = "${t.sector.evento.desc_evento}"></td>
+                                                                                            <td th:text = "${t.sector.desc_sector}"></td>
+                                                                                            <td th:text = "${t.utilizada}"></td>
+                                                                                            <td th:text = "${t.valida}"></td>
+                                                                                            <td th:text = "${t.fecha_uso}"></td>
+                                                                                            <td th:text = "${t.estado}"></td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                    </div>    
+                                                                    <div class="modal-footer text-center" >                                
+                                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>                                                                
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </th:block>
+                                                <th:block  th:each ="c2 : ${compras}">
+                                                    <div class="modal fade text-left" th:id="${'default2'+c2.id_compra}" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true" >
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content" >
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title" id="myModalLabel1">Imagen del bauncher</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                
+                                                                <div class="modal-body">
+                                                                    <th:block th:if="${c2.img_comprobante == null}">
+                                                                        <h4>El comprador tadavia no cargo su comprobante</h4>
+                                                                    </th:block>
+                                                                    <th:block th:if="${c2.img_comprobante != null}">
+                                                                        <div class="row">
+                                                                            <div class="col-12 text-center" >
+                                                                            <img th:src="@{'/uploads/' + ${c2.img_comprobante}}" style="width: 100%; height: 100%;" alt="Sin imagen">
+                                                                            </div>
+                                                                        </div>    
+                                                                    </th:block>
+                                                                    
+                                                                    <div class="modal-footer text-center" >                                
+                                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>                                                                
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </th:block>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer footer-static footer-light">
+            <p class="clearfix text-muted text-center px-2"><span>Copyright  &copy; 2018 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" id="pixinventLink" target="_blank" class="text-bold-800 primary darken-2">PIXINVENT </a>, All rights reserved. </span></p>
+            </footer>
+
+        </div>
+    </div>
+        <div th:replace="layout/layoutMain :: scripts"></div>
+    </body>
+</html>

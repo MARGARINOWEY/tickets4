@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+    <head th:replace="layout/layoutMain :: head"></head>
+
+    <body data-col="2-columns" class=" 2-columns ">
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+    <div class="wrapper nav-collapsed menu-collapsed">
+        <div th:replace="layout/layoutMain :: menuLateral"></div>
+        <div th:replace="layout/layoutMain :: menuNavbar"></div>
+
+        <div class="main-panel">
+            <div class="main-content">
+                <div class="content-wrapper">
+                    <div class="container-fluid">
+                        <section id="alert">
+                            <div class="row match-height">
+                                <div class="col-sm-12">
+                                    <h2 class="content-header">Alerts</h2>
+                                </div>
+                            </div>
+                            <!--Alert States Starts-->
+                            <div class="row match-height">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="card-title-wrap bar-success">
+                                                <h4 class="card-title">Alert States</h4>
+                                            </div>
+                                            <p>Wrap any text and an optional dismiss button in <code>.alert</code> and one of the four contextual classes (e.g., <code>.alert-COLOR</code>) for basic colored alert messages.</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-block">
+                                                <form action="../../../../sectorF" method="POST" enctype="multipart/form-data" novalidate>
+                                                    <input type="hidden" th:field="${sector.id_sector}">
+                                                    <div class="form-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-4 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="eventRegInput1">Descripcion del Sector</label>                                        
+                                                                    <input onkeyup="javascript:this.value=this.value.toUpperCase();" style="text-transform:uppercase;" type="text" id="eventRegInput1" class="form-control" th:field="${sector.desc_sector}" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="eventRegInput1">Precio Unitario</label>                                        
+                                                                    <input onkeyup="javascript:this.value=this.value.toUpperCase();" style="text-transform:uppercase;" type="text" id="eventRegInput3" class="form-control" th:field="${sector.precio_unitario}" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-4 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="eventRegInput1">Filas</label>                                        
+                                                                    <input onkeyup="javascript:this.value=this.value.toUpperCase();" style="text-transform:uppercase;" type="text" id="eventRegInput4" class="form-control" th:field="${sector.filas}" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="eventRegInput1">Columnas</label>                                        
+                                                                    <input onkeyup="javascript:this.value=this.value.toUpperCase();" style="text-transform:uppercase;" type="text" id="eventRegInput5" class="form-control" th:field="${sector.columnas}" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label>Subir imagen</label>
+                                                                    <input accept="image/png,image/jpeg" name="archivo" class="form-control-file" id="projectinput7" type="file" >
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput5">Evento</label><br>
+                                                                    <select class="js-states form-control numero" style="width: 80%;" id="s1" name="evento" required>
+
+                                                                    <th:block th:each="e : ${eventos}" th:if="${sector.id_sector == null}">
+                                                                        <option th:if="${e.estado != 'X'}" th:value="${e.id_evento}" selected th:text="${e.desc_evento}"></option>
+                                                                    </th:block>
+
+                                                                    <option th:if="${sector.id_sector == null}" selected disable hidden></option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-sm-12">
+                                                                <button class="btn btn-success" type="submit" id="Enviar" >
+                                                                    <i class="icon-note"></i> Guardar
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer footer-static footer-light">
+            <p class="clearfix text-muted text-center px-2"><span>Copyright  &copy; 2018 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" id="pixinventLink" target="_blank" class="text-bold-800 primary darken-2">PIXINVENT </a>, All rights reserved. </span></p>
+            </footer>
+
+        </div>
+    </div>
+        <div th:replace="layout/layoutMain :: scripts"></div>
+    </body>
+</html>

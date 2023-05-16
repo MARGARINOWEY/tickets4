@@ -16,7 +16,7 @@
                         <section id="alert">
                             <div class="row match-height">
                                 <div class="col-sm-12">
-                                    <h2 class="content-header">Administrar Lugares</h2>
+                                    <h2 class="content-header">Administrar Tipos de Eventos</h2>
                                 </div>
                             </div>
                             <!--Alert States Starts-->
@@ -25,25 +25,19 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <div class="card-title-wrap bar-success">
-                                                <h4 class="card-title">Lugar</h4>
+                                                <h4 class="card-title">Tipo de Evento</h4>
                                             </div>
                                         </div>
                                         <div class="card-body">
                                             <div class="card-block">
-                                                <form action="../../../../lugarF" method="POST">
-                                                    <input type="hidden" th:field="${lugar.id_lugar}">
+                                                <form action="../../../../tipoEventoF" method="POST">
+                                                    <input type="hidden" th:field="${tipoEvento.id_tipoEvento}">
                                                     <div class="form-body">
                                                         <div class="row">
-                                                            <div class="col-lg-6 col-sm-12">
+                                                            <div class="col-lg-12 col-sm-12">
                                                                 <div class="form-group">
-                                                                    <label for="eventRegInput1">Descripcion del Lugar</label>                                        
-                                                                    <input type="text" id="eventRegInput1" class="form-control" th:field="${lugar.nom_lugar}" required>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 col-sm-12">
-                                                                <div class="form-group">
-                                                                    <label for="eventRegInput1">Direccion del lugar</label>                                        
-                                                                    <input type="text" id="eventRegInput1" class="form-control" th:field="${lugar.direccion}" required>
+                                                                    <label for="eventRegInput1">Descripcion del Tipo de Evento</label>                                        
+                                                                    <input type="text" id="eventRegInput1" class="form-control" th:field="${tipoEvento.desc_tipoEvento}" required>
                                                                 </div>
                                                             </div>
                                                         </div>

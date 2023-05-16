@@ -2,6 +2,7 @@ package com.example.demo.controllers.TicketsController;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -43,6 +44,7 @@ public class TickeController {
 		usuario = usuarioService.findOne(usuario.getId_usuario()); // Recuperamos Usuario de BD
         Sector sector = sectorService.findOne(id_sector);
         int x = Integer.parseInt(sector.getAsientosDisponibles());
+        Random numAleatorio = new Random();
         if (num_asientos <= x) {
 
             int z = x - num_asientos;
@@ -63,6 +65,7 @@ public class TickeController {
                 Ticket ticket = new Ticket();
                 ticket.setCompra(compra);
                 ticket.setSector(sector);
+                ticket.setCod(numAleatorio.nextInt(900000-100000+1) + 100000);
                 ticket.setEstado("A"); // anular el ticket 
                 ticket.setValida("P");  // validacion del pago
                 ticket.setUtilizada("N"); // si ingreso o no

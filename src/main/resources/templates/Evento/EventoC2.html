@@ -28,25 +28,34 @@
                                         <div class="card-body">
                                             <div class="card-block">
                                                 <div class="row">
-                                                    <div class="col-lg-9 col-sm-12">
+                                                    <div class="col-lg-6 col-sm-12">
                                                         <div class="table-responsive" >
-                                                            <table class="table table-bordered" style="text-align:center;" height="100" width="100">
+                                                            <table class="table table-bordered" style="text-align:center;">
                                                                 <thead>
                                                                     <tr>
                                                                         <th th:each="s : ${#numbers.sequence(1,eventoc)}" th:text="${s}">1</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody th:style="'background-image: url('+ @{'/uploads/'+ ${evento.img_sala}} + ');background-repeat:no-repeat; background-size:100% 100%; width: 100%; height: 100%;'" >
+                                                                <tbody th:style="'background-image: url('+ @{'/uploads/'+ ${evento.img_sala}} + ');background-repeat:no-repeat; background-size:100% 100%;'" >
                                                                     <tr th:each="f : ${#numbers.sequence(1,eventof)}">
-                                                                        <td th:each="c : ${#numbers.sequence(1,eventoc)}" style="padding: 20px 0.5px 20px 0.5px;" >
-                                                                            <div th:each="l : ${sectores}" th:if="${l.evento.id_evento == evento.id_evento && l.filas == f && l.columnas == c}">
-                                                                                <th:block th:if="${l.habilitado == 'D' || l.habilitado == '0'}">
-                                                                                    <a class="success p-0 " style="font-size: 30px; opacity: 0.01;" th:text="${'🔴'}"></a>
+                                                                        <td th:each="c : ${#numbers.sequence(1,eventoc)}" style="padding: 0px 8px 0px 8px;">
+                                                                            <th:block th:each="l : ${sectores}" th:if="${l.evento.id_evento == evento.id_evento && l.filas == f && l.columnas == c}">
+                                                                                <th:block th:if="${l.desc_sector == '0' && l.habilitado == 'D'}">
+
+                                                                                    <a class="btn btn-round btn-danger" style="font-size: 30px; opacity: 0.01; margin: 0;" ><p th:text="${l.desc_sector}" style="margin: 0;"></p></a>
+
                                                                                 </th:block>
-                                                                                <th:block th:if="${l.habilitado == 'H'}">
-                                                                                    <a class="success p-0 " data-toggle="modal"  th:attr="data-target='#default'+${l.id_sector}" style="font-size: 30px;" th:text="${'🟢'}"></a>
+                                                                                <th:block th:if="${l.habilitado == 'H' && l.asientosDisponibles == '0' }">
+
+                                                                                    <a class="btn btn-round btn-danger" style="font-size: 30px; margin: 0; opacity: 0.75; "><p th:text="${l.desc_sector}" style="margin: 0;"></p></a>
+
                                                                                 </th:block>
-                                                                            </div>
+                                                                                <th:block th:if="${l.habilitado == 'H' && l.asientosDisponibles != '0'}">
+
+                                                                                    <a class="btn btn-round btn-success" style="font-size: 30px; margin: 0; opacity: 0.75;" data-toggle="modal"  th:attr="data-target='#default'+${l.id_sector}" ><p th:text="${l.desc_sector}" style="margin: 0;"></p></a>
+
+                                                                                </th:block>
+                                                                            </th:block>
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
@@ -63,7 +72,7 @@
                                                                             </div>
                                                                             
                                                                             <div class="modal-body">
-                                                                                <div class="card gradient-orange-amber">
+                                                                                <div class="card gradient-light-blue-cyan">
                                                                                     <div class="card-body">
                                                                                         <div class="px-3 py-3">
                                                                                             <div class="row media">
@@ -88,7 +97,7 @@
                                                                                                             
                                                                                                             <div class="form-group text-center">
                                                                                                                 <div class="col-md-12">
-                                                                                                                    <button class="btn btn-primary px-4 py-2 text-uppercase white font-small-4 box-shadow-2 border-0" type="submit">Comprar ticket</button>
+                                                                                                                    <button class="btn btn-success px-4 py-2 text-uppercase white font-small-4 box-shadow-2 border-0" type="submit">Comprar ticket</button>
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                         </form>
@@ -243,14 +252,6 @@
                 </div>
             </div>
         </div>
-
-        <footer class="footer footer-static footer-light">
-            <p class="clearfix text-muted text-center px-2"><span>Copyright &copy; 2018 <a
-                        href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" id="pixinventLink"
-                        target="_blank" class="text-bold-800 primary darken-2">PIXINVENT </a>, All rights reserved.
-                </span></p>
-        </footer>
-
     </div>
     </div>
     <div th:replace="layout/layoutMain :: scripts"></div>

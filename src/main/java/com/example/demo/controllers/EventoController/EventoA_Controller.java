@@ -73,4 +73,28 @@ public class EventoA_Controller {
 		return "redirect:/eventoAR/"+id_evento;
 		
 	}
+
+	@RequestMapping(value = "/eliminiarEventoA/{id_evento}")
+	public String eliminiarEventoA(@PathVariable("id_evento")Long id_evento, Model model){
+		Evento evento = eventoService.findOne(id_evento);
+		model.addAttribute("evento", evento);
+		evento.setEstado("X");
+		evento.setHabilitado("D");
+		eventoService.save(evento);
+		return "redirect:/eventoR";
+	}
+
+	@RequestMapping(value = "/habilitarEvento/{id_evento}")
+	public String habilitarEvento(@PathVariable("id_evento")Long id_evento, Model model){
+		Evento evento = eventoService.findOne(id_evento);
+		model.addAttribute("evento", evento);
+		if (evento.getHabilitado().equals("H")) {
+			evento.setHabilitado("D");
+			eventoService.save(evento);
+		}else{
+			evento.setHabilitado("H");
+			eventoService.save(evento);
+		}
+		return "redirect:/eventoR";
+	}
 }

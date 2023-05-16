@@ -1,4 +1,4 @@
-package com.example.demo.controllers.Lugar;
+package com.example.demo.controllers.TipoeventoController;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,32 +17,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.entity.Lugar;
-import com.example.demo.service.ILugarService;
+import com.example.demo.entity.TipoEvento;
+import com.example.demo.service.ITipoEventoService;
 
 @Controller
-public class LugarController {
+public class TipoEventoA_Controller {
     @Autowired
-	private ILugarService lugarService;
+	private ITipoEventoService tipoEventoService;
 
-    @RequestMapping(value = "/lugarR", method = RequestMethod.GET) // Pagina principal
-	public String ComprasAR(@Validated Lugar lugar,Model model, RedirectAttributes flash, HttpServletRequest request) {
+    @RequestMapping(value = "/tipoEventoR", method = RequestMethod.GET) // Pagina principal
+	public String ComprasAR(@Validated TipoEvento tipoEvento,Model model, RedirectAttributes flash, HttpServletRequest request) {
 		if (request.getSession().getAttribute("persona") != null) {
             
             
-			return "Lugar/lugarVista";
+			return "TipoEvento/tipoEventoA";
 		} else {
 			return "redirect:loginR";
 		}
 	}
-	@RequestMapping(value = "/lugarF", method = RequestMethod.POST) // Enviar datos de Registro a Lista
-	public String lugarF(@Validated Lugar lugar, RedirectAttributes flash, HttpServletRequest request) { //validar los datos capturados (1)
 
-		lugar.setEstado("A");
-		lugarService.save(lugar);
+    @RequestMapping(value = "/tipoEventoF", method = RequestMethod.POST) // Enviar datos de Registro a Lista
+	public String lugarF(@Validated TipoEvento tipoEvento, RedirectAttributes flash, HttpServletRequest request) { //validar los datos capturados (1)
+
+		tipoEvento.setEstado("A");
+		tipoEventoService.save(tipoEvento);
 
 		flash.addAttribute("success", "Registro realizado con exito");
 
-		return "redirect:/lugarR";
+		return "redirect:/tipoEventoR";
 	}
 }

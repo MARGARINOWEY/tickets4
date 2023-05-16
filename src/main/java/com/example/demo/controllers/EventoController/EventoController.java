@@ -75,8 +75,8 @@ public class EventoController {
 				sector.setAsientosDisponibles("5");
 				sector.setFilas(i);
 				sector.setColumnas(j);
-				sector.setDesc_sector("ninguna");
-				sector.setPrecio_unitario("10");
+				sector.setDesc_sector("0");
+				sector.setPrecio_unitario("140");
 				sector.setHabilitado("D");
 				sector.setEvento(evento);
 				sectorService.save(sector);

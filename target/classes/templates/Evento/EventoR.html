@@ -38,31 +38,13 @@
                                                                     <input onkeyup="javascript:this.value=this.value.toUpperCase();" style="text-transform:uppercase;" type="text" id="eventRegInput1" class="form-control" th:field="${evento.desc_evento}" required>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-6 col-sm-12">
-                                                                <div class="form-group">
-                                                                    <label>Subir Banner</label>
-                                                                    <input accept="image/png,image/jpeg" name="archivo" class="form-control-file" id="projectinput7" type="file" >
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-6 col-sm-12">
-                                                                <div class="form-group">
-                                                                    <label>Subir imagen de la sala</label>
-                                                                    <input accept="image/png,image/jpeg" name="archivo2" class="form-control-file" id="projectinput8" type="file" >
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-12 col-sm-12">
+                                                            <div class="col-lg-8 col-sm-12">
                                                                 <div class="form-group">
                                                                     <label for="projectinput5">Lugar</label><br>
-                                                                    <select class="js-states form-control numero" style="width: 80%;" id="s1" name="lugar" required>
+                                                                    <select class="js-states form-control numero" style="width: 100%;" id="s1" name="lugar" required>
 
                                                                     <th:block th:each="l : ${lugars}" th:if="${evento.id_evento == null}">
-                                                                        <option th:if="${l.estado != 'X'}" th:value="${l.id_lugar}" selected th:text="${l.nom_lugar}"></option>
+                                                                        <option th:if="${l.estado != 'X'}" th:value="${l.id_lugar}" selected th:text="${l.nom_lugar+'--'+l.direccion}"></option>
                                                                     </th:block>
 
                                                                     <option th:if="${evento.id_evento == null}" selected disable hidden></option>
@@ -71,10 +53,10 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-lg-12 col-sm-12">
+                                                            <div class="col-lg-4 col-sm-12">
                                                                 <div class="form-group">
                                                                     <label for="projectinput5">Tipo Evento</label><br>
-                                                                    <select class="js-states form-control numero" style="width: 80%;" id="s2" name="tipoEvento" required>
+                                                                    <select class="js-states form-control numero" style="width: 100%;" id="s2" name="tipoEvento" required>
 
                                                                     <th:block th:each="t : ${tipoEventos}" th:if="${evento.id_evento == null}">
                                                                         <option th:if="${t.estado != 'X'}" th:value="${t.id_tipoEvento}" selected th:text="${t.desc_tipoEvento}"></option>
@@ -84,25 +66,38 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-6 col-sm-12">
+                                                            <div class="col-lg-1 col-sm-12">
                                                                 <div class="form-group">
                                                                     <label for="eventRegInput1">Filas</label>                                        
                                                                     <input type="number" id="eventRegInput67" class="form-control" th:field="${evento.filas}" required>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-6 col-sm-12">
+                                                            <div class="col-lg-1 col-sm-12">
                                                                 <div class="form-group">
                                                                     <label for="eventRegInput1">Columnas</label>                                        
                                                                     <input type="number" id="eventRegInput68" class="form-control" th:field="${evento.columnas}" required>
                                                                 </div>
                                                             </div>
+                                                            
                                                         </div>
-                                                        
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label>Subir Banner</label>
+                                                                    <input accept="image/png,image/jpeg" name="archivo" class="form-control-file" id="projectinput7" type="file" >
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label>Subir imagen de la sala</label>
+                                                                    <input accept="image/png,image/jpeg" name="archivo2" class="form-control-file" id="projectinput8" type="file" >
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                         <div class="row">
                                                             <div class="col-lg-12 col-sm-12">
-                                                                <button class="btn btn-success" type="submit" id="Enviar" >
+                                                                <button class="btn btn-success" type="submit" id="Enviar" style="width: 100%;">
                                                                     <i class="icon-note"></i> Guardar
                                                                 </button>
                                                             </div>
@@ -143,6 +138,7 @@
                                                             <th>TIPO EVENTO</th>
                                                             <th>EDITAR SECTORES</th>
                                                             <th>ESTADO</th>
+                                                            <th>OPERACIONES</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -157,12 +153,29 @@
                                                             <td th:text = "${e.filas}"></td>
                                                             <td th:text = "${e.columnas}"></td>
                                                             <td th:text = "${e.lugar.nom_lugar}"></td>
-                                                            <td th:text = "${e.habilitado}"></td>
+                                                            <td>
+                                                                <tth:block th:if="${e.habilitado == 'H'}">
+                                                                    <a style="width: 100%;" th:href="${'../../../../habilitarEvento/'+e.id_evento}" type="button" class="btn btn-success">Habilitado</a>
+                                                                </tth:block>
+                                                                <tth:block th:if="${e.habilitado == 'D'}">
+                                                                    <a style="width: 100%;" th:href="${'../../../../habilitarEvento/'+e.id_evento}" type="button" class="btn btn-danger">Desabilitado</a>
+                                                                </tth:block>
+                                                            </td>
                                                             <td th:text = "${e.tipoEvento.desc_tipoEvento}"></td>
                                                             <td>
-                                                                <a th:href="@{'../../../../eventoAR/'+ ${e.id_evento}}" type="button" class="btn btn-outline-dark" ><i class="fa fa-th"></i></a>
+                                                                <a style="width: 100%;" th:href="@{'../../../../eventoAR/'+ ${e.id_evento}}" type="button" class="btn btn-outline-dark" ><i class="fa fa-th"></i></a>
                                                             </td>
                                                             <td th:text = "${e.estado}"></td>
+                                                            <td>
+                                                                    <button type="button" class="btn btn-danger" style="width: 100%;">
+                                                                        <a th:href="@{'../../../../eliminiarEventoA/'+ ${e.id_evento}}"  class="white"><i class="fa fa-trash-o"></i></a>
+                                                                    </button>
+                                                                    <!--
+                                                                    <button type="button" class="btn btn-warning">
+                                                                        <a data-toggle="modal"  th:attr="data-target='#default'+${l.id_sector}" class="white"><i class="fa fa-cog"></i></a>
+                                                                    </button>
+                                                                    -->
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -218,6 +231,52 @@
                                                         </div>
                                                     </div>
                                                 </th:block>
+                                                <!--
+                                                <th:block  th:each ="eve : ${eventos}">
+                                                    <div class="modal fade text-left" th:id="${'default'+eve.id_eventos}" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true" >
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content" >
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title" id="myModalLabel1" th:text="${'Detalle: '+eve.desc_evento}"></h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                
+                                                                <div class="modal-body">
+                                                                    <div class="card gradient-orange-amber">
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                                                                <div class="col-12 text-align  ">
+                                                                                    <div class="media-body text-white text-left">
+                                                                                        <form  th:action="@{'../../../../ticketF/'+${l1.id_sector}}" method="POST">
+                                                                                            <div class="row">
+                                                                                                <div class="col-12 form-group">
+                                                                                                    <input type="number" max="50" min="1" class="form-control form-control-lg" placeholder="Numero de asientos para Comprar" name="num_asientos" required>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            
+                                                                                            
+                                                                                            <div class="form-group text-center">
+                                                                                                <div class="col-md-12">
+                                                                                                    <button class="btn btn-primary px-4 py-2 text-uppercase white font-small-4 box-shadow-2 border-0" type="submit">Comprar ticket</button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer text-center" >     
+                                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>                                                                
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </th:block>
+                                                -->
                                             </div>
                                         </div>
                                     </div>

@@ -2,9 +2,12 @@
 <html lang="en">
     <head th:replace="layout/layoutMain :: head"></head>
 
-    <body data-col="2-columns" class=" 2-columns ">
+    <body data-col="2-columns" class=" 2-columns hidden">
+        <div class="centreadooo" id="onload">
+            <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        </div>
     <!-- ////////////////////////////////////////////////////////////////////////////-->
-    <div class="wrapper nav-collapsed menu-collapsed">
+    <div class="wrapper">
         <div th:replace="layout/layoutMain :: menuLateral"></div>
         <div th:replace="layout/layoutMain :: menuNavbar"></div>    
         <div class="main-panel">
@@ -23,7 +26,7 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <div class="card-title-wrap bar-success">
-                                                <h1 style="font-size: 50px; color: #28D094;" class="card-title"><i class="fa fa-user"></i> Nuevo Evento</h1>
+                                                <h4 style="color: #28D094;" class="card-title"></i> Nuevo Evento</h4>
                                             </div>
                                         </div>
                                         <div class="card-body">
@@ -120,7 +123,7 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <div class="card-title-wrap bar-success">
-                                                <h1 style="font-size: 50px; color: #FF9149;" class="card-title"><i class="fa fa-list-alt"></i>Eventos registrados</h1>
+                                                <h4 style="color: #FF9149;" class="card-title"><i class="fa fa-list-alt"></i>Eventos registrados</h4>
                                             </div>
                                         </div>
                                         <div class="card-body">
@@ -198,7 +201,8 @@
                                                                         </div>
                                                                     </div>    
                                                                     <div class="modal-footer text-center" >                                
-                                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>                                                                
+                                                                        <a href="#" th:href="@{'../../../../uploads/'+${e.img_evento}}" class="btn btn-warning" download>Descargar Imagen</a>
+                                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -223,7 +227,8 @@
                                                                         <img th:src="@{'/uploads/' + ${e1.img_sala}}" style="width: 100%; height: 100%;" alt="Sin imagen">
                                                                         </div>
                                                                     </div>    
-                                                                    <div class="modal-footer text-center" >                                
+                                                                    <div class="modal-footer text-center" >              
+                                                                        <a href="#" th:href="@{'../../../../uploads/'+${e1.img_sala}}" class="btn btn-warning" download>Descargar Imagen</a>                  
                                                                         <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>                                                                
                                                                     </div>
                                                                 </div>
@@ -286,11 +291,6 @@
                     </div>
                 </div>
             </div>
-
-            <footer class="footer footer-static footer-light">
-            <p class="clearfix text-muted text-center px-2"><span>Copyright  &copy; 2018 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" id="pixinventLink" target="_blank" class="text-bold-800 primary darken-2">PIXINVENT </a>, All rights reserved. </span></p>
-            </footer>
-
         </div>
     </div>
     <div th:replace="layout/layoutMain :: scripts"></div>
@@ -303,6 +303,12 @@
             placeholder: "Seleccione...",
             type: "number;"
         });
+    </script>
+    <script>
+        window.onload = function() {
+            $('#onload').fadeOut();
+            $('body').removeClass('hidden');
+        }
     </script>
     </body> 
 </html>

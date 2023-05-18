@@ -13,22 +13,41 @@
                         <section id="alert">
                             <div class="row match-height">
                                 <div class="col-sm-12">
-                                    <h2 class="content-header">Alerts</h2>
+                                    <h2 class="content-header">Tickets</h2>
                                 </div>
                             </div>
                             <!--Alert States Starts-->
-                            <div class="row match-height">
-                                <div class="col-md-12">
-                                    <div class="card">
+                            <div class="row match-height" th:each="t : ${tickets}" th:if="${t.compra.id_compra == compra.id_compra}">
+                                <div class="col-12" >
+                                    <div class="card" style="border-style: dashed; border-width: 4px;">
                                         <div class="card-header">
                                             <div class="card-title-wrap bar-success">
-                                                <h4 class="card-title">Alert States</h4>
+                                                <h4 class="card-title" th:text="${'ID: '+t.cod}"></h4>
                                             </div>
-                                            <p>Wrap any text and an optional dismiss button in <code>.alert</code> and one of the four contextual classes (e.g., <code>.alert-COLOR</code>) for basic colored alert messages.</p>
                                         </div>
-                                        <div class="card-body">
+                                        <div class="card-body" >
                                             <div class="card-block">
-                                                
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h2 th:text="${'Mesa: '+t.sector.desc_sector}"></h2>
+                                                        <h5><strong>Evento:</strong></h5>
+                                                        <h6 th:text="${t.sector.evento.desc_evento}"></h6>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <h5><strong>Nombre del comprador:</strong></h5>
+                                                        <p th:text="${compra.usuario.persona.nombre+' '+compra.usuario.persona.apellido_p+' '+compra.usuario.persona.apellido_m}"></p>
+                                                        <h5><strong>Fecha de compra:</strong></h5>
+                                                        <p th:text="${compra.fecha_compra}"></p>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div style='text-align: right;'>
+                                                            <img alt='Barcode Generator TEC-IT' th:src="${'https://barcode.tec-it.com/barcode.ashx?data=http%3A%2F%2Flocalhost%3A8080%2FticketEscaneado%2F'+t.cod+'&code=MobileQRCode&eclevel=L&modulewidth=1.5'}"/>
+                                                            <!--<img alt='Barcode Generator TEC-IT'
+                                                                th:src="${'https://barcode.tec-it.com/barcode.ashx?data='+t.cod+'&code=Code25IL&eclevel=M'}"/>
+                                                            -->
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -42,5 +61,10 @@
         </div>
     </div>
         <div th:replace="layout/layoutMain :: scripts"></div>
+        <script>
+            window.onload = function() {
+                window.print();
+            }
+        </script>
     </body>
 </html>

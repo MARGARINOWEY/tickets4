@@ -2,9 +2,12 @@
 <html lang="en">
     <head th:replace="layout/layoutMain :: head"></head>
 
-    <body data-col="2-columns" class=" 2-columns ">
+    <body data-col="2-columns" class=" 2-columns hidden">
+        <div class="centreadooo" id="onload">
+            <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        </div>
     <!-- ////////////////////////////////////////////////////////////////////////////-->
-    <div class="wrapper nav-collapsed menu-collapsed">
+    <div class="wrapper">
         <div th:replace="layout/layoutMain :: menuLateral"></div>
         <div th:replace="layout/layoutMain :: menuNavbar"></div>    
         <div class="main-panel">
@@ -47,5 +50,11 @@
         </div>
     </div>
     <div th:replace="layout/layoutMain :: scripts"></div>
+    <script>
+        window.onload = function() {
+            $('#onload').fadeOut();
+            $('body').removeClass('hidden');
+        }
+    </script>
     </body> 
 </html>

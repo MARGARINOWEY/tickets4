@@ -3,7 +3,10 @@
 
 <head th:replace="layout/layoutMain :: head"></head>
 
-<body data-col="2-columns" class=" 2-columns ">
+<body data-col="2-columns" class=" 2-columns hidden">
+    <div class="centreadooo" id="onload">
+        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
     <!-- ////////////////////////////////////////////////////////////////////////////-->
     <div class="wrapper nav-collapsed menu-collapsed">
         <div th:replace="layout/layoutMain :: menuLateral"></div>
@@ -256,13 +259,9 @@
     </div>
     <div th:replace="layout/layoutMain :: scripts"></div>
     <script>
-        const seatsContainer = document.getElementById('seats-container');
-        const seats = seatsContainer.getElementsByClassName('seat');
-        
-        for (let i = 0; i < seats.length; i++) {
-            seats[i].addEventListener('click', function() {
-                this.classList.toggle('selected');
-            });
+        window.onload = function() {
+            $('#onload').fadeOut();
+            $('body').removeClass('hidden');
         }
     </script>
 </body>

@@ -26,32 +26,13 @@
         <link rel="stylesheet" type="text/css" href="../../../../app-assets/vendors/css/tables/datatable/datatables.min.css">
         <link rel="stylesheet" type="text/css" href="../../../../app-assets/vendors/css/sweetalert2.min.css">
         <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/selectBuscar.css">
-        <style>
-            .seat {
-                width: 150px;
-                height: 150px;
-                background-color: #ccc;
-                margin: 5px;                
-                display: inline-block;
-                cursor: pointer;
-                opacity: 0.4;
-            }
-            
-            .seat.selected {
-                background-color: #ff0000;
-            }
-            @media (max-width: 480px) {
-            .seat {
-                width: 15px;
-                height: 15px;
-                margin: 0.05px;
-            }
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="../../../../app-assets/css/preload.css">
     </head>
 <body>
     <!-- =====================BARRA DE NAVEGACION LATERAL===================== -->
     <div data-active-color="white" data-background-color="black" data-image="../../../../app-assets/img/sidebar-bg/01.jpg" class="app-sidebar" th:fragment="menuLateral">
+        
+        
         <div class="sidebar-header">
         <div class="logo clearfix"><a href="index.html" class="logo-text float-left">
             <div class="logo-img"><img src="../../../../app-assets/img/logo.png" alt="Convex Logo"/></div><span class="text align-middle">CONVEX2</span></a><a id="sidebarToggle" href="javascript:;" class="nav-toggle d-none d-sm-none d-md-none d-lg-block"><i data-toggle="expanded" class="ft-disc toggle-icon"></i></a><a id="sidebarClose" href="javascript:;" class="nav-close d-block d-md-block d-lg-none d-xl-none"><i class="ft-circle"></i></a></div>
@@ -62,24 +43,23 @@
             <li class="has-sub nav-item" th:if="${session.usuario.estado == 'A'}">
                 <a>
                     <i class="icon-home"></i>
-                    <span data-i18n="" class="menu-title">Registros y Listas</span>
-                    <span class="tag badge badge-pill badge-danger mt-1">5</span>
+                    <span data-i18n="" class="menu-title">Administración</span>
                 </a>
                 <ul class="menu-content">
                 <li>
-                    <a href="../../../../personaR" class="menu-item">Administrar Personas</a>
+                    <a href="../../../../personaR" class="menu-item">Personas</a>
                 </li>
                 <li>
-                    <a href="../../../../eventoR" class="menu-item">Administrar Eventos</a>
+                    <a href="../../../../eventoR" class="menu-item">Eventos</a>
                 </li>
                 <li>
-                    <a href="../../../../ComprasAR" class="menu-item">Administrar Compras</a>
+                    <a href="../../../../ComprasAR" class="menu-item">Compras</a>
                 </li>
                 <li>
-                    <a href="../../../../lugarR" class="menu-item">Administrar Lugar</a>
+                    <a href="../../../../lugarR" class="menu-item">Lugar</a>
                 </li>
                 <li>
-                    <a href="../../../../tipoEventoR" class="menu-item">Administrar Tipo de Evento</a>
+                    <a href="../../../../tipoEventoR" class="menu-item">Tipo de Evento</a>
                 </li>
                 </ul>
             </li>
@@ -177,6 +157,7 @@
         <script src="../../../../app-assets/vendors/js/jqBootstrapValidation.js"></script>
         <script src="../../../../app-assets/js/form-validation.js"></script>        
         <script src="../../../../app-assets/js/sweet-alerts.js"></script>
+        
         <!--Fin Nuevos Scrip -->
     </div>
 </body>

@@ -99,6 +99,7 @@ public class TickeController {
         sector.setDesc_sector(desc_sector);
         sector.setPrecio_unitario(precio_unitario);
         sector.setAsientosDisponibles(asientosDisponibles);
+        sector.setHabilitado("H");
         sectorService.save(sector);
 
 

@@ -35,7 +35,7 @@ public class ImprimirTicketsController {
 		model.addAttribute("compra", compra);
 		model.addAttribute("tickets", ticketService.findAll());
 
-		return "imprimirTickets/ImprimirTicketsC";
+		return "ImprimirTickets/ImprimirTicketsC";
 		
 	}
 }

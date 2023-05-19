@@ -37,16 +37,19 @@
                                                     <thead>
                                                         <tr>
                                                             <th>NOMBRE DEL CLIENTE</th>
+                                                            <th>NUMERO DEL CLIENTE</th>
                                                             <th>TICKETS</th>
                                                             <th>MONTO A PAGAR</th>
                                                             <th>COMPROBANTE</th>
                                                             <th>FECHA COMPRA</th>
+                                                            <th>GENERAR TICKETS</th>
                                                             <th>ESTADO DE LA COMPRA</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr th:each ="c : ${compras}">
                                                             <td th:text = "${c.usuario.persona.nombre+' '+c.usuario.persona.apellido_p+' '+c.usuario.persona.apellido_m}"></td>
+                                                            <td th:text = "${c.usuario.persona.num_celular}"></td>
                                                             <td>
                                                                 <button type="button" class="btn btn-outline-dark" data-toggle="modal"  th:attr="data-target='#default'+${c.id_compra}" ><i class="fa fa-eye font-medium-3"></i>&nbsp;Ver</button>
                                                             </td>
@@ -55,6 +58,9 @@
                                                                 <button type="button" class="btn btn-outline-dark" data-toggle="modal"  th:attr="data-target='#default2'+${c.id_compra}" ><i class="fa fa-eye font-medium-3"></i>&nbsp;Comprobante</button>
                                                             </td>
                                                             <td th:text = "${c.fecha_compra}"></td>
+                                                            <td>
+                                                                <a class="btn btn-dark" style="width: 100%;" th:href="${'../../../../imprimirR/'+c.id_compra}">Generar Tickets</a>
+                                                            </td>
                                                             <td>
                                                                 <th:block th:if="${c.estado == 'NT'}">
                                                                     <button style="width: 100%;" type="button" class="btn btn-primary"><i class="icon-clock font-medium-3"></i>&nbsp;No terminado</button>
@@ -122,7 +128,7 @@
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content" >
                                                                 <div class="modal-header">
-                                                                    <h4 class="modal-title" id="myModalLabel1">Imagen del bauncher</h4>
+                                                                    <h4 class="modal-title" id="myModalLabel1">Imagen del comprobante</h4>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                     </button>

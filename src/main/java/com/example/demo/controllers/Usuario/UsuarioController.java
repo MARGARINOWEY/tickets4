@@ -32,6 +32,12 @@ public class UsuarioController {
 		return "login/Login";
 	}
 
+	@RequestMapping(value = "/", method = RequestMethod.GET) // Pagina principal
+	public String LoginM2() {
+		
+		return "login/Login";
+	}
+
     @RequestMapping(value = "/loginF", method = RequestMethod.POST)
 	public String LoginF(@RequestParam(value = "usuario") String user,@RequestParam(value = "contrasena") String contrasena, Model model, HttpServletRequest request,RedirectAttributes flash){
 		

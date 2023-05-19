@@ -30,12 +30,10 @@
     </head>
 <body>
     <!-- =====================BARRA DE NAVEGACION LATERAL===================== -->
-    <div data-active-color="white" data-background-color="black" data-image="../../../../app-assets/img/sidebar-bg/01.jpg" class="app-sidebar" th:fragment="menuLateral">
-        
-        
+    <div data-active-color="white" data-background-color="black" data-image="../../../../app-assets/img/sidebar-bg/06.jpg" class="app-sidebar" th:fragment="menuLateral">
         <div class="sidebar-header">
         <div class="logo clearfix"><a href="index.html" class="logo-text float-left">
-            <div class="logo-img"><img src="../../../../app-assets/img/logo.png" alt="Convex Logo"/></div><span class="text align-middle">CONVEX2</span></a><a id="sidebarToggle" href="javascript:;" class="nav-toggle d-none d-sm-none d-md-none d-lg-block"><i data-toggle="expanded" class="ft-disc toggle-icon"></i></a><a id="sidebarClose" href="javascript:;" class="nav-close d-block d-md-block d-lg-none d-xl-none"><i class="ft-circle"></i></a></div>
+            <div class="logo-img"><img src="../../../../app-assets/img/logo.png" alt="Convex Logo"/>tickets</div><span class="text align-middle"></span></a><a id="sidebarToggle" href="javascript:;" class="nav-toggle d-none d-sm-none d-md-none d-lg-block"><i data-toggle="expanded" class="ft-disc toggle-icon"></i></a><a id="sidebarClose" href="javascript:;" class="nav-close d-block d-md-block d-lg-none d-xl-none"><i class="ft-circle"></i></a></div>
         </div>
         <div class="sidebar-content">
         <div class="nav-container">
@@ -75,6 +73,33 @@
                     <span data-i18n="" class="menu-title">Mis Compras</span>
                 </a>
             </li>
+            <li class=" nav-item">
+                <a href="https://pixinvent.ticksy.com/" data-toggle="modal"  data-target="#modalS">
+                    <i class="icon-support"></i>
+                    <span data-i18n="" class="menu-title">Support</span>
+                </a>
+            </li>
+            <div class="modal fade text-left" th:id="modalS" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true" >
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content" >
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel1">información de contacto para soporte</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <h4>Nombre:</h4>
+                            <p>PAUL STEVE CURCUY ITURRI</p><br>
+                            <a class="btn btn-success"  href="https://wa.me/59178850666" style="width: 100%;" ><h4 class="white">Whatsapp: +591 - 78850666 <i class="icon icon-action-redo"></i></h4></a>
+                            <div class="modal-footer text-center" >
+                                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </ul>
         </div>
         </div>
@@ -103,25 +128,13 @@
         </div>
         <div class="navbar-container">
             <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                <p th:text="${session.persona.nombre+' '+session.persona.apellido_p+' '+session.persona.apellido_m}"></p>
             <ul class="navbar-nav">
-                <li class="dropdown nav-item mr-0">
-                    <a id="dropdownBasic3" href="#" data-toggle="dropdown" class="nav-link position-relative dropdown-user-link dropdown-toggle">
-                        <span class="avatar avatar-online">
-                            <img id="navbar-avatar" src="../../../../app-assets/img/portrait/small/avatar-s-3.jpg" alt="avatar"/>
-                        </span>
-                        <p class="d-none">User Settings</p>
-                    </a>
-                <div aria-labelledby="dropdownBasic3" class="dropdown-menu dropdown-menu-right">
-                    <div class="arrow_box_right">
-                        
-                    <div class="dropdown-divider"></div>
-                        <a th:href="${'../../../../cerrar_sesion'}" class="dropdown-item">
-                            <i class="ft-power mr-2"></i>
-                            <span>Cerrar Sesion</span>
-                        </a>
-                    </div>
-                </div>
-                </li>
+                
+                <a th:href="${'../../../../cerrar_sesion'}" class="btn btn-danger">
+                    <i class="ft-power mr-2"></i>
+                    <span>Cerrar Sesion</span>
+                </a>
             </ul>
             </div>
         </div>

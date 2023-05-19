@@ -8,7 +8,7 @@
         <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </div>
     <!-- ////////////////////////////////////////////////////////////////////////////-->
-    <div class="wrapper nav-collapsed menu-collapsed">
+    <div class="wrapper">
         <div th:replace="layout/layoutMain :: menuLateral"></div>
         <div th:replace="layout/layoutMain :: menuNavbar"></div>
 
@@ -53,6 +53,8 @@
                                                                                 <h5 th:text="${co.monto_pagar+' Bs.'}" class="text-bold-400 mb-0"></h5>
                                                                                 <h6 class="warning">Estado de la Compra</h6>
                                                                                 <h5 th:text="${'Pendiente'}" class="text-bold-400 mb-0"></h5>
+                                                                                <h6 class="primary">Fecha de Compra</h6>
+                                                                                <h5 th:text="${co.fecha_compra}" class="text-bold-400 mb-0"></h5>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -78,6 +80,8 @@
                                                                                 <h5 th:text="${co.monto_pagar+' Bs.'}" class="text-bold-400 mb-0"></h5>
                                                                                 <h6 class="primary">Estado de la Compra</h6>
                                                                                 <h5 th:text="${'No Terminado'}" class="text-bold-400 mb-0"></h5>
+                                                                                <h6 class="primary">Fecha de Compra</h6>
+                                                                                <h5 th:text="${co.fecha_compra}" class="text-bold-400 mb-0"></h5>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -103,6 +107,8 @@
                                                                                 <h5 th:text="${co.monto_pagar+' Bs.'}" class="text-bold-400 mb-0"></h5>
                                                                                 <h6 class="success">Estado de la Compra</h6>
                                                                                 <h5 th:text="${'Verificado'}" class="text-bold-400 mb-0"></h5>
+                                                                                <h6 class="primary">Fecha de Compra</h6>
+                                                                                <h5 th:text="${co.fecha_compra}" class="text-bold-400 mb-0"></h5>
                                                                             </div>
                                                                         </div>
                                                                     </div>

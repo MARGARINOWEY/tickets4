@@ -74,7 +74,7 @@
                 </a>
             </li>
             <li class=" nav-item">
-                <a href="https://pixinvent.ticksy.com/" data-toggle="modal"  data-target="#modalS">
+                <a data-toggle="modal"  data-target="#modalS">
                     <i class="icon-support"></i>
                     <span data-i18n="" class="menu-title">Soporte</span>
                 </a>
@@ -111,16 +111,16 @@
 
 
     <!-- ===================== NAVBAR ===================== -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-faded" th:fragment="menuNavbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-faded" th:fragment="menuNavbar" style="background: #212529;">
         <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" data-toggle="collapse" class="navbar-toggle d-lg-none float-left">
-                <span class="sr-only">Toggle navigation</span>
+            <button type="button" data-toggle="collapse" class="navbar-toggle d-lg-none float-left white">
+                <span class="sr-only" >Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <span class="d-lg-none navbar-right navbar-collapse-toggle">
+            <span class="d-lg-none navbar-right navbar-collapse-toggle white">
                 <a class="open-navbar-container">
                     <i class="ft-more-vertical"></i>
                 </a>
@@ -128,10 +128,9 @@
         </div>
         <div class="navbar-container">
             <div id="navbarSupportedContent" class="collapse navbar-collapse">
-                <p th:text="${session.persona.nombre+' '+session.persona.apellido_p+' '+session.persona.apellido_m}"></p>
+                <button style="width: 100%;" class="btn btn-outline-secondary" th:text="${session.persona.nombre+' '+session.persona.apellido_p+' '+session.persona.apellido_m}"></button>
             <ul class="navbar-nav">
-                
-                <a th:href="${'../../../../cerrar_sesion'}" class="btn btn-danger">
+                <a style="width: 95%;" th:href="${'../../../../cerrar_sesion'}" class="btn btn-danger">
                     <i class="ft-power mr-2"></i>
                     <span>Cerrar Sesion</span>
                 </a>

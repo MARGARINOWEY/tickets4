@@ -72,8 +72,11 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/BienvenidoR", method = RequestMethod.GET) // Pagina principal
-	public String BienvenidoR() {
-		
-		return "login/Bienvenido";
+	public String BienvenidoR(HttpServletRequest request) {
+		if (request.getSession().getAttribute("persona") != null) {
+			return "login/Bienvenido";
+		} else {
+			return "redirect:loginR";
+		}
 	}
 }

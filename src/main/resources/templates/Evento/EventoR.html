@@ -69,6 +69,12 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
+                                                            <div class="col-lg-3 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="eventRegInput1">Descuento por mesa completa</label>
+                                                                    <input type="number" id="des" class="form-control" th:field="${evento.descuento_mc}" required>
+                                                                </div>
+                                                            </div>
                                                             <div class="col-lg-1 col-sm-12">
                                                                 <div class="form-group">
                                                                     <label for="eventRegInput1">Filas</label>                                        
@@ -137,6 +143,7 @@
                                                             <th>FILAS</th>
                                                             <th>COLUMNAS</th>
                                                             <th>LUGAR</th>
+                                                            <th>DESCUENTO</th>
                                                             <th>HABILITADO</th>
                                                             <th>TIPO EVENTO</th>
                                                             <th>EDITAR SECTORES</th>
@@ -156,6 +163,7 @@
                                                             <td th:text = "${e.filas}"></td>
                                                             <td th:text = "${e.columnas}"></td>
                                                             <td th:text = "${e.lugar.nom_lugar}"></td>
+                                                            <td th:text = "${e.descuento_mc}"></td>
                                                             <td>
                                                                 <tth:block th:if="${e.habilitado == 'H'}">
                                                                     <a style="width: 100%;" th:href="${'../../../../habilitarEvento/'+e.id_evento}" type="button" class="btn btn-success">Habilitado</a>

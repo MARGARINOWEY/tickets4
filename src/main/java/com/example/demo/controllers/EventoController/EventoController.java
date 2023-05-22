@@ -72,7 +72,7 @@ public class EventoController {
 		for (int i = 1; i <= a; i++) {
 			for (int j = 1; j <= b; j++) {
 				Sector sector = new Sector();
-				sector.setAsientosDisponibles("5");
+				sector.setAsientosDisponibles(12);
 				sector.setFilas(i);
 				sector.setColumnas(j);
 				sector.setDesc_sector("0");
@@ -80,9 +80,12 @@ public class EventoController {
 				sector.setHabilitado("D");
 				sector.setEvento(evento);
 				sectorService.save(sector);
+				Sector sector2 = sectorService.findOne(sector.getId_sector());
+				sector2.setAsientosIniciales(sector.getAsientosDisponibles());
+				sectorService.save(sector2);
 			}
 		}
-		flash.addAttribute("success", "Registro realizado con exito");
+		flash.addAttribute("Sectores creados");
 		return "redirect:/eventoR";
 	}
 }

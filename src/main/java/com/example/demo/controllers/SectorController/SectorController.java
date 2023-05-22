@@ -47,7 +47,7 @@ public class SectorController {
         Integer a = sector.getFilas();
         Integer b = sector.getColumnas();
         Integer c = a * b;
-        sector.setAsientosDisponibles(String.valueOf(c));
+        sector.setAsientosDisponibles(c);
 		sectorService.save(sector);
 		flash.addAttribute("success", "Registro realizado con exito");
 		return "redirect:/sectorR";

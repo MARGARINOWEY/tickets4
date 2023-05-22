@@ -43,12 +43,12 @@ public class TickeController {
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario"); //Recuperar Usuario de session
 		usuario = usuarioService.findOne(usuario.getId_usuario()); // Recuperamos Usuario de BD
         Sector sector = sectorService.findOne(id_sector);
-        int x = Integer.parseInt(sector.getAsientosDisponibles());
+        int x = sector.getAsientosDisponibles();
         Random numAleatorio = new Random();
         if (num_asientos <= x) {
 
             int z = x - num_asientos;
-            sector.setAsientosDisponibles(String.valueOf(z));
+            sector.setAsientosDisponibles(z);
             sectorService.save(sector);
 
             Compra compra = new Compra();
@@ -94,7 +94,7 @@ public class TickeController {
 	}
 
     @RequestMapping(value = "/sectorEditar/{id_sector}", method = RequestMethod.POST) // Enviar datos de Registro a Lista
-	public String sectorEditar(@PathVariable("id_sector")Long id_sector, @RequestParam(value = "desc_sector") String desc_sector,@RequestParam(value = "precio_unitario") String precio_unitario,@RequestParam(value = "asientosDisponibles") String asientosDisponibles, RedirectAttributes flash,  HttpServletRequest request){ //validar los datos capturados (1)
+	public String sectorEditar(@PathVariable("id_sector")Long id_sector, @RequestParam(value = "desc_sector") String desc_sector,@RequestParam(value = "precio_unitario") String precio_unitario,@RequestParam(value = "asientosDisponibles") Integer asientosDisponibles, RedirectAttributes flash,  HttpServletRequest request){ //validar los datos capturados (1)
         Sector sector = sectorService.findOne(id_sector);
         sector.setDesc_sector(desc_sector);
         sector.setPrecio_unitario(precio_unitario);

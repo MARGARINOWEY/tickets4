@@ -8,7 +8,7 @@
             <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         </div>
     <!-- ////////////////////////////////////////////////////////////////////////////-->
-    <div class="wrapper nav-collapsed menu-collapsed">
+    <div class="wrapper">
         <div th:replace="layout/layoutMain :: menuLateral"></div>
         <div th:replace="layout/layoutMain :: menuNavbar"></div>
 
@@ -231,6 +231,27 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div id="modalAviso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalAvisoLabel">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                <h5 class="modal-title">IMPORTANTE</h5>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                        <div class="card p-3">
+                                                                            <blockquote class="blockquote mb-0 card-body">
+                                                                            <div class="card-block">
+                                                                                <p><strong>Las compras reservadas (no terminadas), se anularan en 24 horas.</strong></p>
+                                                                            </div>
+                                                                            </blockquote>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button style="width: 100%;" type="button" class="btn btn-dark" data-bs-dismiss="modal"><strong>Entiendo Perfectámente</strong></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 
                                             </div>
                                         </div>
@@ -248,6 +269,7 @@
             window.onload = function() {
                 $('#onload').fadeOut();
                 $('body').removeClass('hidden');
+                $('#modalAviso').modal('show');
             }
         </script>
     </body>

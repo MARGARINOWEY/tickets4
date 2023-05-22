@@ -38,6 +38,7 @@ public class Evento implements Serializable {
     private String estado;
     private String filas;
     private String columnas;
+    private Integer descuento_mc;
     
 
     @ManyToOne(fetch = FetchType.LAZY)

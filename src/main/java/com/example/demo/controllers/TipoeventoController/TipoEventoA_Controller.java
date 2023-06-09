@@ -17,12 +17,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.Archivo;
 import com.example.demo.entity.TipoEvento;
 import com.example.demo.service.ITipoEventoService;
 
 @Controller
 public class TipoEventoA_Controller {
-    @Autowired
+    Archivo archivo = new Archivo();
+
+	@Autowired
 	private ITipoEventoService tipoEventoService;
 
     @RequestMapping(value = "/tipoEventoR", method = RequestMethod.GET) // Pagina principal
@@ -37,9 +40,12 @@ public class TipoEventoA_Controller {
 	}
 
     @RequestMapping(value = "/tipoEventoF", method = RequestMethod.POST) // Enviar datos de Registro a Lista
-	public String lugarF(@Validated TipoEvento tipoEvento, RedirectAttributes flash, HttpServletRequest request) { //validar los datos capturados (1)
+	public String lugarF(@Validated TipoEvento tipoEvento, RedirectAttributes flash, HttpServletRequest request, @RequestParam(name = "archivo", required = false) MultipartFile portada) { //validar los datos capturados (1)
 
 		tipoEvento.setEstado("A");
+		if (!portada.isEmpty()) { //ojojojojojojojojojojojojoj
+			tipoEvento.setImg_tipoEvento(archivo.guardarArchivo(portada));
+		}
 		tipoEventoService.save(tipoEvento);
 
 		flash.addAttribute("success", "Registro realizado con exito");

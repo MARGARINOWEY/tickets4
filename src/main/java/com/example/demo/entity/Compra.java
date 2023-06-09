@@ -38,6 +38,7 @@ public class Compra implements Serializable {
     private String monto_pagar;
     private String estado;
     private String img_comprobante;
+    private String nro_comprobante;
 
     @ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_usuario")

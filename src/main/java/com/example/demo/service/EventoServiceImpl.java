@@ -36,4 +36,22 @@ public class EventoServiceImpl implements IEventoService{
         // TODO Auto-generated method stub
         eventoDao.deleteById(id);
     }
+
+    @Override
+    public List<Evento> getAllEventosXTipoevento(Long id_tipoEvento) {
+        // TODO Auto-generated method stub
+        return (List<Evento>) eventoDao.getAllEventosXTipoevento(id_tipoEvento);
+    }
+
+    @Override
+    public List<Evento> getAllEventosXTipoevento2(Long id_tipoEvento, String accion) {
+        // TODO Auto-generated method stub
+        return (List<Evento>) eventoDao.getAllEventosXTipoevento2(id_tipoEvento, accion);
+    }
+
+    @Override
+    public void C2(Long id_tipoEvento, String accion) {
+        // TODO Auto-generated method stub
+        eventoDao.C2(id_tipoEvento, accion);
+    }
 }

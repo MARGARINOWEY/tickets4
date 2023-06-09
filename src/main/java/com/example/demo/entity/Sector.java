@@ -39,6 +39,7 @@ public class Sector implements Serializable {
     private Integer columnas;
     private String habilitado;
     private Integer asientosIniciales;
+    private String est_mesa_completa;
 
     @ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_evento")

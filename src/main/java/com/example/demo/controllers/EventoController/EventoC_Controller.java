@@ -21,11 +21,14 @@ import com.example.demo.entity.Evento;
 import com.example.demo.entity.Sector;
 import com.example.demo.service.IEventoService;
 import com.example.demo.service.ISectorService;
+import com.example.demo.service.ITipoEventoService;
 
 @Controller
 public class EventoC_Controller {
     @Autowired
 	private IEventoService eventoService;
+	@Autowired
+	private ITipoEventoService tipoEventoService;
 	@Autowired
 	private ISectorService sectorService;
 
@@ -35,6 +38,7 @@ public class EventoC_Controller {
 		if (request.getSession().getAttribute("persona") != null) {
 
 			model.addAttribute("eventos", eventoService.findAll());
+			model.addAttribute("tipoEventos", tipoEventoService.findAll());
 
 			return "Evento/EventoC";
 		} else {
@@ -58,6 +62,17 @@ public class EventoC_Controller {
 		//model.addAttribute("detalle", detallePersonaService.findAll());
 		
 		return "Evento/EventoC2";
+		
+	}
+
+	@RequestMapping(value = "/eventoCRB/{id_tipoEvento}")
+	public String BuscarEvento(@PathVariable("id_tipoEvento")Long id_tipoEvento, Model model){
+
+		//model.addAttribute("eventos", eventoService.getAllEventosXTipoevento(id_tipoEvento));
+		model.addAttribute("eventos", eventoService.getAllEventosXTipoevento2(id_tipoEvento, "c1"));
+		model.addAttribute("tipoEventos", tipoEventoService.findAll());
+		
+		return "Evento/EventoC";
 		
 	}
 

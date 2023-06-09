@@ -12,4 +12,10 @@ public interface IEventoService {
 	public Evento findOne(Long id);
 
 	public void delete(Long id);
+
+	public List<Evento> getAllEventosXTipoevento(Long id_tipoEvento);
+
+	public List<Evento> getAllEventosXTipoevento2(Long id_tipoEvento, String accion);
+
+	public void C2(Long id_tipoEvento, String accion);
 }

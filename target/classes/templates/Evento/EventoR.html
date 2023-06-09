@@ -134,63 +134,79 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="card-block">
-                                                <table class="table display nowrap table-striped table-bordered scroll-horizontal">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>EVENTO</th>
-                                                            <th>BANNER</th>
-                                                            <th>FONDO</th>
-                                                            <th>FILAS</th>
-                                                            <th>COLUMNAS</th>
-                                                            <th>LUGAR</th>
-                                                            <th>DESCUENTO</th>
-                                                            <th>HABILITADO</th>
-                                                            <th>TIPO EVENTO</th>
-                                                            <th>EDITAR SECTORES</th>
-                                                            <th>ESTADO</th>
-                                                            <th>OPERACIONES</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr th:each ="e : ${eventos}" th:if="${e.estado != 'X'}">
-                                                            <td th:text = "${e.desc_evento}"></td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-outline-dark" data-toggle="modal"  th:attr="data-target='#default'+${e.id_evento}" ><i class="fa fa-eye font-medium-3"></i>&nbsp;Ver</button>
-                                                            </td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-outline-dark" data-toggle="modal"  th:attr="data-target='#default1'+${e.id_evento}" ><i class="fa fa-eye font-medium-3"></i>&nbsp;Ver</button>
-                                                            </td>
-                                                            <td th:text = "${e.filas}"></td>
-                                                            <td th:text = "${e.columnas}"></td>
-                                                            <td th:text = "${e.lugar.nom_lugar}"></td>
-                                                            <td th:text = "${e.descuento_mc}"></td>
-                                                            <td>
-                                                                <tth:block th:if="${e.habilitado == 'H'}">
-                                                                    <a style="width: 100%;" th:href="${'../../../../habilitarEvento/'+e.id_evento}" type="button" class="btn btn-success">Habilitado</a>
-                                                                </tth:block>
-                                                                <tth:block th:if="${e.habilitado == 'D'}">
-                                                                    <a style="width: 100%;" th:href="${'../../../../habilitarEvento/'+e.id_evento}" type="button" class="btn btn-danger">Desabilitado</a>
-                                                                </tth:block>
-                                                            </td>
-                                                            <td th:text = "${e.tipoEvento.desc_tipoEvento}"></td>
-                                                            <td>
-                                                                <a style="width: 100%;" th:href="@{'../../../../eventoAR/'+ ${e.id_evento}}" type="button" class="btn btn-outline-dark" ><i class="fa fa-th"></i></a>
-                                                            </td>
-                                                            <td th:text = "${e.estado}"></td>
-                                                            <td>
-                                                                    <button type="button" class="btn btn-danger" style="width: 100%;">
-                                                                        <a th:href="@{'../../../../eliminiarEventoA/'+ ${e.id_evento}}"  class="white"><i class="fa fa-trash-o"></i></a>
-                                                                    </button>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <table class="table display nowrap table-striped table-bordered scroll-horizontal">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>EVENTO</th>
+                                                                    <th>BANNER</th>
+                                                                    <th>FONDO</th>
+                                                                    <th>FILAS</th>
+                                                                    <th>COLUMNAS</th>
+                                                                    <th>LUGAR</th>
+                                                                    <th>DESCUENTO</th>
+                                                                    <th>HABILITADO</th>
+                                                                    <th>TIPO EVENTO</th>
+                                                                    <th>EDITAR SECTORES</th>
                                                                     <!--
-                                                                    <button type="button" class="btn btn-warning">
-                                                                        <a data-toggle="modal"  th:attr="data-target='#default'+${l.id_sector}" class="white"><i class="fa fa-cog"></i></a>
-                                                                    </button>
+                                                                    <th>COMPRA X MESA</th>
                                                                     -->
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-
+                                                                    <th>ESTADO</th>
+                                                                    <th>OPERACIONES</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr th:each ="e : ${eventos}" th:if="${e.estado != 'X'}">
+                                                                    <td th:text = "${e.desc_evento}"></td>
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-outline-dark" data-toggle="modal"  th:attr="data-target='#default'+${e.id_evento}" ><i class="fa fa-eye font-medium-3"></i>&nbsp;Ver</button>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-outline-dark" data-toggle="modal"  th:attr="data-target='#default1'+${e.id_evento}" ><i class="fa fa-eye font-medium-3"></i>&nbsp;Ver</button>
+                                                                    </td>
+                                                                    <td th:text = "${e.filas}"></td>
+                                                                    <td th:text = "${e.columnas}"></td>
+                                                                    <td th:text = "${e.lugar.nom_lugar}"></td>
+                                                                    <td th:text = "${e.descuento_mc}"></td>
+                                                                    <td>
+                                                                        <tth:block th:if="${e.habilitado == 'H'}">
+                                                                            <a style="width: 100%;" th:href="${'../../../../habilitarEvento/'+e.id_evento}" type="button" class="btn btn-success">Habilitado</a>
+                                                                        </tth:block>
+                                                                        <tth:block th:if="${e.habilitado == 'D'}">
+                                                                            <a style="width: 100%;" th:href="${'../../../../habilitarEvento/'+e.id_evento}" type="button" class="btn btn-danger">Desabilitado</a>
+                                                                        </tth:block>
+                                                                    </td>
+                                                                    <td th:text = "${e.tipoEvento.desc_tipoEvento}"></td>
+                                                                    <td>
+                                                                        <a style="width: 100%;" th:href="@{'../../../../eventoAR/'+ ${e.id_evento}}" type="button" class="btn btn-outline-dark" ><i class="fa fa-th"></i></a>
+                                                                    </td>
+                                                                    <!--
+                                                                    <td>
+                                                                        <tth:block th:if="${e.est_mesa_completa_evento == 'H'}">
+                                                                            <a style="width: 100%;" th:href="${'../../../../habilitarCXMesa/'+e.id_evento}" type="button" class="btn btn-success">Habilitado</a>
+                                                                        </tth:block>
+                                                                        <tth:block th:if="${e.est_mesa_completa_evento == 'D'}">
+                                                                            <a style="width: 100%;" th:href="${'../../../../habilitarCXMesa/'+e.id_evento}" type="button" class="btn btn-danger">Desabilitado</a>
+                                                                        </tth:block>
+                                                                    </td>
+                                                                    -->
+                                                                    <td th:text = "${e.estado}"></td>
+                                                                    <td>
+                                                                            <button type="button" class="btn btn-danger" style="width: 100%;">
+                                                                                <a th:href="@{'../../../../eliminiarEventoA/'+ ${e.id_evento}}"  class="white"><i class="fa fa-trash-o"></i></a>
+                                                                            </button>
+                                                                            <!--
+                                                                            <button type="button" class="btn btn-warning">
+                                                                                <a data-toggle="modal"  th:attr="data-target='#default'+${l.id_sector}" class="white"><i class="fa fa-cog"></i></a>
+                                                                            </button>
+                                                                            -->
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                                                 <th:block  th:each ="e : ${eventos}" th:if="${e.estado != 'X'}">
                                                     <div class="modal fade text-left" th:id="${'default'+e.id_evento}" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true" >
                                                         <div class="modal-dialog" role="document">

@@ -33,7 +33,7 @@ public class CompraController {
         if (!img_comprobante.isEmpty()) { //ojojojojojojojojojojojojoj
             compra.setImg_comprobante(archivo.guardarArchivo(img_comprobante));
             compra.setNro_comprobante(nro_comprobante);
-            compra.setFecha_pago(compraService.Date());
+            compra.setFecha_pago(compraService.Date2222());
             compra.setEstado("P");
             compraService.save(compra);
 		}

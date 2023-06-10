@@ -124,7 +124,7 @@ public class TickeController {
             ticket.setEstado("A"); // anular el ticket 
             ticket.setValida("P");  // validacion del pago
             ticket.setUtilizada("N"); // si ingreso o no
-            ticket.setFecha_uso(compraService.Date()); // fecha y hora del ultimo uso del ticket
+            ticket.setFecha_uso(compraService.Date2222()); // fecha y hora del ultimo uso del ticket
             ticketService.save(ticket);
         }
 

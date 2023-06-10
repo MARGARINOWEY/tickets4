@@ -193,9 +193,7 @@
                                                                     -->
                                                                     <td th:text = "${e.estado}"></td>
                                                                     <td>
-                                                                            <button type="button" class="btn btn-danger" style="width: 100%;">
-                                                                                <a th:href="@{'../../../../eliminiarEventoA/'+ ${e.id_evento}}"  class="white"><i class="fa fa-trash-o"></i></a>
-                                                                            </button>
+                                                                            <a class="btn btn-danger white" style="width: 100%;" th:href="@{'../../../../eliminiarEventoA/'+ ${e.id_evento}}" ><i class="fa fa-trash-o"></i></a>
                                                                             <!--
                                                                             <button type="button" class="btn btn-warning">
                                                                                 <a data-toggle="modal"  th:attr="data-target='#default'+${l.id_sector}" class="white"><i class="fa fa-cog"></i></a>

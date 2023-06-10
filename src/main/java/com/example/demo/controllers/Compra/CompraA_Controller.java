@@ -53,4 +53,13 @@ public class CompraA_Controller {
 		return "redirect:/ComprasAR";
 		
 	}
+	@RequestMapping(value = "/Cancelar_CA/{id_compra}")
+	public String Cancelar_CA(@PathVariable("id_compra")Long id_compra,Model model){
+		Compra compra = compraService.findOne(id_compra);
+        compra.setEstado("C");
+        compraService.save(compra);
+
+		return "redirect:/ComprasAR";
+		
+	}
 }

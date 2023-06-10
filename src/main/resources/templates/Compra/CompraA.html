@@ -44,6 +44,7 @@
                                                             <th>FECHA COMPRA</th>
                                                             <th>GENERAR TICKETS</th>
                                                             <th>ESTADO DE LA COMPRA</th>
+                                                            <th>CANCELAR</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -71,6 +72,9 @@
                                                                 <th:block th:if="${c.estado == 'V'}">
                                                                     <button style="width: 100%;" type="button" class="btn btn-success"><i class="icon-check font-medium-3"></i>&nbsp;Verificado</button>
                                                                 </th:block>
+                                                            </td>
+                                                            <td>
+                                                                <a th:href="${'../../../../Cancelar_CA/'+c.id_compra}" style="width: 100%;" type="button" class="btn btn-danger">Cancelar Compra</a>
                                                             </td>
                                                         </tr>
                                                     </tbody>

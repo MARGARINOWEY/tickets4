@@ -98,14 +98,5 @@ public class EventoA_Controller {
 		return "redirect:/eventoR";
 	}
 
-	@RequestMapping(value = "/habilitarCXMesa/{id_evento}") // Enviar datos de Registro a Lista
-	public String sectorEditar(@PathVariable("id_evento")Long id_evento,  HttpServletRequest request){ //validar los datos capturados (1)
-        
-		eventoService.C2(id_evento, "C2");
-
-        return "redirect:/eventoR";
-
-	}
-	
-
 }
+	

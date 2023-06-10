@@ -181,7 +181,7 @@
                                                                     <td>
                                                                         <a style="width: 100%;" th:href="@{'../../../../eventoAR/'+ ${e.id_evento}}" type="button" class="btn btn-outline-dark" ><i class="fa fa-th"></i></a>
                                                                     </td>
-                                                                    <!--
+                                                                    
                                                                     <td>
                                                                         <tth:block th:if="${e.est_mesa_completa_evento == 'H'}">
                                                                             <a style="width: 100%;" th:href="${'../../../../habilitarCXMesa/'+e.id_evento}" type="button" class="btn btn-success">Habilitado</a>
@@ -190,7 +190,7 @@
                                                                             <a style="width: 100%;" th:href="${'../../../../habilitarCXMesa/'+e.id_evento}" type="button" class="btn btn-danger">Desabilitado</a>
                                                                         </tth:block>
                                                                     </td>
-                                                                    -->
+                                                                    
                                                                     <td th:text = "${e.estado}"></td>
                                                                     <td>
                                                                             <button type="button" class="btn btn-danger" style="width: 100%;">

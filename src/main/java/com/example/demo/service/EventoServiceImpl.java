@@ -54,4 +54,16 @@ public class EventoServiceImpl implements IEventoService{
         // TODO Auto-generated method stub
         eventoDao.C2(id_tipoEvento, accion);
     }
+
+    @Override
+    public void C3(Long id_tipoEvento, String accion) {
+        // TODO Auto-generated method stub
+        eventoDao.C3(id_tipoEvento, accion);
+    }
+
+    
+
+    
+
+    
 }

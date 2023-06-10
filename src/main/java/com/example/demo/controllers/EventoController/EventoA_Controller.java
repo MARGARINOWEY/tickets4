@@ -98,5 +98,23 @@ public class EventoA_Controller {
 		return "redirect:/eventoR";
 	}
 
+	@RequestMapping(value = "/habilitarCXMesa/{id_evento}") // Enviar datos de Registro a Lista
+	public String eventoCXM(@PathVariable("id_evento")Long id_evento,  HttpServletRequest request){ //validar los datos capturados (1)
+        Evento evento = eventoService.findOne(id_evento);
+
+		if (evento.getEst_mesa_completa_evento().equals("H")) {
+			evento.setEst_mesa_completa_evento("D");
+			eventoService.save(evento);
+			eventoService.C2(id_evento, "C2");
+		}else{
+			if (evento.getEst_mesa_completa_evento().equals("D")) {
+				evento.setEst_mesa_completa_evento("H");
+				eventoService.save(evento);
+				eventoService.C2(id_evento, "C2");
+			}
+		}
+		return "redirect:/eventoR";
+	}
+
 }
 	

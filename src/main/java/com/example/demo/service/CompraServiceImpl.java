@@ -42,4 +42,10 @@ public class CompraServiceImpl implements ICompraService{
         // TODO Auto-generated method stub
         return compraDao.getCompraXusuario(id_usuario);
     }
+
+    @Override
+    public java.util.Date Date() {
+        // TODO Auto-generated method stub
+        return compraDao.Date();
+    }
 }

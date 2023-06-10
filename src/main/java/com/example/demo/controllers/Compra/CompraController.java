@@ -28,10 +28,12 @@ public class CompraController {
 	private ICompraService compraService;
 
     @RequestMapping(value = "/CompraC/{id_compra}")
-	public String eventoAR(@PathVariable("id_compra")Long id_compra,@RequestParam(name = "archivo3", required = false) MultipartFile img_comprobante, Model model){
+	public String eventoAR(@PathVariable("id_compra")Long id_compra,@RequestParam(name = "archivo3", required = false) MultipartFile img_comprobante, Model model,@RequestParam("nro_comprobante")String nro_comprobante){
 		Compra compra = compraService.findOne(id_compra);
         if (!img_comprobante.isEmpty()) { //ojojojojojojojojojojojojoj
             compra.setImg_comprobante(archivo.guardarArchivo(img_comprobante));
+            compra.setNro_comprobante(nro_comprobante);
+            compra.setFecha_pago(compraService.Date());
             compra.setEstado("P");
             compraService.save(compra);
 		}

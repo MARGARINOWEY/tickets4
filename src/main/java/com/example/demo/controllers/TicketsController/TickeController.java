@@ -1,8 +1,11 @@
 package com.example.demo.controllers.TicketsController;
 
 import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -52,7 +55,7 @@ public class TickeController {
             sectorService.save(sector);
 
             Compra compra = new Compra();
-            compra.setFecha_compra(new Date());
+            compra.setFecha_compra(compraService.Date());
             compra.setEstado("NT");
             compra.setUsuario(usuario);
             int a = num_asientos;  
@@ -90,6 +93,45 @@ public class TickeController {
 		model.addAttribute("tickets", ticketService.findAll());
 		
 		return "Ticket/ticketC";
+		
+	}
+
+    @RequestMapping(value = "/ticketF2/{id_sector}")
+	public String ticketF2(@PathVariable("id_sector")Long id_sector, Model model, HttpServletRequest request){
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario"); //Recuperar Usuario de session
+		usuario = usuarioService.findOne(usuario.getId_usuario()); // Recuperamos Usuario de BD
+        Sector sector = sectorService.findOne(id_sector);
+        Random numAleatorio = new Random();
+
+        
+
+        Compra compra = new Compra();
+        compra.setFecha_compra(new Date());
+        compra.setEstado("NT");
+        compra.setUsuario(usuario);
+        int p = Integer.parseInt(sector.getPrecio_unitario());
+        int res = p * sector.getAsientosDisponibles();
+        compra.setMonto_pagar(String.valueOf(res));
+        compraService.save(compra);
+
+        for (int i = 1; i <= sector.getAsientosDisponibles(); i++) {
+
+            Ticket ticket = new Ticket();
+            ticket.setCompra(compra);
+            ticket.setSector(sector);
+            ticket.setCod(numAleatorio.nextInt(900000-100000+1) + 100000);
+            ticket.setEstado("A"); // anular el ticket 
+            ticket.setValida("P");  // validacion del pago
+            ticket.setUtilizada("N"); // si ingreso o no
+            ticket.setFecha_uso(compraService.Date()); // fecha y hora del ultimo uso del ticket
+            ticketService.save(ticket);
+        }
+
+        sector.setAsientosDisponibles(0);
+        sectorService.save(sector);
+        
+
+        return "redirect:/ticketCR/"+compra.getId_compra();
 		
 	}
 

@@ -97,7 +97,7 @@
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-lg-12 col-sm-12 pb-2">
-                                                                        <input type="number" name="nro_comprobante" placeholder="Nro. de documento del comprobante" class="form-control form-control-lg" required>
+                                                                        <input type="number" name="nro_comprobante" id="projectinput9" placeholder="Nro. de documento del comprobante" class="form-control form-control-lg" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row"> 
@@ -109,6 +109,7 @@
                                                         </th:block>
                                                         <th:block th:if="${compra.img_comprobante != null}">
                                                             <button type="button" class="btn btn-success" data-toggle="modal"  th:attr="data-target='#default3'" ><i class="fa fa-file-o font-medium-3"></i>&nbsp;Ver Comprabante Cargado</button>
+                                                            <button type="button" class="btn btn-info" data-toggle="modal"  th:attr="data-target='#default4'" ><i class="fa fa-file-o font-medium-3"></i>&nbsp;Ver Nro. de comprobante</button>
                                                         </th:block>
                                                     </div>
                                                     
@@ -172,7 +173,7 @@
                                                                 <div class="modal-body">
                                                                     <div class="row">
                                                                         <div class="col-12 text-center" >
-                                                                        <img src="../../../../uploads/qr.jpeg" style="width: 100%; height: 100%;" alt="sin qr">
+                                                                        <img src="../../../../uploads/qr2.jpeg" style="width: 100%; height: 100%;" alt="sin qr">
                                                                         </div>
                                                                     </div>    
                                                                     <div class="modal-footer text-center" >                                
@@ -195,6 +196,28 @@
                                                                     <div class="row">
                                                                         <div class="col-12 text-center" >
                                                                             <img th:src="@{'/uploads/' + ${compra.img_comprobante}}" style="width: 100%; height: 100%;" alt="Sin comprobante">
+                                                                        </div>
+                                                                    </div>    
+                                                                    <div class="modal-footer text-center" >                                
+                                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>                                                                
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade text-left" th:id="default4" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true" >
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content" >
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title" id="myModalLabel1">Nro. de Comprobante Cargado</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-12 text-center" >
+                                                                            <h3 th:text="${compra.nro_comprobante}"></h3>
                                                                         </div>
                                                                     </div>    
                                                                     <div class="modal-footer text-center" >                                

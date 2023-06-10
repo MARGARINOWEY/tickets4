@@ -18,4 +18,6 @@ public interface IEventoService {
 	public List<Evento> getAllEventosXTipoevento2(Long id_tipoEvento, String accion);
 
 	public void C2(Long id_tipoEvento, String accion);
+
+	public void C3(Long id_tipoEvento, String accion);
 }

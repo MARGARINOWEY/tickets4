@@ -64,6 +64,7 @@ public class EventoController {
 		if (!portada2.isEmpty()) { //ojojojojojojojojojojojojoj
 			evento.setImg_sala(archivo.guardarArchivo(portada2));
 		}
+		evento.setEst_mesa_completa_evento("H");
 		evento.setHabilitado("H");
 		evento.setEstado("A");
 		eventoService.save(evento);
@@ -78,6 +79,7 @@ public class EventoController {
 				sector.setDesc_sector("0");
 				sector.setPrecio_unitario("140");
 				sector.setHabilitado("D");
+				sector.setEst_mesa_completa("D");
 				sector.setEvento(evento);
 				sectorService.save(sector);
 				Sector sector2 = sectorService.findOne(sector.getId_sector());

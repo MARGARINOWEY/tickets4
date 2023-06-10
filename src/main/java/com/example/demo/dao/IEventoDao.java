@@ -17,4 +17,6 @@ public interface IEventoDao extends CrudRepository<Evento, Long>{
     @Query(value = "exec Eventos @ID_evento = ?1, @accion = ?2 ", nativeQuery = true)
     public void C2(Long id_tipoEvento, String accion);
 
+    @Query(value = "exec Eventos @ID_evento = ?1, @accion = ?2 ", nativeQuery = true)
+    public void C3(Long id_tipoEvento, String accion);
 }

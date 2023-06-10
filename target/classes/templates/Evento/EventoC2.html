@@ -31,7 +31,7 @@
                                         <div class="card-body">
                                             <div class="card-block">
                                                 <div class="row">
-                                                    <div class="col-lg-7 col-sm-12">
+                                                    <div class="col-lg-8 col-sm-12">
                                                         <div class="table-responsive" >
                                                             <table class="table table-bordered" style="text-align:center;">
                                                                 <thead>
@@ -41,21 +41,21 @@
                                                                 </thead>
                                                                 <tbody th:style="'background-image: url('+ @{'/uploads/'+ ${evento.img_sala}} + ');background-repeat:no-repeat; background-size:100% 100%;'" >
                                                                     <tr th:each="f : ${#numbers.sequence(1,eventof)}">
-                                                                        <td th:each="c : ${#numbers.sequence(1,eventoc)}" style="padding: 0px 8px 0px 8px;">
+                                                                        <td th:each="c : ${#numbers.sequence(1,eventoc)}" >
                                                                             <th:block th:each="l : ${sectores}" th:if="${l.evento.id_evento == evento.id_evento && l.filas == f && l.columnas == c}">
                                                                                 <th:block th:if="${l.desc_sector == '0' && l.habilitado == 'D'}">
 
-                                                                                    <a class="btn btn-round btn-danger" style="font-size: 30px; opacity: 0.01; margin: 0;" ><p th:text="${l.desc_sector}" style="margin: 0;"></p></a>
+                                                                                    <a class=" btn-danger" style="font-size: 30px; opacity: 0.01; margin: 0;" ><p  th:text="${'🔴'}" style=" font-size: 30px; margin: 0;"></p></a>
 
                                                                                 </th:block>
                                                                                 <th:block th:if="${l.habilitado == 'H' && l.asientosDisponibles == 0 }">
 
-                                                                                    <a class="btn btn-round btn-danger" style="font-size: 30px; margin: 0; opacity: 0.75; "><p th:text="${l.desc_sector}" style="margin: 0;"></p></a>
+                                                                                    <a class=" btn-danger" style="font-size: 30px; margin: 0; opacity: 0.75; "><p th:text="${'🔴'}" style="font-size: 30px;margin: 0;"></p></a>
 
                                                                                 </th:block>
                                                                                 <th:block th:if="${l.habilitado == 'H' && l.asientosDisponibles != 0}">
 
-                                                                                    <a class="btn btn-round btn-success" style="font-size: 30px; margin: 0; opacity: 0.75;" data-toggle="modal"  th:attr="data-target='#default'+${l.id_sector}" ><p th:text="${l.desc_sector}" style="margin: 0;"></p></a>
+                                                                                    <a class=" btn-success" style="font-size: 30px; margin: 0; opacity: 0.75;" data-toggle="modal"  th:attr="data-target='#default'+${l.id_sector}" ><p th:text="${'🟢'}" style="font-size: 30px;margin: 0;"></p></a>
 
                                                                                 </th:block>
                                                                             </th:block>
@@ -63,7 +63,7 @@
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
-                                                            <th:block  th:each ="l1 : ${sectores}">
+                                                            <th:block  th:each ="l1 : ${sectores}" th:if="${l1.est_mesa_completa == 'D'}">
                                                                 <div class="modal fade text-left" th:id="${'default'+l1.id_sector}" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true" >
                                                                     <div class="modal-dialog" role="document">
                                                                         <div class="modal-content" >
@@ -89,16 +89,17 @@
                                                                                                         <h3 class="card-title text-white"><strong>Precio por Asiento</strong></h3>
                                                                                                         <h3 class="text-white" th:text="${l1.precio_unitario+' Bs.'}"></h3>
                                                                                                         <input id="a" type="hidden" th:value="${l1.precio_unitario}">
+                                                                                                        
                                                                                                         <input id="desc" type="hidden" th:value="${l1.evento.descuento_mc}">
                                                                                                         <input id="asientosInicial" type="hidden" th:value="${l1.asientosIniciales}">
                                                                                                         <h3 class="card-title text-white"><strong>Asientos Disponibles</strong></h3>
                                                                                                         <h3 class="text-white" th:text="${l1.asientosDisponibles}"></h3>
                                                                                                         <h3 class="card-title text-white"><strong>Precio Total</strong></h3>
-                                                                                                        <h3 class="text-white" id="resultado"></h3>
+                                                                                                        <h3 class="text-white" th:id="${'resultado'+l1.id_sector}"></h3>
                                                                                                         <form  th:action="@{'../../../../ticketF/'+${l1.id_sector}}" method="POST">
                                                                                                             <div class="form-group">
                                                                                                                 <div class="col-md-12">
-                                                                                                                    <input oninput="mult()" id="b" type="number" max="50" min="1" class="form-control form-control-lg" placeholder="Numero de asientos para Comprar" name="num_asientos" required>
+                                                                                                                    <input th:attr="oninput=${'mult('+l1.id_sector+')'}" value="0" th:id="${l1.id_sector}" type="number" max="50" min="1" class="form-control form-control-lg" placeholder="Numero de asientos para Comprar" name="num_asientos" required>
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                             
@@ -108,6 +109,54 @@
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                         </form>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="modal-footer text-center" >     
+                                                                                    <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>                                                                
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </th:block>
+                                                            <th:block  th:each ="l1 : ${sectores}" th:if="${l1.est_mesa_completa == 'H'}">
+                                                                <div class="modal fade text-left" th:id="${'default'+l1.id_sector}" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true" >
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content" >
+                                                                            <div class="modal-header">
+                                                                                <h4 class="modal-title" id="myModalLabel1" th:text="${'Detalle: '+l1.id_sector}"></h4>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            
+                                                                            <div class="modal-body">
+                                                                                <div class="card gradient-light-blue-cyan">
+                                                                                    <div class="card-body">
+                                                                                        <div class="px-3 py-3">
+                                                                                            <div class="row media">
+                                                                                                <div class="col-12">
+                                                                                                    <div class="align-center">
+                                                                                                        <h1 class="card-title text-white font-large-2" th:text="${'MESA'+' '+l1.desc_sector}" ></h1>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-12 text-align">
+                                                                                                    <div class="media-body text-white text-left">
+                                                                                                        <h3 class="card-title text-white"><strong>Precio por Asiento</strong></h3>
+                                                                                                        <h3 class="text-white" th:text="${l1.precio_unitario+' Bs.'}"></h3>
+                                                                                                        <input id="a" type="hidden" th:value="${l1.precio_unitario}">
+                                                                                                        <input th:id="${'id'+l1.id_sector}" type="hidden" th:value="${l1.id_sector}">
+                                                                                                        <input id="desc" type="hidden" th:value="${l1.evento.descuento_mc}">
+                                                                                                        <input id="asientosInicial" type="hidden" th:value="${l1.asientosIniciales}">
+                                                                                                        <h3 class="card-title text-white"><strong>Asientos Disponibles</strong></h3>
+                                                                                                        <h3 class="text-white" th:text="${l1.asientosDisponibles}"></h3>
+                                                                                                        <h3 class="card-title text-white"><strong>Precio Total</strong></h3>
+                                                                                                        <h3 class="text-white" th:text="${l1.asientosDisponibles * 140}"></h3>
+                                                                                                        <a th:href="${'../../../../ticketF2/'+l1.id_sector}" class="btn btn-warning px-4 py-2 text-uppercase white font-small-4 box-shadow-2 border-0" type="button">Comprar ticket</a>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -139,29 +188,36 @@
     </div>
     <div th:replace="layout/layoutMain :: scripts"></div>
     <script>
+        function mult(props) {
+            console.log(a);
+            console.log("hola");
+            var input1 = parseInt(document.getElementById('a').value);
+            var input2 = parseInt(document.getElementById(props).value);
+            console.log(input2);
+            console.log(input1);
+            var desc = parseInt(document.getElementById('desc').value);
+            console.log(desc);
+            var asientosInicial = parseInt(document.getElementById('asientosInicial').value);
+            console.log(asientosInicial);
+            if (input2 == asientosInicial) {
+                var resultado = (input1 * input2)-desc;
+                document.getElementById('resultado'+props).innerHTML =  resultado+' Bs. con descuento por mesa completa';
+            }else{
+                if (input2 !== asientosInicial) {
+                    var resultado = input1 * input2;
+                    document.getElementById('resultado'+props).innerHTML =  resultado+' Bs.';    
+                }
+            }
+        }
+    </script>
+    
+    <script>
         window.onload = function() {
             $('#onload').fadeOut();
             $('body').removeClass('hidden');
         }
     </script>
-    <script>
-        function mult() {
-            var input1 = parseInt(document.getElementById('a').value);
-            var input2 = parseInt(document.getElementById('b').value);
-            var desc = parseInt(document.getElementById('desc').value);
-            var asientosInicial = parseInt(document.getElementById('asientosInicial').value);
-            if (input2 == asientosInicial) {
-                var resultado = (input1 * input2)-desc;
-                document.getElementById('resultado').innerHTML =  resultado+' Bs. con descuento por mesa completa';
-            }else{
-                if (input2 !== asientosInicial) {
-                    var resultado = input1 * input2;
-                    document.getElementById('resultado').innerHTML =  resultado+' Bs.';    
-                }
-                
-            }
-        }
-    </script>
+    
 </body>
 <!--<div th:style="'background-image: url('+ @{'/uploads/'+ ${evento.img_sala}} + ');background-repeat:no-repeat; background-size:cover; width: 100%; height: 100%; '">
 <h1>hola</h1>

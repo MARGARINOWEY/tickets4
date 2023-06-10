@@ -209,18 +209,14 @@
                 }
             }
         }
-        function MandarURL (a) {			          
-            swal({
-              title: 'Esta seguro de comprar?',  
-              type: 'success',                 
-              showCancelButton: true,
-              showConfirmButton: false,
-              cancelButtonText: "Cancelar",      
-              html:
-              "<a type='button' class='swal2-styled ' style='display: inline-block; background-color: rgb(48, 133, 214); border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214); padding: 13px 57px 13px 57px;' data-original-title='' title='' href='../../../../ticketF2/"+a+"'  >"+
-                  "Si"+
-              "</a>",              
-            }).then().done();
+        var contador = 0;
+        function MandarURL (a) {
+            contador++;
+            if (contador == 1){
+                location.href="../../../../ticketF2/"+a
+                console.log(contador);
+            }
+            
         }
     </script>
     

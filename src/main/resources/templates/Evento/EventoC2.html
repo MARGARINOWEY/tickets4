@@ -156,7 +156,7 @@
                                                                                                         <h3 class="text-white" th:text="${l1.asientosDisponibles}"></h3>
                                                                                                         <h3 class="card-title text-white"><strong>Precio Total</strong></h3>
                                                                                                         <h3 class="text-white" th:text="${l1.asientosDisponibles * 140}"></h3>
-                                                                                                        <a th:href="${'../../../../ticketF2/'+l1.id_sector}" class="btn btn-warning px-4 py-2 text-uppercase white font-small-4 box-shadow-2 border-0" type="button">Comprar ticket</a>
+                                                                                                        <button th:attr="onclick=${'MandarURL('+l1.id_sector+')'}" id="btn_com" class="btn btn-warning px-4 py-2 text-uppercase white font-small-4 box-shadow-2 border-0" type="button">Comprar tickets</button>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -209,12 +209,25 @@
                 }
             }
         }
+        function MandarURL (a) {			          
+            swal({
+              title: 'Esta seguro de comprar?',  
+              type: 'success',                 
+              showCancelButton: true,
+              showConfirmButton: false,
+              cancelButtonText: "Cancelar",      
+              html:
+              "<a type='button' class='swal2-styled ' style='display: inline-block; background-color: rgb(48, 133, 214); border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214); padding: 13px 57px 13px 57px;' data-original-title='' title='' href='../../../../ticketF2/"+a+"'  >"+
+                  "Si"+
+              "</a>",              
+            }).then().done();
+        }
     </script>
     
     <script>
         window.onload = function() {
             $('#onload').fadeOut();
-            $('body').removeClass('hidden');
+            $('body').add('hidden');
         }
     </script>
     

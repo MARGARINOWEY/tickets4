@@ -16,5 +16,5 @@ public interface ICompraService {
 
 	public List<Compra> getCompraXusuario(Long id_usuario);
 	
-	public Date Date();
+	public Date Date2222();
 }

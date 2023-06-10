@@ -55,7 +55,8 @@ public class TickeController {
             sectorService.save(sector);
 
             Compra compra = new Compra();
-            compra.setFecha_compra(compraService.Date());
+            compra.setFecha_compra(compraService.Date2222());
+            System.out.println(compraService.Date2222());
             compra.setEstado("NT");
             compra.setUsuario(usuario);
             int a = num_asientos;  

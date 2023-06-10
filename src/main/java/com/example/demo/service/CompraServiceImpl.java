@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +45,10 @@ public class CompraServiceImpl implements ICompraService{
     }
 
     @Override
-    public java.util.Date Date() {
+    public Date Date2222() {
         // TODO Auto-generated method stub
-        return compraDao.Date();
+        return compraDao.Date2222();
     }
+
+    
 }

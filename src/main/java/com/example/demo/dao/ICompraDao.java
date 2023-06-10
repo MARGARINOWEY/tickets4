@@ -13,7 +13,7 @@ public interface ICompraDao extends CrudRepository<Compra, Long>{
     public List<Compra> getCompraXusuario(Long id_usuario);
 
     @Query(value = "select getdate()", nativeQuery = true)
-    public Date Date();
+    public Date Date2222();
 
 
 }

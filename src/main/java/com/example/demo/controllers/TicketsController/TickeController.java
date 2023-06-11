@@ -104,36 +104,36 @@ public class TickeController {
         Sector sector = sectorService.findOne(id_sector);
         Random numAleatorio = new Random();
 
-        
+        if (sector.getAsientosDisponibles() > 0) {
+            Compra compra = new Compra();
+            compra.setFecha_compra(compraService.Date2222());
+            compra.setEstado("NT");
+            compra.setUsuario(usuario);
+            int p = Integer.parseInt(sector.getPrecio_unitario());
+            int res = p * sector.getAsientosDisponibles();
+            compra.setMonto_pagar(String.valueOf(res));
+            compraService.save(compra);
 
-        Compra compra = new Compra();
-        compra.setFecha_compra(new Date());
-        compra.setEstado("NT");
-        compra.setUsuario(usuario);
-        int p = Integer.parseInt(sector.getPrecio_unitario());
-        int res = p * sector.getAsientosDisponibles();
-        compra.setMonto_pagar(String.valueOf(res));
-        compraService.save(compra);
+            for (int i = 1; i <= sector.getAsientosDisponibles(); i++) {
 
-        for (int i = 1; i <= sector.getAsientosDisponibles(); i++) {
+                Ticket ticket = new Ticket();
+                ticket.setCompra(compra);
+                ticket.setSector(sector);
+                ticket.setCod(numAleatorio.nextInt(900000-100000+1) + 100000);
+                ticket.setEstado("A"); // anular el ticket 
+                ticket.setValida("P");  // validacion del pago
+                ticket.setUtilizada("N"); // si ingreso o no
+                ticket.setFecha_uso(compraService.Date2222()); // fecha y hora del ultimo uso del ticket
+                ticketService.save(ticket);
+            }
 
-            Ticket ticket = new Ticket();
-            ticket.setCompra(compra);
-            ticket.setSector(sector);
-            ticket.setCod(numAleatorio.nextInt(900000-100000+1) + 100000);
-            ticket.setEstado("A"); // anular el ticket 
-            ticket.setValida("P");  // validacion del pago
-            ticket.setUtilizada("N"); // si ingreso o no
-            ticket.setFecha_uso(compraService.Date2222()); // fecha y hora del ultimo uso del ticket
-            ticketService.save(ticket);
+            sector.setAsientosDisponibles(0);
+            sectorService.save(sector);
+            return "redirect:/ticketCR/"+compra.getId_compra();
+        }else{
+            return "redirect:/eventoCR/"+sector.getEvento().getId_evento();
         }
 
-        sector.setAsientosDisponibles(0);
-        sectorService.save(sector);
-        
-
-        return "redirect:/ticketCR/"+compra.getId_compra();
-		
 	}
 
     @RequestMapping(value = "/sectorEditar/{id_sector}", method = RequestMethod.POST) // Enviar datos de Registro a Lista

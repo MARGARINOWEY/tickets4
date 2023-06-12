@@ -104,18 +104,15 @@ public class TickeController {
         Sector sector = sectorService.findOne(id_sector);
         Random numAleatorio = new Random();
 
-        
-
-        Compra compra = new Compra();
-        compra.setFecha_compra(new Date());
-        compra.setEstado("NT");
-        compra.setUsuario(usuario);
-        int p = Integer.parseInt(sector.getPrecio_unitario());
-        int res = p * sector.getAsientosDisponibles();
-        compra.setMonto_pagar(res);
-        compraService.save(compra);
-
-        for (int i = 1; i <= sector.getAsientosDisponibles(); i++) {
+        if (sector.getAsientosDisponibles() > 0) {
+            Compra compra = new Compra();
+            compra.setFecha_compra(new Date());
+            compra.setEstado("NT");
+            compra.setUsuario(usuario);
+            int p = Integer.parseInt(sector.getPrecio_unitario());
+            int res = p * sector.getAsientosDisponibles();
+            compra.setMonto_pagar(res);
+            compraService.save(compra);        
 
             Ticket ticket = new Ticket();
             ticket.setCompra(compra);
@@ -126,14 +123,14 @@ public class TickeController {
             ticket.setUtilizada("N"); // si ingreso o no
             ticket.setFecha_uso(compraService.Date2222()); // fecha y hora del ultimo uso del ticket
             ticketService.save(ticket);
+
+            sector.setAsientosDisponibles(0);
+            sectorService.save(sector);
+            return "redirect:/ticketCR/"+compra.getId_compra();
+        }else{
+            return "redirect:/eventoCR/"+sector.getEvento().getId_evento();
         }
 
-        sector.setAsientosDisponibles(0);
-        sectorService.save(sector);
-        
-
-        return "redirect:/ticketCR/"+compra.getId_compra();
-		
 	}
 
     @RequestMapping(value = "/sectorEditar/{id_sector}", method = RequestMethod.POST) // Enviar datos de Registro a Lista

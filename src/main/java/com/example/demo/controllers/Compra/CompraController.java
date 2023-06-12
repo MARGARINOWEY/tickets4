@@ -1,6 +1,8 @@
 package com.example.demo.controllers.Compra;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,10 +30,12 @@ public class CompraController {
 	private ICompraService compraService;
 
     @RequestMapping(value = "/CompraC/{id_compra}")
-	public String eventoAR(@PathVariable("id_compra")Long id_compra,@RequestParam(name = "archivo3", required = false) MultipartFile img_comprobante, Model model,@RequestParam("nro_comprobante")String nro_comprobante){
+	public String eventoAR(@PathVariable("id_compra")Long id_compra,@RequestParam(name = "archivo3", required = false) MultipartFile img_comprobante, Model model,@RequestParam("nro_comprobante")String nro_comprobante) throws IOException{
 		Compra compra = compraService.findOne(id_compra);
         if (!img_comprobante.isEmpty()) { //ojojojojojojojojojojojojoj
-            compra.setImg_comprobante(archivo.guardarArchivo(img_comprobante));
+            byte[] bytes = img_comprobante.getBytes();
+            String base64Image = Base64.getEncoder().encodeToString(bytes);
+            compra.setImg_comprobante(base64Image);
             compra.setNro_comprobante(nro_comprobante);
             compra.setFecha_pago(compraService.Date2222());
             compra.setEstado("P");

@@ -1,6 +1,8 @@
 package com.example.demo.controllers.TipoeventoController;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,13 +42,19 @@ public class TipoEventoA_Controller {
 	}
 
     @RequestMapping(value = "/tipoEventoF", method = RequestMethod.POST) // Enviar datos de Registro a Lista
-	public String lugarF(@Validated TipoEvento tipoEvento, RedirectAttributes flash, HttpServletRequest request, @RequestParam(name = "archivo", required = false) MultipartFile portada) { //validar los datos capturados (1)
+	public String lugarF(@Validated TipoEvento tipoEvento, RedirectAttributes flash, HttpServletRequest request, @RequestParam(name = "archivo", required = false) MultipartFile portada) throws IOException { //validar los datos capturados (1)
 
 		tipoEvento.setEstado("A");
 		if (!portada.isEmpty()) { //ojojojojojojojojojojojojoj
 			tipoEvento.setImg_tipoEvento(archivo.guardarArchivo(portada));
 		}
 		tipoEventoService.save(tipoEvento);
+
+		//byte[] bytes = portada.getBytes();
+
+		//String base64Image = Base64.getEncoder().encodeToString(bytes);
+
+		//System.out.println(base64Image);
 
 		flash.addAttribute("success", "Registro realizado con exito");
 

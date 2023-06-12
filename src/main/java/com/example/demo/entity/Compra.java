@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -35,8 +36,9 @@ public class Compra implements Serializable {
     @DateTimeFormat( pattern = "yyyy-MM-dd")
     private Date fecha_compra;
     private Date fecha_pago;
-    private String monto_pagar;
+    private Integer monto_pagar;
     private String estado;
+    @Column(length = 10485760)
     private String img_comprobante;
     private String nro_comprobante;
 

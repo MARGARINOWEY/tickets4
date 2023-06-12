@@ -62,7 +62,7 @@ public class TickeController {
             int a = num_asientos;  
             int b = Integer.parseInt(sector.getPrecio_unitario());
             int c = a*b;
-            compra.setMonto_pagar(String.valueOf(c));
+            compra.setMonto_pagar(c);
             compraService.save(compra);
 
             for (int i = 1; i <= num_asientos; i++) {
@@ -112,7 +112,7 @@ public class TickeController {
         compra.setUsuario(usuario);
         int p = Integer.parseInt(sector.getPrecio_unitario());
         int res = p * sector.getAsientosDisponibles();
-        compra.setMonto_pagar(String.valueOf(res));
+        compra.setMonto_pagar(res);
         compraService.save(compra);
 
         for (int i = 1; i <= sector.getAsientosDisponibles(); i++) {

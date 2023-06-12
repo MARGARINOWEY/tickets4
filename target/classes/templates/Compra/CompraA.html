@@ -48,7 +48,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr th:each ="c : ${compras}">
+                                                        <tr th:each ="c : ${compras}" th:if="${c.estado != 'C'}" >
                                                             <td th:text = "${c.usuario.persona.nombre+' '+c.usuario.persona.apellido_p+' '+c.usuario.persona.apellido_m}"></td>
                                                             <td th:text = "${c.usuario.persona.num_celular}"></td>
                                                             <td>
@@ -145,7 +145,7 @@
                                                                     <th:block th:if="${c2.img_comprobante != null}">
                                                                         <div class="row">
                                                                             <div class="col-12 text-center" >
-                                                                            <img th:src="@{'/uploads/' + ${c2.img_comprobante}}" style="width: 100%; height: 100%;" alt="Sin imagen">
+                                                                            <img th:src="@{'data:image/jpg;base64,' + ${c2.img_comprobante}}" style="width: 100%; height: 100%;" alt="Sin imagen">
                                                                             </div>
                                                                         </div>    
                                                                     </th:block>

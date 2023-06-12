@@ -48,7 +48,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr th:each ="c : ${compras}" th:if="${c.estado != 'C'}" >
+                                                        <tr th:each ="c : ${compras}" th:if="${c.estado != 'X'}" >
                                                             <td th:text = "${c.usuario.persona.nombre+' '+c.usuario.persona.apellido_p+' '+c.usuario.persona.apellido_m}"></td>
                                                             <td th:text = "${c.usuario.persona.num_celular}"></td>
                                                             <td>

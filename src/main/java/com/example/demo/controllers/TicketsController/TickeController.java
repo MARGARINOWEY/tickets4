@@ -114,6 +114,8 @@ public class TickeController {
             compra.setMonto_pagar(res);
             compraService.save(compra);        
 
+            for (int i = 1; i <= sector.getAsientosDisponibles(); i++) {
+
             Ticket ticket = new Ticket();
             ticket.setCompra(compra);
             ticket.setSector(sector);
@@ -123,6 +125,7 @@ public class TickeController {
             ticket.setUtilizada("N"); // si ingreso o no
             ticket.setFecha_uso(compraService.Date2222()); // fecha y hora del ultimo uso del ticket
             ticketService.save(ticket);
+            }
 
             sector.setAsientosDisponibles(0);
             sectorService.save(sector);

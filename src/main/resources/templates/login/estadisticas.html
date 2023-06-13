@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+    <head th:replace="layout/layoutMain :: head"></head>
+
+    <body data-col="2-columns" class=" 2-columns ">
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+    <div class="wrapper nav-collapsed menu-collapsed">
+        <div th:replace="layout/layoutMain :: menuLateral"></div>
+        <div th:replace="layout/layoutMain :: menuNavbar"></div>
+
+        <div class="main-panel">
+            <div class="main-content">
+                <div class="content-wrapper">
+                    <div class="container-fluid">
+                        <section id="alert">
+                            <div class="row match-height">
+                                <div class="col-sm-12">
+                                    <h2 class="content-header">Alerts</h2>
+                                </div>
+                            </div>
+                            <!--Alert States Starts-->
+                            <div class="row match-height">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="card-title-wrap bar-success">
+                                                <h4 class="card-title">Alert States</h4>
+                                            </div>
+                                            <p>Wrap any text and an optional dismiss button in <code>.alert</code> and one of the four contextual classes (e.g., <code>.alert-COLOR</code>) for basic colored alert messages.</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-block">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer footer-static footer-light">
+            <p class="clearfix text-muted text-center px-2"><span>Copyright  &copy; 2018 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" id="pixinventLink" target="_blank" class="text-bold-800 primary darken-2">PIXINVENT </a>, All rights reserved. </span></p>
+            </footer>
+
+        </div>
+    </div>
+        <div th:replace="layout/layoutMain :: scripts"></div>
+    </body>
+</html>

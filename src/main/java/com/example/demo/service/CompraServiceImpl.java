@@ -50,5 +50,16 @@ public class CompraServiceImpl implements ICompraService{
         return compraDao.Date2222();
     }
 
+    @Override
+    public void CancelarCompra(Long id_compra, String accion) {
+        // TODO Auto-generated method stub
+        compraDao.CancelarCompra(id_compra, accion);
+    }
+
+    
+    
+
+    
+
     
 }

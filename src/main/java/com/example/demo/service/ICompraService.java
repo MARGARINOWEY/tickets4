@@ -17,4 +17,6 @@ public interface ICompraService {
 	public List<Compra> getCompraXusuario(Long id_usuario);
 	
 	public Date Date2222();
+
+	void CancelarCompra(Long id_compra, String accion);
 }

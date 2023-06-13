@@ -3,10 +3,14 @@ package com.example.demo.dao;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.example.demo.entity.Compra;
+import com.example.demo.entity.Evento;
 
 public interface ICompraDao extends CrudRepository<Compra, Long>{
     @Query("SELECT c FROM Compra c LEFT JOIN c.usuario u WHERE u.id_usuario = ?1")
@@ -14,6 +18,13 @@ public interface ICompraDao extends CrudRepository<Compra, Long>{
 
     @Query(value = "select getdate()", nativeQuery = true)
     public Date Date2222();
+    
+    @Transactional
+    @Modifying
+    @Query(value = "exec Eventos @ID_compra = ?1, @accion = ?2 ", nativeQuery = true)
+    void CancelarCompra(Long id_compra, String accion);
+    //@Query(value = "exec Eventos @ID_evento = ?1, @accion = ?2 ", nativeQuery = true)
+    //public List<Evento> getAllEventosXTipoevento2(Long id_tipoEvento, String accion);
 
 
 }

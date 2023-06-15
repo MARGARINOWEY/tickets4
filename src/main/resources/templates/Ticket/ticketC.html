@@ -833,7 +833,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="modalAviso" class="modal fade" tabindex="-1" role="dialog"
+                                        <th:block th:if="${compra.img_comprobante3 == null && compra.estadoCompraPorcentaje == '3'}">
+                                            <div id="modalAviso" class="modal fade" tabindex="-1" role="dialog"
                                             aria-labelledby="modalAvisoLabel">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -844,9 +845,7 @@
                                                         <div class="card p-3">
                                                             <blockquote class="blockquote mb-0 card-body">
                                                                 <div class="card-block">
-                                                                    <p><strong>Las compras reservadas (no
-                                                                            terminadas), se anularan en 24
-                                                                            horas.</strong></p>
+                                                                    <p><strong>Usted tiene 14 DÍAS para realizar el pago correspondiente al 100%, pasados los 14 DÍAS, su reserva quedará anulada y deberá volver a realizar el proceso de reserva y compra.</strong></p>
                                                                 </div>
                                                             </blockquote>
                                                         </div>
@@ -859,7 +858,59 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        </th:block>
+                                        <th:block th:if="${compra.img_comprobante == null && compra.estadoCompraPorcentaje == '1'}">
+                                            <div id="modalAviso" class="modal fade" tabindex="-1" role="dialog"
+                                            aria-labelledby="modalAvisoLabel">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">IMPORTANTE</h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="card p-3">
+                                                            <blockquote class="blockquote mb-0 card-body">
+                                                                <div class="card-block">
+                                                                    <p><strong>Usted tiene 14 DÍAS para realizar el pago correspondiente al 50%, pasados los 14 DÍAS, su reserva quedará anulada y deberá volver a realizar el proceso de reserva y compra.</strong></p>
+                                                                </div>
+                                                            </blockquote>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button style="width: 100%;" type="button" class="btn btn-dark"
+                                                            data-bs-dismiss="modal"><strong>Entiendo
+                                                                Perfectámente</strong></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </th:block>
+                                        <th:block th:if="${compra.img_comprobante2 == null && compra.estadoCompraPorcentaje == '2'}">
+                                            <div id="modalAviso" class="modal fade" tabindex="-1" role="dialog"
+                                            aria-labelledby="modalAvisoLabel">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">IMPORTANTE</h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="card p-3">
+                                                            <blockquote class="blockquote mb-0 card-body">
+                                                                <div class="card-block">
+                                                                    <p><strong>Si usted no realiza el pago del 100% de su reserva antes del vencimiento de cada preventa, los precios y promociones se ajustarán automáticamente a la modalidad siguiente.</strong></p>
+                                                                </div>
+                                                            </blockquote>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button style="width: 100%;" type="button" class="btn btn-dark"
+                                                            data-bs-dismiss="modal"><strong>Entiendo
+                                                                Perfectámente</strong></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </th:block>
                                     </div>
                                 </div>
                             </div>

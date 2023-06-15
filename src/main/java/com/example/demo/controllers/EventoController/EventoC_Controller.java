@@ -64,8 +64,8 @@ public class EventoC_Controller {
 		return "Evento/EventoC";
 	}
 
-	@RequestMapping(value = "/ComprarTicketsEmailF/{id_sector}", method = RequestMethod.POST) // Pagina principal
-	public String eventoCR(Model model,HttpServletRequest request,@PathVariable("id_sector")Long id_sector,@RequestParam("correo")String correo) {
+	@RequestMapping(value = "/ComprarTicketsEmailF/{id_sector}/{correo}") // Pagina principal
+	public String eventoCR(Model model,HttpServletRequest request,@PathVariable("id_sector")Long id_sector,@PathVariable("correo")String correo) {
 
 		Sector sector = sectorService.findOne(id_sector);
 		if (usuarioService.RecuperarUsuario(correo, "C8") != null) {

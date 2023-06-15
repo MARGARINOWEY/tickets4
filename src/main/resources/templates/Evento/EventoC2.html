@@ -165,7 +165,7 @@
                                                                                                             <button th:attr="onclick=${'MandarURL('+l1.id_sector+')'}" id="btn_com" class="btn btn-warning px-4 py-2 text-uppercase white font-small-4 box-shadow-2 border-0" type="button">Comprar tickets</button>
                                                                                                         </th:block>
                                                                                                         <th:block th:if="${session.usuario == null}">
-                                                                                                            <form  th:action="@{'../../../../ComprarTicketsEmailF/'+${l1.id_sector}}" method="POST">
+                                                                                                            <form th:action="@{'../../../../ComprarTicketsEmailF/'+${l1.id_sector}}" method="POST">
                                                                                                                 <div class="form-group">
                                                                                                                     <div class="row">
                                                                                                                         <div class="col-md-12">
@@ -180,7 +180,6 @@
                                                                                                                 </div>
                                                                                                             </form>
                                                                                                         </th:block>
-                                                                                                        
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -234,6 +233,7 @@
             }
         }
         var contador = 0;
+        var contador2 = 0;
         function MandarURL (a) {
             contador++;
             if (contador == 1){
@@ -242,6 +242,8 @@
             }
             
         }
+
+        
     </script>
     
     <script>

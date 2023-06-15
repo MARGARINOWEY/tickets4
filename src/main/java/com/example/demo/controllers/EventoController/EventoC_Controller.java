@@ -66,10 +66,19 @@ public class EventoC_Controller {
 
 	@RequestMapping(value = "/ComprarTicketsEmailF/{id_sector}", method = RequestMethod.POST) // Pagina principal
 	public String eventoCR(Model model,HttpServletRequest request,@PathVariable("id_sector")Long id_sector,@RequestParam("correo")String correo) {
-
 		Sector sector = sectorService.findOne(id_sector);
 		if (usuarioService.RecuperarUsuario(correo, "C8") != null) {
-			Usuario usuario = usuarioService.findOne(usuarioService.RecuperarUsuario(correo, "C8"));	
+
+			Long id_compra =  compraService.InsertCompra(correo, id_sector, "AC1");
+
+			if (id_compra != 0) {
+				Compra compra = compraService.findOne(id_compra);
+				Usuario usuario = usuarioService.findOne(compra.getUsuario().getId_usuario());
+				emailService.enviarMensajeRegistro(usuario.getCorreo(), "Reserva: "+sector.getEvento().getDesc_evento(), compra.getMonto_pagar(), sector.getEvento().getDesc_evento(),"CompraC4Email/"+compra.getId_compra());
+				return "redirect:/BuscarTickets";
+			}
+				return "redirect:/eventoCR/"+sector.getEvento().getId_evento();
+			/*Usuario usuario = usuarioService.findOne(usuarioService.RecuperarUsuario(correo, "C8"));	
 			Random numAleatorio = new Random();
 			System.out.println("entroooooooo");
 			if (sector.getAsientosDisponibles() > 0) {
@@ -108,13 +117,8 @@ public class EventoC_Controller {
 				
 					return "redirect:/eventoCR/"+sector.getEvento().getId_evento();		
 				
-			}else{
-				if (compraService.Validar(correo, sector.getId_sector(), "V1") > 0) {
-					return "redirect:/BuscarTickets";
-				}else{
-					return "redirect:/eventoCR/"+sector.getEvento().getId_evento();		
-				}
-			}
+			}*/
+
 		}else{
 			Persona persona = new Persona();
 			persona.setEstado("C"); 

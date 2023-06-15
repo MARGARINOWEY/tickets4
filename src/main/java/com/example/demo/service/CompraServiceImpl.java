@@ -66,5 +66,11 @@ public class CompraServiceImpl implements ICompraService{
     public Integer Validar(String correo, Long id_sector, String accion) {
         // TODO Auto-generated method stub
         return compraDao.Validar(correo, id_sector, accion);
+    }
+
+    @Override
+    public Long InsertCompra(String correo, Long id_sector, String accion) {
+        // TODO Auto-generated method stub
+        return compraDao.InsertCompra(correo, id_sector, accion);
     }    
 }

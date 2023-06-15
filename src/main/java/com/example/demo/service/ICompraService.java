@@ -23,4 +23,6 @@ public interface ICompraService {
 	public List<Compra> BuscarTickets(String correo, String accion);
 
 	Integer Validar(String correo,Long id_sector, String accion);
+
+	Long InsertCompra(String correo,Long id_sector, String accion);
 }

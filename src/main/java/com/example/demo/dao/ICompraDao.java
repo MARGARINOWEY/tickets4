@@ -30,4 +30,7 @@ public interface ICompraDao extends CrudRepository<Compra, Long>{
     @Query(value = "exec Eventos @correo = ?1, @id_sector = ?2,  @accion = ?3", nativeQuery = true)
     Integer Validar(String correo,Long id_sector, String accion);
 
+    @Query(value = "exec Eventos @correo = ?1, @id_sector = ?2,  @accion = ?3", nativeQuery = true)
+    Long InsertCompra(String correo,Long id_sector, String accion);
+
 }

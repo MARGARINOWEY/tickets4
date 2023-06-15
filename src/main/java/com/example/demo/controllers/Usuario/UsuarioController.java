@@ -53,16 +53,22 @@ public class UsuarioController {
 		
 		if (usuario != null) {
 			
-			HttpSession session = request.getSession(true);
+			if (usuario.getEstado().equals("X") || usuario.getEstado() == null) {
+				return "redirect:/eventoCR";
+			}
+			if (usuario.getEstado().equals("A")) {
+				HttpSession session = request.getSession(true);
 			
-			session.setAttribute("persona", usuario.getPersona());
-			session.setAttribute("usuario", usuario);
+				session.setAttribute("persona", usuario.getPersona());
+				session.setAttribute("usuario", usuario);
 			
-			flash.addAttribute(" Inicio Sesion!"+ usuario.getPersona().getNombre());
+				flash.addAttribute(" Inicio Sesion!"+ usuario.getPersona().getNombre());
 
 			
 			
-			return "redirect:/BienvenidoR";
+			return "redirect:/BienvenidoR";	
+			}
+			return "redirect:/eventoCR";
 		} else{
 			return "redirect:/loginR";
 		}

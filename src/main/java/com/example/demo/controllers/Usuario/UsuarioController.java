@@ -53,7 +53,7 @@ public class UsuarioController {
 		
 		if (usuario != null) {
 			
-			if (usuario.getEstado().equals("X") || usuario.getEstado() == null) {
+			if (usuario.getEstado() != "A" || usuario.getEstado() == null) {
 				return "redirect:/eventoCR";
 			}
 			if (usuario.getEstado().equals("A")) {

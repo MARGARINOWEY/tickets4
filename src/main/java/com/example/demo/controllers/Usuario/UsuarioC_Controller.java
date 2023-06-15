@@ -93,11 +93,8 @@ public class UsuarioC_Controller {
 	@RequestParam("ci")String ci,
 	@RequestParam("correo")String correo
 	){
-		Persona persona = personaService.findOne(id_persona);
 		Sector sector = sectorService.findOne(id_sector);
-		Usuario usuario = usuarioService.findOne(id_usuario);
-		Random numAleatorio = new Random();
-
+		Persona persona = personaService.findOne(id_persona);
 		persona.setNombre(nombre);
 		persona.setApellido_p(apellido_p);
 		persona.setApellido_m(apellido_m);
@@ -105,7 +102,27 @@ public class UsuarioC_Controller {
 		persona.setCi(ci);
 		personaService.save(persona);
 
-		if (sector.getAsientosDisponibles() > 0) {
+		Long id_compra = compraService.InsertCompra(correo, id_sector, "AC1");
+		if (id_compra != 0) {
+			Compra compra = compraService.findOne(id_compra);
+			Usuario usuario = usuarioService.findOne(compra.getUsuario().getId_usuario());
+			emailService.enviarMensajeRegistro(usuario.getCorreo(), "Reserva: "+sector.getEvento().getDesc_evento(), compra.getMonto_pagar(), sector.getEvento().getDesc_evento(),"CompraC4Email/"+compra.getId_compra(),sector.getDesc_sector());
+			return "redirect:/BuscarTickets";
+		}else{
+			return "redirect:/eventoCR/"+sector.getEvento().getId_evento();
+		}
+		
+
+		
+		//Usuario usuario = usuarioService.findOne(id_usuario);
+		//Compra compra = compraService.findOne(id_compra);
+
+
+		//Random numAleatorio = new Random();
+
+		
+
+		/*if (sector.getAsientosDisponibles() > 0) {
 				Compra compra = new Compra();
 				compra.setFecha_compra(new Date());
 				compra.setEstado("NT");
@@ -136,7 +153,7 @@ public class UsuarioC_Controller {
 			}else{
 				System.out.println("entro2");
 				return "redirect:/eventoCR/"+sector.getEvento().getId_evento();
-			}
+			}*/
 	
 	}
 }

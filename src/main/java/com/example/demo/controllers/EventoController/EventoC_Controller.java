@@ -74,7 +74,7 @@ public class EventoC_Controller {
 			if (id_compra != 0) {
 				Compra compra = compraService.findOne(id_compra);
 				Usuario usuario = usuarioService.findOne(compra.getUsuario().getId_usuario());
-				emailService.enviarMensajeRegistro(usuario.getCorreo(), "Reserva: "+sector.getEvento().getDesc_evento(), compra.getMonto_pagar(), sector.getEvento().getDesc_evento(),"CompraC4Email/"+compra.getId_compra());
+				emailService.enviarMensajeRegistro(usuario.getCorreo(), "Reserva: "+sector.getEvento().getDesc_evento(), compra.getMonto_pagar(), sector.getEvento().getDesc_evento(),"CompraC4Email/"+compra.getId_compra(),sector.getDesc_sector());
 				return "redirect:/BuscarTickets";
 			}
 				return "redirect:/eventoCR/"+sector.getEvento().getId_evento();

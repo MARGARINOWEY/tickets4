@@ -60,7 +60,7 @@ public class EmailServiceImpl implements IEmailService {
     }
 
     @Override
-    public void enviarMensajeRegistro(String toUser, String subject, Integer monto_pagar, String evento, String link) {
+    public void enviarMensajeRegistro(String toUser, String subject, Integer monto_pagar, String evento, String link, String mesa) {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
@@ -69,6 +69,7 @@ public class EmailServiceImpl implements IEmailService {
         ctx.setVariable("monto_pagar", monto_pagar);
         ctx.setVariable("evento", evento);
         ctx.setVariable("link", link);
+        ctx.setVariable("mesa", mesa);
 
         final String htmlContent = templateEngine.process("Ticket/compraEmail.html", ctx);
         

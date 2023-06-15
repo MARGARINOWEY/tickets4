@@ -41,6 +41,14 @@ public class Compra implements Serializable {
     @Column(length = 10485760)
     private String img_comprobante;
     private String nro_comprobante;
+    @Column(length = 10485760)
+    private String img_comprobante2;
+    private String nro_comprobante2;
+    @Column(length = 10485760)
+    private String img_comprobante3;
+    private String nro_comprobante3;
+    private String estadoCompraPorcentaje;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_usuario")

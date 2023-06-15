@@ -33,6 +33,7 @@ public class Usuario implements Serializable {
     private Long id_usuario;
     private String usuario_nom;
     private String contrasena;
+    private String correo;
     private String estado;
 
     @ManyToOne(fetch = FetchType.LAZY)

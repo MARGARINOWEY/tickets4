@@ -42,5 +42,19 @@ public class UsuarioServiceImpl implements IUsuarioService{
         // TODO Auto-generated method stub
         return usuarioDao.getUsuarioContraseña(usuario, contrasena);
     }
+
+    @Override
+    public Long RecuperarContraseña(String ci, String num_celular, String accion) {
+        // TODO Auto-generated method stub
+        return usuarioDao.RecuperarContraseña(ci, num_celular, accion);
+    }
+
+    @Override
+    public Long RecuperarUsuario(String correo, String accion) {
+        // TODO Auto-generated method stub
+        return usuarioDao.RecuperarUsuario(correo, accion);
+    }
+
+    
     
 }

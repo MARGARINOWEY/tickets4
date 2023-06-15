@@ -161,7 +161,25 @@
                                                                                                         <h3 class="text-white" th:text="${l1.asientosDisponibles}"></h3>
                                                                                                         <h3 class="card-title text-white"><strong>Precio Total</strong></h3>
                                                                                                         <h3 class="text-white" th:text="${l1.asientosDisponibles * 140}"></h3>
-                                                                                                        <button th:attr="onclick=${'MandarURL('+l1.id_sector+')'}" id="btn_com" class="btn btn-warning px-4 py-2 text-uppercase white font-small-4 box-shadow-2 border-0" type="button">Comprar tickets</button>
+                                                                                                        <th:block th:if="${session.usuario != null}">
+                                                                                                            <button th:attr="onclick=${'MandarURL('+l1.id_sector+')'}" id="btn_com" class="btn btn-warning px-4 py-2 text-uppercase white font-small-4 box-shadow-2 border-0" type="button">Comprar tickets</button>
+                                                                                                        </th:block>
+                                                                                                        <th:block th:if="${session.usuario == null}">
+                                                                                                            <form th:action="@{'../../../../ComprarTicketsEmailF/'+${l1.id_sector}}" method="POST">
+                                                                                                                <div class="form-group">
+                                                                                                                    <div class="row">
+                                                                                                                        <div class="col-md-12">
+                                                                                                                            <input type="text" class="form-control form-control-lg" placeholder="Correo Electronico" name="correo" required>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                    <div class="row">
+                                                                                                                        <div class="col-md-12">
+                                                                                                                            <button style="width: 100%;" class="btn btn-success px-4 py-2 text-uppercase white font-small-4 box-shadow-2 border-0" type="submit">Comprar tickets</button>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </form>
+                                                                                                        </th:block>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -215,6 +233,7 @@
             }
         }
         var contador = 0;
+        var contador2 = 0;
         function MandarURL (a) {
             contador++;
             if (contador == 1){
@@ -223,6 +242,8 @@
             }
             
         }
+
+        
     </script>
     
     <script>

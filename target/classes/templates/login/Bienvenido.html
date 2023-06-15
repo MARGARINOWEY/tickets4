@@ -15,28 +15,30 @@
                 <div class="content-wrapper">
                     <div class="container-fluid">
                         <section id="alert">
-                            <div class="row match-height">
-                                <div class="col-sm-12">
-                                    <h2 class="content-header">BIENVENIDO</h2>
-                                </div>
-                            </div>
                             <!--Alert States Starts-->
                             <div class="row match-height">
                                 <div class="col-md-12">
-                                    <div class="card">
+                                    <div class="card" style="background: #870000;  /* fallback for old browsers */
+                                    background: -webkit-linear-gradient(to right, #190A05, #870000);  /* Chrome 10-25, Safari 5.1-6 */
+                                    background: linear-gradient(to right, #190A05, #870000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                                    ">
                                         <div class="card-header">
                                             <div class="card-title-wrap bar-success">
-                                                <h4 class="card-title" th:text="${session.usuario.persona.nombre+' '+session.usuario.persona.apellido_p+' '+session.usuario.persona.apellido_m}">------</h4>
+                                                <h4 class="card-title white" th:text="${'BIENVENIDO'}">------</h4>
                                             </div>
                                         </div>
                                         <div class="card-body">
                                             <div class="card-block">
                                                 <div class="row">
                                                     <div class="col-12 text-center">
-                                                        <h4 class="card-title">¿Qué quieres hacer?</h4>
+                                                        <img src="app-assets/logo2.png" alt="company-logo" class="" width="200">
                                                     </div>
                                                 </div>
-                                                
+                                                <div class="row">
+                                                    <div class="col-12 text-center">
+                                                        <h4 class="card-title white">¿Qué quieres hacer?</h4>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -45,21 +47,26 @@
                             <div class="row">
                                 <div class="col-12" >
                                     <a href="../../../../eventoCR" style="width: 100%; padding-top: 20px; padding-bottom: 20px; " class="btn btn-warning">
-                                        <i style="font-size: larger;" class="fa fa-star-o"></i><strong>Ver los eventos</strong>
+                                        <i style="font-size: larger;" class="fa fa-star-o"></i><br>
+                                        <strong>Ver los eventos</strong>
                                     </a>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <a href="../../../../ComprasR" style="width: 100%; padding-top: 20px; padding-bottom: 20px;" class="btn btn-primary">
-                                        <i style="font-size: larger;" class="icon icon-handbag"></i><strong>Ver mis compras</strong> 
-                                    </a>
+                            <th:block th:if="${session.usuario != null}">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <a href="../../../../ComprasR" style="width: 100%; padding-top: 20px; padding-bottom: 20px;" class="btn btn-primary">
+                                            <i style="font-size: larger;" class="icon icon-handbag"></i><br>
+                                            <strong>Ver mis compras</strong> 
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
+                            </th:block>
                             <div class="row">
                                 <div class="col-12">
                                     <a data-toggle="modal"  data-target="#modalS" style="width: 100%; padding-top: 20px; padding-bottom: 20px;" class="btn btn-danger">
-                                        <i style="font-size: larger;" class="icon icon-support"></i><strong>Contactar con soporte</strong> 
+                                        <i style="font-size: larger;" class="icon icon-support"></i><br>
+                                        <strong>Contactar con soporte</strong> 
                                     </a>
                                 </div>
                             </div>

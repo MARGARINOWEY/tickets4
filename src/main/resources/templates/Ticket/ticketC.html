@@ -1,12 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="en" class="loading">
-    <head th:replace="layout/layoutMain :: head"></head>
 
-    <body data-col="2-columns" class=" 2-columns hidden">
-        <div class="centreadooo" id="onload">
-            <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+<head th:replace="layout/layoutMain :: head"></head>
+
+<body data-col="2-columns" class=" 2-columns hidden">
+    <div class="centreadooo" id="onload">
+        <div class="lds-roller">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
+    </div>
     <!-- ////////////////////////////////////////////////////////////////////////////-->
     <div class="wrapper">
         <div th:replace="layout/layoutMain :: menuLateral"></div>
@@ -26,106 +35,495 @@
                             <div class="row match-height">
                                 <div class="col-md-12">
                                     <div class="card">
-                                        <div class="card-header">
-                                            <div class="card-title-wrap bar-success">
-                                                <div class="row">
-                                                    <div class="col-lg-12 col-sm-12">
-                                                        <h4 class="card-title" >Pago</h4>
+                                        <th:block th:if="${compra.estadoCompraPorcentaje == '0'}">
+                                            <div class="card-header">
+                                                <div class="card-title-wrap bar-success">
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-sm-12">
+                                                            <h4 class="card-title">Error</h4>
+                                                        </div>
                                                     </div>
-                                                    
                                                 </div>
-                                                
                                             </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="card-block">
-                                                <div class="row">
-                                                    
-                                                    <div class="col-lg-4 col-sm-12">
-                                                        <th:block th:if="${compra.estado == 'NT'}">
-                                                            <div class="media align-items-stretch">
-                                                                <div class="p-2 text-center bg-primary rounded-left pt-3">
-                                                                    <i class="icon-info font-large-2 text-white"></i>
+                                            <div class="card-body">
+                                                <div class="card-block">
+                                                    <h1>Verifique su Correo</h1>
+                                        </th:block>
+
+                                        <th:block th:if="${compra.estadoCompraPorcentaje == '1'}">
+                                            <div class="card-header">
+                                                <div class="card-title-wrap bar-success">
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-sm-12">
+                                                            <h4 class="card-title">Primer pago del 50%</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-block">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <th:block th:if="${compra.estado == 'NT'}">
+                                                                <div class="media align-items-stretch">
+                                                                    <div
+                                                                        class="p-2 text-center bg-primary rounded-left pt-3">
+                                                                        <i
+                                                                            class="icon-info font-large-2 text-white"></i>
+                                                                    </div>
+                                                                    <div class="py-2 px-2 media-body">
+                                                                        <h6 class="primary">Estado de la Compra</h6>
+                                                                        <h5 class="text-bold-400"
+                                                                            th:text="${'No terminado'}"></h5>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="py-2 px-2 media-body">
-                                                                    <h6 class="primary">Estado de la Compra</h6>
-                                                                    <h5 class="text-bold-400" th:text="${'No terminado'}"></h5>
+                                                            </th:block>
+                                                            <th:block th:if="${compra.estado == 'P'}">
+                                                                <div class="media align-items-stretch">
+                                                                    <div
+                                                                        class="p-2 text-center bg-warning rounded-left pt-3">
+                                                                        <i
+                                                                            class="icon-info font-large-2 text-white"></i>
+                                                                    </div>
+                                                                    <div class="py-2 px-2 media-body">
+                                                                        <h6 class="warning">Estado de la Compra</h6>
+                                                                        <h5 class="text-bold-400"
+                                                                            th:text="${'Enviado para verificación'}">
+                                                                        </h5>
+                                                                    </div>
                                                                 </div>
+                                                            </th:block>
+                                                            <th:block th:if="${compra.estado == 'V'}">
+                                                                <div class="media align-items-stretch">
+                                                                    <div
+                                                                        class="p-2 text-center bg-success rounded-left pt-3">
+                                                                        <i
+                                                                            class="icon-info font-large-2 text-white"></i>
+                                                                    </div>
+                                                                    <div class="py-2 px-2 media-body">
+                                                                        <h6 class="success">Estado de la Compra</h6>
+                                                                        <h5 class="text-bold-400"
+                                                                            th:text="${'Verificado'}"></h5>
+                                                                    </div>
+                                                                </div>
+                                                            </th:block>
+                                                            <th:block th:if="${compra.estado == 'X'}">
+                                                                <div class="media align-items-stretch">
+                                                                    <div
+                                                                        class="p-2 text-center bg-danger rounded-left pt-3">
+                                                                        <i
+                                                                            class="icon-info font-large-2 text-white"></i>
+                                                                    </div>
+                                                                    <div class="py-2 px-2 media-body">
+                                                                        <h6 class="danger">Estado de la Compra</h6>
+                                                                        <h5 class="text-bold-400"
+                                                                            th:text="${'Cancelado'}"></h5>
+                                                                    </div>
+                                                                </div>
+                                                            </th:block>
+                                                            <h5 class="card-title"
+                                                                th:text="${'Monto a pagar: '+compra.monto_pagar/2+' Bs.'}">
+                                                            </h5>
+
+                                                            <h5 class="card-title"
+                                                                th:text="${'Monto restante :'+compra.monto_pagar/2+' Bs.'}">
+                                                            </h5>
+
+                                                            <h5 class="card-title"
+                                                                th:text="${'De un total: '+compra.monto_pagar+' Bs.'}">
+                                                            </h5>
+                                                        </div>
+                                                        <div class="col-lg-2 col-sm-12">
+                                                            <button style="width: 100%;" type="button"
+                                                                class="btn btn-primary" data-toggle="modal"
+                                                                th:attr="data-target='#defaultQR1'">
+                                                                <i class="fa fa-eye font-medium-3"></i>&nbsp;QR de pago
+                                                                del 50%
+                                                            </button><br>
+                                                        </div>
+                                                        <div class="col-lg-2 col-sm-12">
+                                                            <button style="width: 100%;" type="button"
+                                                                class="btn btn-warning" data-toggle="modal"
+                                                                th:attr="data-target='#default2'"><i
+                                                                    class="fa fa-eye font-medium-3"></i>&nbsp;Cuenta
+                                                                Bancaria</button>
+                                                        </div>
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <th:block
+                                                                th:if="${compra.img_comprobante == null && compra.estado != 'X' && compra.estadoCompraPorcentaje == '1'}">
+                                                                <form
+                                                                    th:action="@{'../../../../CompraC/'+${compra.id_compra}}"
+                                                                    method="POST" enctype="multipart/form-data"
+                                                                    novalidate>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12 col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label>Subir foto del
+                                                                                    Comprobante</label>
+                                                                                <input accept="image/*,.pdf"
+                                                                                    name="archivo3"
+                                                                                    class="form-control-file"
+                                                                                    id="projectinput8" type="file"
+                                                                                    required>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12 col-sm-12 pb-2">
+                                                                            <input type="number" name="nro_comprobante"
+                                                                                id="projectinput9"
+                                                                                placeholder="Nro. de documento del comprobante"
+                                                                                class="form-control form-control-lg"
+                                                                                required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12 col-sm-12">
+                                                                            <button style="width: 100%;"
+                                                                                class="btn btn-danger px-4 py-2 text-uppercase box-shadow-2 border-0"
+                                                                                type="submit">Completar el 50% del pago</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </th:block>
+                                                            <th:block th:if="${compra.img_comprobante != null && compra.estadoCompraPorcentaje == '1'}">
+                                                                <button type="button" class="btn btn-success"
+                                                                    data-toggle="modal"
+                                                                    th:attr="data-target='#default3'"><i
+                                                                        class="fa fa-file-o font-medium-3"></i>&nbsp;Ver
+                                                                    Comprabante Cargado</button>
+                                                                <button type="button" class="btn btn-info"
+                                                                    data-toggle="modal"
+                                                                    th:attr="data-target='#default4'"><i
+                                                                        class="fa fa-file-o font-medium-3"></i>&nbsp;Ver
+                                                                    Nro. de comprobante</button>
+                                                            </th:block>
+                                                        </div>
+                                                    </div>
+                                        </th:block>
+                                        <th:block th:if="${compra.estadoCompraPorcentaje == '2'}">
+                                            <div class="card-header">
+                                                <div class="card-title-wrap bar-success">
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-sm-12">
+                                                            <th:block th:if="${compra.img_comprobante2 == null}">
+                                                                <h4 class="card-title">Segundo pago del 50%</h4>
+                                                            </th:block>
+                                                            <th:block th:if="${compra.img_comprobante2 != null}">
+                                                                <h4 class="card-title">Realizado el 100% del pago</h4>
+                                                            </th:block>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-block">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <th:block th:if="${compra.estado == 'NT'}">
+                                                                <div class="media align-items-stretch">
+                                                                    <div
+                                                                        class="p-2 text-center bg-primary rounded-left pt-3">
+                                                                        <i
+                                                                            class="icon-info font-large-2 text-white"></i>
+                                                                    </div>
+                                                                    <div class="py-2 px-2 media-body">
+                                                                        <h6 class="primary">Estado de la Compra</h6>
+                                                                        <h5 class="text-bold-400"
+                                                                            th:text="${'No terminado'}"></h5>
+                                                                    </div>
+                                                                </div>
+                                                            </th:block>
+                                                            <th:block th:if="${compra.estado == 'P'}">
+                                                                <div class="media align-items-stretch">
+                                                                    <div
+                                                                        class="p-2 text-center bg-warning rounded-left pt-3">
+                                                                        <i
+                                                                            class="icon-info font-large-2 text-white"></i>
+                                                                    </div>
+                                                                    <div class="py-2 px-2 media-body">
+                                                                        <h6 class="warning">Estado de la Compra</h6>
+                                                                        <h5 class="text-bold-400"
+                                                                            th:text="${'Enviado para verificación'}">
+                                                                        </h5>
+                                                                    </div>
+                                                                </div>
+                                                            </th:block>
+                                                            <th:block th:if="${compra.estado == 'V'}">
+                                                                <div class="media align-items-stretch">
+                                                                    <div
+                                                                        class="p-2 text-center bg-success rounded-left pt-3">
+                                                                        <i
+                                                                            class="icon-info font-large-2 text-white"></i>
+                                                                    </div>
+                                                                    <div class="py-2 px-2 media-body">
+                                                                        <h6 class="success">Estado de la Compra</h6>
+                                                                        <h5 class="text-bold-400"
+                                                                            th:text="${'Verificado'}"></h5>
+                                                                    </div>
+                                                                </div>
+                                                            </th:block>
+                                                            <th:block th:if="${compra.estado == 'X'}">
+                                                                <div class="media align-items-stretch">
+                                                                    <div
+                                                                        class="p-2 text-center bg-danger rounded-left pt-3">
+                                                                        <i
+                                                                            class="icon-info font-large-2 text-white"></i>
+                                                                    </div>
+                                                                    <div class="py-2 px-2 media-body">
+                                                                        <h6 class="danger">Estado de la Compra</h6>
+                                                                        <h5 class="text-bold-400"
+                                                                            th:text="${'Cancelado'}"></h5>
+                                                                    </div>
+                                                                </div>
+                                                            </th:block>
+                                                            <th:block th:if="${compra.img_comprobante2 == null}">
+                                                                <h5 class="card-title"
+                                                                th:text="${'Monto a pagar: '+compra.monto_pagar/2+' Bs.'}">
+                                                            </h5>
+
+                                                            <h5 class="card-title"
+                                                                th:text="${'Monto restante :'+'0 Bs.'}">
+                                                            </h5>
+
+                                                            <h5 class="card-title"
+                                                                th:text="${'De un total: '+compra.monto_pagar+' Bs.'}">
+                                                            </h5>
+                                                            </th:block>
+                                                        </div>
+                                                        <th:block th:if="${compra.img_comprobante2 == null}">
+                                                            <div class="col-lg-2 col-sm-12">
+                                                                <button style="width: 100%;" type="button"
+                                                                    class="btn btn-primary" data-toggle="modal"
+                                                                    th:attr="data-target='#defaultQR1'">
+                                                                    <i class="fa fa-eye font-medium-3"></i>&nbsp;QR de pago
+                                                                    del 50%
+                                                                </button><br>
                                                             </div>
-                                                        </th:block>
-                                                        <th:block th:if="${compra.estado == 'P'}">
-                                                            <div class="media align-items-stretch">
-                                                                <div class="p-2 text-center bg-warning rounded-left pt-3">
-                                                                    <i class="icon-info font-large-2 text-white"></i>
-                                                                </div>
-                                                                <div class="py-2 px-2 media-body">
-                                                                    <h6 class="warning">Estado de la Compra</h6>
-                                                                    <h5 class="text-bold-400" th:text="${'Enviado para verificación'}"></h5>
-                                                                </div>
-                                                            </div>
-                                                        </th:block>
-                                                        <th:block th:if="${compra.estado == 'V'}">
-                                                            <div class="media align-items-stretch">
-                                                                <div class="p-2 text-center bg-success rounded-left pt-3">
-                                                                    <i class="icon-info font-large-2 text-white"></i>
-                                                                </div>
-                                                                <div class="py-2 px-2 media-body">
-                                                                    <h6 class="success">Estado de la Compra</h6>
-                                                                    <h5 class="text-bold-400" th:text="${'Verificado'}"></h5>
-                                                                </div>
-                                                            </div>
-                                                        </th:block>
-                                                        <th:block th:if="${compra.estado == 'C'}">
-                                                            <div class="media align-items-stretch">
-                                                                <div class="p-2 text-center bg-danger rounded-left pt-3">
-                                                                    <i class="icon-info font-large-2 text-white"></i>
-                                                                </div>
-                                                                <div class="py-2 px-2 media-body">
-                                                                    <h6 class="danger">Estado de la Compra</h6>
-                                                                    <h5 class="text-bold-400" th:text="${'Cancelado'}"></h5>
-                                                                </div>
+                                                            <div class="col-lg-2 col-sm-12">
+                                                                <button style="width: 100%;" type="button"
+                                                                    class="btn btn-warning" data-toggle="modal"
+                                                                    th:attr="data-target='#default2'"><i
+                                                                        class="fa fa-eye font-medium-3"></i>&nbsp;Cuenta
+                                                                    Bancaria</button>
                                                             </div>
                                                         </th:block>
                                                         
-                                                        <h4 class="card-title" th:text="${'Monto total: '+compra.monto_pagar+' Bs.'}"></h4>
-                                                    </div>
-                                                    <div class="col-lg-2 col-sm-12">
-                                                        <button style="width: 100%;" type="button" class="btn btn-primary" data-toggle="modal"  th:attr="data-target='#default1'" ><i class="fa fa-eye font-medium-3"></i>&nbsp;QR de pago</button><br>
-                                                    </div>
-                                                    <div class="col-lg-2 col-sm-12">
-                                                        <button style="width: 100%;" type="button" class="btn btn-warning" data-toggle="modal"  th:attr="data-target='#default2'" ><i class="fa fa-eye font-medium-3"></i>&nbsp;Cuenta Bancaria</button>
-                                                    </div>
-                                                    <div class="col-lg-4 col-sm-12">
-                                                        <th:block th:if="${compra.img_comprobante == null && compra.estado != 'C'}">
-                                                            <form  th:action="@{'../../../../CompraC/'+${compra.id_compra}}" method="POST" enctype="multipart/form-data" novalidate>
-                                                                <div class="row">
-                                                                    <div class="col-lg-12 col-sm-12">
-                                                                        <div class="form-group">
-                                                                            <label>Subir foto del Comprobante</label>
-                                                                            <input accept="image/*,.pdf" name="archivo3" class="form-control-file" id="projectinput8" type="file" required>
+                                                        <div class="col-lg-4 col-sm-12 pt-2">
+                                                            <th:block
+                                                                th:if="${compra.img_comprobante2 == null && compra.estado != 'X' && compra.estadoCompraPorcentaje == '2'}">
+                                                                <form
+                                                                    th:action="@{'../../../../CompraC2/'+${compra.id_compra}}"
+                                                                    method="POST" enctype="multipart/form-data"
+                                                                    novalidate>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12 col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label>Subir foto del
+                                                                                    Comprobante</label>
+                                                                                <input accept="image/*,.pdf"
+                                                                                    name="archivo4"
+                                                                                    class="form-control-file"
+                                                                                    id="projectinput8" type="file"
+                                                                                    required>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-lg-12 col-sm-12 pb-2">
-                                                                        <input type="number" name="nro_comprobante" id="projectinput9" placeholder="Nro. de documento del comprobante" class="form-control form-control-lg" required>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12 col-sm-12 pb-2">
+                                                                            <input type="number" name="nro_comprobante2"
+                                                                                id="projectinput9"
+                                                                                placeholder="Nro. de documento del comprobante"
+                                                                                class="form-control form-control-lg"
+                                                                                required>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="row"> 
-                                                                    <div class="col-lg-12 col-sm-12">
-                                                                        <button style="width: 100%;" class="btn btn-danger px-4 py-2 text-uppercase box-shadow-2 border-0" type="submit">Finalizar la Compra</button>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12 col-sm-12">
+                                                                            <button style="width: 100%;"
+                                                                                class="btn btn-danger px-4 py-2 box-shadow-2"
+                                                                                type="submit">Completar el 100% del pago</button>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </form>
-                                                        </th:block>
-                                                        <th:block th:if="${compra.img_comprobante != null}">
-                                                            <button type="button" class="btn btn-success" data-toggle="modal"  th:attr="data-target='#default3'" ><i class="fa fa-file-o font-medium-3"></i>&nbsp;Ver Comprabante Cargado</button>
-                                                            <button type="button" class="btn btn-info" data-toggle="modal"  th:attr="data-target='#default4'" ><i class="fa fa-file-o font-medium-3"></i>&nbsp;Ver Nro. de comprobante</button>
-                                                        </th:block>
+                                                                </form>
+                                                            </th:block>
+                                                            <th:block th:if="${compra.img_comprobante2 != null && compra.estadoCompraPorcentaje == '2'}">
+                                                                <button type="button" class="btn btn-success pt-2"
+                                                                    style="width: 100%;"
+                                                                    data-toggle="modal"
+                                                                    th:attr="data-target='#default5'"><i
+                                                                        class="fa fa-file-o font-medium-3"></i>&nbsp;Ver
+                                                                    Comprabante Cargado</button>
+                                                                <button type="button" class="btn btn-info"
+                                                                    style="width: 100%;"
+                                                                    data-toggle="modal"
+                                                                    th:attr="data-target='#default6'"><i
+                                                                        class="fa fa-file-o font-medium-3"></i>&nbsp;Ver
+                                                                    Nro. de comprobante</button>
+                                                            </th:block>
+                                                        </div>
                                                     </div>
-                                                    
+                                        </th:block>
+                                        <th:block th:if="${compra.estadoCompraPorcentaje == '3'}">
+                                            <div class="card-header">
+                                                <div class="card-title-wrap bar-success">
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-sm-12">
+                                                            <th:block th:if="${compra.img_comprobante3 == null}">
+                                                                <h4 class="card-title">Pago del 100%</h4>
+                                                            </th:block>
+                                                            <th:block th:if="${compra.img_comprobante3 != null}">
+                                                                <h4 class="card-title">Realizado el 100% del pago</h4>
+                                                            </th:block>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-block">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-sm-12">
+                                                            <th:block th:if="${compra.estado == 'NT'}">
+                                                                <div class="media align-items-stretch">
+                                                                    <div
+                                                                        class="p-2 text-center bg-primary rounded-left pt-3">
+                                                                        <i
+                                                                            class="icon-info font-large-2 text-white"></i>
+                                                                    </div>
+                                                                    <div class="py-2 px-2 media-body">
+                                                                        <h6 class="primary">Estado de la Compra</h6>
+                                                                        <h5 class="text-bold-400"
+                                                                            th:text="${'No terminado'}"></h5>
+                                                                    </div>
+                                                                </div>
+                                                            </th:block>
+                                                            <th:block th:if="${compra.estado == 'P'}">
+                                                                <div class="media align-items-stretch">
+                                                                    <div
+                                                                        class="p-2 text-center bg-warning rounded-left pt-3">
+                                                                        <i
+                                                                            class="icon-info font-large-2 text-white"></i>
+                                                                    </div>
+                                                                    <div class="py-2 px-2 media-body">
+                                                                        <h6 class="warning">Estado de la Compra</h6>
+                                                                        <h5 class="text-bold-400"
+                                                                            th:text="${'Enviado para verificación'}">
+                                                                        </h5>
+                                                                    </div>
+                                                                </div>
+                                                            </th:block>
+                                                            <th:block th:if="${compra.estado == 'V'}">
+                                                                <div class="media align-items-stretch">
+                                                                    <div
+                                                                        class="p-2 text-center bg-success rounded-left pt-3">
+                                                                        <i
+                                                                            class="icon-info font-large-2 text-white"></i>
+                                                                    </div>
+                                                                    <div class="py-2 px-2 media-body">
+                                                                        <h6 class="success">Estado de la Compra</h6>
+                                                                        <h5 class="text-bold-400"
+                                                                            th:text="${'Verificado'}"></h5>
+                                                                    </div>
+                                                                </div>
+                                                            </th:block>
+                                                            <th:block th:if="${compra.estado == 'X'}">
+                                                                <div class="media align-items-stretch">
+                                                                    <div
+                                                                        class="p-2 text-center bg-danger rounded-left pt-3">
+                                                                        <i
+                                                                            class="icon-info font-large-2 text-white"></i>
+                                                                    </div>
+                                                                    <div class="py-2 px-2 media-body">
+                                                                        <h6 class="danger">Estado de la Compra</h6>
+                                                                        <h5 class="text-bold-400"
+                                                                            th:text="${'Cancelado'}"></h5>
+                                                                    </div>
+                                                                </div>
+                                                            </th:block>
+                                                            <th:block th:if="${compra.img_comprobante3 == null}">
+                                                                <h5 class="card-title"
+                                                                th:text="${'Monto a pagar: '+compra.monto_pagar+' Bs.'}">
+                                                                </h5>
+
+                                                                <h5 class="card-title"
+                                                                    th:text="${'De un total: '+compra.monto_pagar+' Bs.'}">
+                                                                </h5>
+                                                            </th:block>
+                                                        </div>
+                                                        <th:block th:if="${compra.img_comprobante3 == null}">
+                                                            <div class="col-lg-2 col-sm-12">
+                                                                <button style="width: 100%;" type="button"
+                                                                    class="btn btn-primary" data-toggle="modal"
+                                                                    th:attr="data-target='#defaultQR3'">
+                                                                    <i class="fa fa-eye font-medium-3"></i>&nbsp;QR de pago
+                                                                    del 100%
+                                                                </button><br>
+                                                            </div>
+                                                            <div class="col-lg-2 col-sm-12">
+                                                                <button style="width: 100%;" type="button"
+                                                                    class="btn btn-warning" data-toggle="modal"
+                                                                    th:attr="data-target='#default2'"><i
+                                                                        class="fa fa-eye font-medium-3"></i>&nbsp;Cuenta
+                                                                    Bancaria</button>
+                                                            </div>
+                                                        </th:block>
+                                                        
+                                                        <div class="col-lg-4 col-sm-12 pt-2">
+                                                            <th:block
+                                                                th:if="${compra.img_comprobante3 == null && compra.estado != 'X' && compra.estadoCompraPorcentaje == '3'}">
+                                                                <form
+                                                                    th:action="@{'../../../../CompraC3/'+${compra.id_compra}}"
+                                                                    method="POST" enctype="multipart/form-data"
+                                                                    novalidate>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12 col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label>Subir foto del
+                                                                                    Comprobante</label>
+                                                                                <input accept="image/*,.pdf"
+                                                                                    name="archivo5"
+                                                                                    class="form-control-file"
+                                                                                    id="projectinput8" type="file"
+                                                                                    required>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12 col-sm-12 pb-2">
+                                                                            <input type="number" name="nro_comprobante3"
+                                                                                id="projectinput9"
+                                                                                placeholder="Nro. de documento del comprobante"
+                                                                                class="form-control form-control-lg"
+                                                                                required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12 col-sm-12">
+                                                                            <button style="width: 100%;"
+                                                                                class="btn btn-danger px-4 py-2 box-shadow-2"
+                                                                                type="submit">Completar el 100% del pago</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </th:block>
+                                                            <th:block th:if="${compra.img_comprobante3 != null && compra.estadoCompraPorcentaje == '3'}">
+                                                                <button type="button" class="btn btn-success"
+                                                                    style="width: 100%;"
+                                                                    data-toggle="modal"
+                                                                    th:attr="data-target='#default7'"><i
+                                                                        class="fa fa-file-o font-medium-3"></i>&nbsp;Ver
+                                                                    Comprabante Cargado</button>
+                                                                <button type="button" class="btn btn-info"
+                                                                    style="width: 100%;"
+                                                                    data-toggle="modal"
+                                                                    th:attr="data-target='#default8'"><i
+                                                                        class="fa fa-file-o font-medium-3"></i>&nbsp;Ver
+                                                                    Nro. de comprobante</button>
+                                                            </th:block>
+                                                        </div>
+                                                    </div>
+                                        </th:block>
+                                        <!--<div class="row">
                                                     <div class="col-lg-10 col-sm-12 text-center">
                                                         <h4>Lista de tickets Comprados</h4>
                                                     </div>
@@ -134,9 +532,9 @@
                                                             <a th:href="${'../../../../imprimirR/'+compra.id_compra}" class="btn btn-round btn-success" style="width: 100%;" ><i class="fa fa-print text-white"></i> Imprimir Tickets</a>
                                                         </div>
                                                     </th:block>
-                                                </div>
-                                                
-                                                <div class="row" th:each="t : ${tickets}" th:if="${t.compra.id_compra == compra.id_compra && compra.estado != 'C'}">
+                                                </div>--->
+
+                                        <!--<div class="row" th:each="t : ${tickets}" th:if="${t.compra.id_compra == compra.id_compra && compra.estado != 'C'}">
                                                     <div class="col-12">
                                                         <div class="card gradient-orange-amber">
                                                             <div class="card-body">
@@ -147,19 +545,15 @@
                                                                                 <div class="col-lg-12 col-sm-12">
                                                                                     <i class="icon-tag text-white font-large-2 float-left"></i><br>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="row">
                                                                                 <div class="col-lg-12 col-sm-12">
-                                                                                    <h5 class="text-white font-large-1 float-left" th:text="${'ID: '+t.cod}"></h5>
+                                                                                    <i class="text-white font-large-2 float-left" th:text="${t.id_ticket}"></i><br>
                                                                                 </div>
                                                                             </div>
-                                                                            
-                                                                            
                                                                         </div>
                                                                         <div class="col-lg-6 col-sm-12">
                                                                             <div class="media-body text-white text-right">
                                                                                 <h3 class="text-white" th:text="${'Mesa: '+t.sector.desc_sector}"></h3>
-                                                                                <span th:text="${'Fecha de ultimo uso: '+t.fecha_uso}"></span><br>
+                                                                                <p th:text="${'Fecha de ultimo uso: '+t.fecha_uso}"></p><br>
                                                                                 <button class="btn btn-primary" th:text="${t.valida}"></button>
                                                                                 <button class="btn btn-primary" th:text="${t.utilizada}"></button>
                                                                                 <button class="btn btn-primary" th:text="${t.estado}"></button>
@@ -170,146 +564,321 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>-->
+
+                                        <div class="modal fade text-left" th:id="defaultQR1" tabindex="-1" role="dialog"
+                                            data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="myModalLabel1">QR de pago
+                                                        </h4>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-12 text-center">
+                                                                <img src="../../../../uploads/qr1.jpeg"
+                                                                    style="width: 100%; height: 100%;" alt="sin qr">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer text-center">
+                                                            <button type="button" class="btn grey btn-outline-secondary"
+                                                                data-dismiss="modal">Cerrar ventana</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                
-                                                    <div class="modal fade text-left" th:id="default1" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true" >
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content" >
-                                                                <div class="modal-header">
-                                                                    <h4 class="modal-title" id="myModalLabel1">QR de pago</h4>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="row">
-                                                                        <div class="col-12 text-center" >
-                                                                        <img src="../../../../uploads/qr2.jpeg" style="width: 100%; height: 100%;" alt="sin qr">
-                                                                        </div>
-                                                                    </div>    
-                                                                    <div class="modal-footer text-center" >                                
-                                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>                                                                
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal fade text-left" th:id="default3" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true" >
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content" >
-                                                                <div class="modal-header">
-                                                                    <h4 class="modal-title" id="myModalLabel1">Comprobante Cargado</h4>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="row">
-                                                                        <div class="col-12 text-center" >
-                                                                            <img th:src="@{'data:image/jpg;base64,' + ${compra.img_comprobante}}" style="width: 100%; height: 100%;" alt="Sin comprobante">
-                                                                        </div>
-                                                                    </div>    
-                                                                    <div class="modal-footer text-center" >                                
-                                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>                                                                
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal fade text-left" th:id="default4" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true" >
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content" >
-                                                                <div class="modal-header">
-                                                                    <h4 class="modal-title" id="myModalLabel1">Nro. de Comprobante Cargado</h4>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="row">
-                                                                        <div class="col-12 text-center" >
-                                                                            <h3 th:text="${compra.nro_comprobante}"></h3>
-                                                                        </div>
-                                                                    </div>    
-                                                                    <div class="modal-footer text-center" >                                
-                                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>                                                                
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal fade text-left" th:id="default2" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true" >
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content" >
-                                                                <div class="modal-header">
-                                                                    <h4 class="modal-title" id="myModalLabel1">Cuenta de Bancaria</h4>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="row">
-                                                                        <div class="col-12 text-center" >
-                                                                            <img src="../../../../uploads/bcp.jpeg" style="width: 100%; height: 100%;" alt="sin qr">
-                                                                        </div>
-                                                                    </div>    
-                                                                    <div class="row">
-                                                                        <div class="col-12 text-center">
-                                                                            <h4>Nombre:</h4>
-                                                                            <p>PAUL STEVE CURCUY ITURRI</p><br>
-                                                                            <h4>Banco:</h4>
-                                                                            <p>BANCO DE CREDITO DE BOLIVIA</p><br>
-                                                                            <h4>Cuenta de Ahorros:</h4>
-                                                                            <p>201-51386167-3-00</p><br>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer text-center" >                                
-                                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>                                                                
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div id="modalAviso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalAvisoLabel">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                <h5 class="modal-title">IMPORTANTE</h5>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                        <div class="card p-3">
-                                                                            <blockquote class="blockquote mb-0 card-body">
-                                                                            <div class="card-block">
-                                                                                <p><strong>Las compras reservadas (no terminadas), se anularan en 24 horas.</strong></p>
-                                                                            </div>
-                                                                            </blockquote>
-                                                                        </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button style="width: 100%;" type="button" class="btn btn-dark" data-bs-dismiss="modal"><strong>Entiendo Perfectámente</strong></button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                
                                             </div>
                                         </div>
+                                        <div class="modal fade text-left" th:id="defaultQR3" tabindex="-1" role="dialog"
+                                            data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="myModalLabel1">QR de pago
+                                                        </h4>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-12 text-center">
+                                                                <img src="../../../../uploads/qr2.jpeg"
+                                                                    style="width: 100%; height: 100%;" alt="sin qr">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer text-center">
+                                                            <button type="button" class="btn grey btn-outline-secondary"
+                                                                data-dismiss="modal">Cerrar ventana</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal fade text-left" th:id="default3" tabindex="-1" role="dialog"
+                                            data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="myModalLabel1">Comprobante
+                                                            Cargado</h4>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-12 text-center">
+                                                                <img th:src="@{'data:image/jpg;base64,' + ${compra.img_comprobante}}"
+                                                                    style="width: 100%; height: 100%;"
+                                                                    alt="Sin comprobante">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer text-center">
+                                                            <button type="button" class="btn grey btn-outline-secondary"
+                                                                data-dismiss="modal">Cerrar ventana</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal fade text-left" th:id="default4" tabindex="-1" role="dialog"
+                                            data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="myModalLabel1">Nro. de
+                                                            Comprobante Cargado</h4>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-12 text-center">
+                                                                <h3 th:text="${compra.nro_comprobante}"></h3>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer text-center">
+                                                            <button type="button" class="btn grey btn-outline-secondary"
+                                                                data-dismiss="modal">Cerrar ventana</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-----------------------2------------------------------>
+                                        <div class="modal fade text-left" th:id="default5" tabindex="-1" role="dialog"
+                                            data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="myModalLabel1">Comprobante
+                                                            Cargado</h4>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-12 text-center">
+                                                                <img th:src="@{'data:image/jpg;base64,' + ${compra.img_comprobante2}}"
+                                                                    style="width: 100%; height: 100%;"
+                                                                    alt="Sin comprobante">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer text-center">
+                                                            <button type="button" class="btn grey btn-outline-secondary"
+                                                                data-dismiss="modal">Cerrar ventana</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal fade text-left" th:id="default6" tabindex="-1" role="dialog"
+                                            data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="myModalLabel1">Nro. de
+                                                            Comprobante Cargado</h4>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-12 text-center">
+                                                                <h3 th:text="${compra.nro_comprobante2}"></h3>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer text-center">
+                                                            <button type="button" class="btn grey btn-outline-secondary"
+                                                                data-dismiss="modal">Cerrar ventana</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!----------------------------------------------------->
+                                        <!-----------------------3------------------------------>
+                                        <div class="modal fade text-left" th:id="default7" tabindex="-1" role="dialog"
+                                            data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="myModalLabel1">Comprobante
+                                                            Cargado</h4>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-12 text-center">
+                                                                <img th:src="@{'data:image/jpg;base64,' + ${compra.img_comprobante3}}"
+                                                                    style="width: 100%; height: 100%;"
+                                                                    alt="Sin comprobante">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer text-center">
+                                                            <button type="button" class="btn grey btn-outline-secondary"
+                                                                data-dismiss="modal">Cerrar ventana</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal fade text-left" th:id="default8" tabindex="-1" role="dialog"
+                                            data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="myModalLabel1">Nro. de
+                                                            Comprobante Cargado</h4>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-12 text-center">
+                                                                <h3 th:text="${compra.nro_comprobante3}"></h3>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer text-center">
+                                                            <button type="button" class="btn grey btn-outline-secondary"
+                                                                data-dismiss="modal">Cerrar ventana</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!----------------------------------------------------->
+                                        <div class="modal fade text-left" th:id="default2" tabindex="-1" role="dialog"
+                                            data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="myModalLabel1">Cuenta de
+                                                            Bancaria</h4>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-12 text-center">
+                                                                <img src="../../../../uploads/bcp.jpeg"
+                                                                    style="width: 100%; height: 100%;" alt="sin qr">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-12 text-center">
+                                                                <h4>Nombre:</h4>
+                                                                <p>PAUL STEVE CURCUY ITURRI</p><br>
+                                                                <h4>Banco:</h4>
+                                                                <p>BANCO DE CREDITO DE BOLIVIA</p><br>
+                                                                <h4>Cuenta de Ahorros:</h4>
+                                                                <p>201-51386167-3-00</p><br>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer text-center">
+                                                            <button type="button" class="btn grey btn-outline-secondary"
+                                                                data-dismiss="modal">Cerrar ventana</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="modalAviso" class="modal fade" tabindex="-1" role="dialog"
+                                            aria-labelledby="modalAvisoLabel">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">IMPORTANTE</h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="card p-3">
+                                                            <blockquote class="blockquote mb-0 card-body">
+                                                                <div class="card-block">
+                                                                    <p><strong>Las compras reservadas (no
+                                                                            terminadas), se anularan en 24
+                                                                            horas.</strong></p>
+                                                                </div>
+                                                            </blockquote>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button style="width: 100%;" type="button" class="btn btn-dark"
+                                                            data-bs-dismiss="modal"><strong>Entiendo
+                                                                Perfectámente</strong></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-                        </section>
                     </div>
                 </div>
+                </section>
             </div>
         </div>
     </div>
-        <div th:replace="layout/layoutMain :: scripts"></div>
-        <script>
-            window.onload = function() {
-                $('#onload').fadeOut();
-                $('body').removeClass('hidden');
-                $('#modalAviso').modal('show');
-            }
-        </script>
-    </body>
+    </div>
+    </div>
+    <div th:replace="layout/layoutMain :: scripts"></div>
+    <script>
+        window.onload = function () {
+            $('#onload').fadeOut();
+            $('body').removeClass('hidden');
+            $('#modalAviso').modal('show');
+        }
+    </script>
+</body>
+
 </html>

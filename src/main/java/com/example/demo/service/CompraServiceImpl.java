@@ -56,10 +56,15 @@ public class CompraServiceImpl implements ICompraService{
         compraDao.CancelarCompra(id_compra, accion);
     }
 
-    
-    
+    @Override
+    public List<Compra> BuscarTickets(String correo, String accion) {
+        // TODO Auto-generated method stub
+        return compraDao.BuscarTickets(correo, accion);
+    }
 
-    
-
-    
+    @Override
+    public Integer Validar(String correo, Long id_sector, String accion) {
+        // TODO Auto-generated method stub
+        return compraDao.Validar(correo, id_sector, accion);
+    }    
 }

@@ -32,7 +32,7 @@
     <!-- =====================BARRA DE NAVEGACION LATERAL===================== -->
     <div data-active-color="white" data-background-color="black" data-image="../../../../app-assets/img/sidebar-bg/06.jpg" class="app-sidebar" th:fragment="menuLateral">
         <div class="sidebar-header">
-        <div class="logo clearfix"><a href="../../../../BienvenidoR" class="logo-text float-left">
+        <div class="logo clearfix"><a href="../../../../eventoCR" class="logo-text float-left">
             <div class="logo-img">
                 <img src="../../../../app-assets/logo2.png" alt="Convex Logo"/>
                 TN'T
@@ -42,39 +42,49 @@
         <div class="sidebar-content">
         <div class="nav-container">
             <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
-            <li class="has-sub nav-item" th:if="${session.usuario.estado == 'A'}">
-                <a>
-                    <i class="icon-home"></i>
-                    <span data-i18n="" class="menu-title">Administración</span>
-                </a>
-                <ul class="menu-content">
-                <li>
-                    <a href="../../../../personaR" class="menu-item">Personas</a>
+            <th:block th:if="${session.usuario != null}">
+                <li class="has-sub nav-item" th:if="${session.usuario.estado == 'A'}">
+                    <a>
+                        <i class="icon-home"></i>
+                        <span data-i18n="" class="menu-title">Administración</span>
+                    </a>
+                    <ul class="menu-content">
+                    <li>
+                        <a href="../../../../personaR" class="menu-item">Personas</a>
+                    </li>
+                    <li>
+                        <a href="../../../../eventoR" class="menu-item">Eventos</a>
+                    </li>
+                    <li>
+                        <a href="../../../../ComprasAR" class="menu-item">Compras</a>
+                    </li>
+                    <li>
+                        <a href="../../../../lugarR" class="menu-item">Lugar</a>
+                    </li>
+                    <li>
+                        <a href="../../../../tipoEventoR" class="menu-item">Tipo de Evento</a>
+                    </li>
+                    </ul>
                 </li>
-                <li>
-                    <a href="../../../../eventoR" class="menu-item">Eventos</a>
-                </li>
-                <li>
-                    <a href="../../../../ComprasAR" class="menu-item">Compras</a>
-                </li>
-                <li>
-                    <a href="../../../../lugarR" class="menu-item">Lugar</a>
-                </li>
-                <li>
-                    <a href="../../../../tipoEventoR" class="menu-item">Tipo de Evento</a>
-                </li>
-                </ul>
-            </li>
+            </th:block>
             <li class=" nav-item">
                 <a href="../../../../eventoCR">
                     <i class="icon-disc"></i>
                     <span data-i18n="" class="menu-title">Eventos</span>
                 </a>
             </li>
+            <th:block th:if="${session.usuario != null}">
+                <li class=" nav-item">
+                    <a href="../../../../ComprasR">
+                        <i class="icon-basket-loaded"></i>
+                        <span data-i18n="" class="menu-title">Mis Compras</span>
+                    </a>
+                </li>
+            </th:block>
             <li class=" nav-item">
-                <a href="../../../../ComprasR">
-                    <i class="icon-basket-loaded"></i>
-                    <span data-i18n="" class="menu-title">Mis Compras</span>
+                <a href="../../../../BuscarTickets">
+                    <i class="icon-magnifier"></i>
+                    <span data-i18n="" class="menu-title">Buscar Compra</span>
                 </a>
             </li>
             <li class=" nav-item">
@@ -131,15 +141,29 @@
             </span>
         </div>
         <div class="navbar-container">
-            <div id="navbarSupportedContent" class="collapse navbar-collapse">
-                <button style="width: 100%;" class="btn btn-outline-secondary" th:text="${session.persona.nombre+' '+session.persona.apellido_p+' '+session.persona.apellido_m}"></button>
-            <ul class="navbar-nav">
-                <a style="width: 95%;" th:href="${'../../../../cerrar_sesion'}" class="btn btn-danger">
-                    <i class="ft-power mr-2"></i>
-                    <span>Cerrar Sesion</span>
-                </a>
-            </ul>
-            </div>
+            <th:block th:if="${session.usuario != null}">
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <button style="width: 100%;" class="btn btn-outline-secondary" th:text="${session.persona.nombre+' '+session.persona.apellido_p+' '+session.persona.apellido_m}"></button>
+                    <ul class="navbar-nav">
+                        <a style="width: 98%;" th:href="${'../../../../cerrar_sesion'}" class="btn btn-danger">
+                            <i class="ft-power mr-2"></i>
+                            <span>Cerrar Sesion</span>
+                        </a>
+                    </ul>
+                </div>
+            </th:block>
+            <th:block th:if="${session.usuario == null}">
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <button style="width: 100%;" class="btn btn-outline-secondary" th:text="${'Invitado'}"></button>
+                    <ul class="navbar-nav">
+                        <a style="width: 95%;" th:href="${'../../../../cerrar_sesion'}" class="btn btn-info">
+                            <i class="ft-power mr-2"></i>
+                            <span>Iniciar Sesión</span>
+                        </a>
+                    </ul>
+                </div>
+            </th:block>
+            
         </div>
         </div>
     </nav>

@@ -14,4 +14,8 @@ public interface IUsuarioService {
 	public void delete(Long id);
 
 	public Usuario getUsuarioContraseña(String usuario, String contrasena);
+
+	Long RecuperarContraseña(String ci,String num_celular , String accion);
+
+	Long RecuperarUsuario(String correo, String accion);
 }

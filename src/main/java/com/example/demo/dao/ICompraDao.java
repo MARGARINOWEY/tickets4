@@ -23,8 +23,11 @@ public interface ICompraDao extends CrudRepository<Compra, Long>{
     @Modifying
     @Query(value = "exec Eventos @ID_compra = ?1, @accion = ?2 ", nativeQuery = true)
     void CancelarCompra(Long id_compra, String accion);
-    //@Query(value = "exec Eventos @ID_evento = ?1, @accion = ?2 ", nativeQuery = true)
-    //public List<Evento> getAllEventosXTipoevento2(Long id_tipoEvento, String accion);
 
+    @Query(value = "exec Eventos @correo = ?1, @accion = ?2 ", nativeQuery = true)
+    public List<Compra> BuscarTickets(String correo, String accion);
+
+    @Query(value = "exec Eventos @correo = ?1, @id_sector = ?2,  @accion = ?3", nativeQuery = true)
+    Integer Validar(String correo,Long id_sector, String accion);
 
 }

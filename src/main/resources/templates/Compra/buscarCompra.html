@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+    <head th:replace="layout/layoutMain :: head"></head>
+
+    <body data-col="2-columns" class=" 2-columns hidden">
+        <div class="centreadooo" id="onload">
+            <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        </div>
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+    <div class="wrapper">
+        <div th:replace="layout/layoutMain :: menuLateral"></div>
+        <div th:replace="layout/layoutMain :: menuNavbar"></div>
+
+        <div class="main-panel">
+            <div class="main-content">
+                <div class="content-wrapper">
+                    <div class="container-fluid">
+                        <section id="alert">
+                            <!--Alert States Starts-->
+                            <div class="row match-height">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="card-title-wrap bar-success">
+                                                <h4 class="card-title">Buscar el estado de la compra por el Correo Electronico</h4>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-block">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <form action="../../../../BuscarTicketsF" class="form-horizontal" method="POST" novalidate >
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <h5>Introducir Correo Electronico</h5>
+                                                                    <div class="controls">
+                                                                        <input type="email" name="correo" class="form-control" required data-validation-required-message="Debe introducir su correo">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                            <button style="width: 100%;" class="btn btn-info" type="submit">Buscar</button>
+                                                        </div>
+                                                    </form>
+                                                    </div>
+                                                </div>
+                                                
+                                                    
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <th:block th:each="c : ${compras}">
+                                <th:block th:if="${c.id_compra == null}">
+                                    <h3>No hay un compra realizada con ese correo</h3>
+                                </th:block>
+                                <th:block th:if="${c.estado == 'P'}">
+                                    <div class="row">
+                                        <div class="col-xl-3 col-lg-6 col-12">
+                                            <div class="card gradient-orange-amber">
+                                                <div class="card-body">
+                                                    <div class="px-3 py-3">
+                                                        <div class="media">
+                                                        <div class="align-center">
+                                                            <i class="text-white font-large-2 float-left">P</i>
+                                                        </div>
+                                                        <div class="media-body text-white text-right">
+                                                            <p th:text="${'Identificador: '+c.id_compra}" ></p>
+                                                            <h5 class="text-white" th:text="${'Total pagado: 100%'}"></h5>
+                                                            <h7 class="text-white" th:text="${'Fecha de compra : '+ c.fecha_compra}"></h7>
+                                                            <span th:text="${'Monto a Pagar: '+c.monto_pagar}" ></span>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th:block>
+                                <th:block th:if="${c.estado == 'NT'}">
+                                    <div class="row">
+                                        <div class="col-xl-3 col-lg-6 col-12">
+                                            <div class="card" style="background: #4b6cb7;  /* fallback for old browsers */
+                                            background: -webkit-linear-gradient(to right, #182848, #4b6cb7);  /* Chrome 10-25, Safari 5.1-6 */
+                                            background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                                            ">
+                                                <div class="card-body">
+                                                    <div class="px-3 py-3">
+                                                        <div class="media">
+                                                        <div class="align-center">
+                                                            <i class="text-white font-large-2 float-left">NT</i>
+                                                        </div>
+                                                        <div class="media-body text-white text-right">
+                                                            <p th:text="${'Identificador: '+c.id_compra}" ></p>
+                                                            <h5 class="text-white" th:text="${'Total pagado: 100%'}"></h5>
+                                                            <h7 class="text-white" th:text="${'Fecha de compra : '+ c.fecha_compra}"></h7>
+                                                            <span th:text="${'Monto a Pagar: '+c.monto_pagar}" ></span>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th:block>
+                                <th:block th:if="${c.estado == 'V'}">
+                                    <div class="row">
+                                        <div class="col-xl-3 col-lg-6 col-12">
+                                            <div class="card gradient-mint">
+                                                <div class="card-body">
+                                                    <div class="px-3 py-3">
+                                                        <div class="media">
+                                                        <div class="align-center">
+                                                            <i class="text-white font-large-2 float-left">V</i>
+                                                        </div>
+                                                        <div class="media-body text-white text-right">
+                                                            <p th:text="${'Identificador: '+c.id_compra}" ></p>
+                                                            <h5 class="text-white" th:text="${'Total pagado: 100%'}"></h5>
+                                                            <h7 class="text-white" th:text="${'Fecha de compra : '+ c.fecha_compra}"></h7>
+                                                            <span th:text="${'Monto a Pagar: '+c.monto_pagar}" ></span>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th:block>
+                                
+                            </th:block>
+                        </section>
+                        <div id="modalAviso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalAvisoLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title">AVISO</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                            <div class="card p-3">
+                                                <blockquote class="blockquote mb-0 card-body">
+                                                <div class="card-block">
+                                                    <p><strong>Revise su correo para completar la compra</strong></p><br>
+                                                    <p>o</p><br>
+                                                    <p><strong>Puede ver el estado de su compra ingresando su correo</strong></p><br>
+                                                    <!--<p><strong>Las compras reservadas (no terminadas), se anularan en 14 dias.</strong></p>-->
+                                                </div>
+                                                </blockquote>
+                                            </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button style="width: 100%;" type="button" class="btn btn-dark" data-bs-dismiss="modal"><strong>Entiendo Perfectámente</strong></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div th:replace="layout/layoutMain :: scripts"></div>
+        <script>
+            window.onload = function() {
+                $('#onload').fadeOut();
+                $('body').removeClass('hidden');
+                $('#modalAviso').modal('show');
+            }
+        </script>
+    </body>
+</html>

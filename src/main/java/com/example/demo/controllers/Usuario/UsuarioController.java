@@ -37,7 +37,13 @@ public class UsuarioController {
 	@RequestMapping(value = "/", method = RequestMethod.GET) // Pagina principal
 	public String LoginM2() {
 		
-		return "login/Login";
+		return "redirect:/eventoCR";
+	}
+
+	@RequestMapping(value = "/email", method = RequestMethod.GET) // Pagina principal
+	public String email() {
+		
+		return "Ticket/compraEmail";
 	}
 
     @RequestMapping(value = "/loginF", method = RequestMethod.POST)
@@ -75,7 +81,7 @@ public class UsuarioController {
 
     @RequestMapping(value = "/BienvenidoR", method = RequestMethod.GET) // Pagina principal
 	public String BienvenidoR(HttpServletRequest request,Model model) {
-		if (request.getSession().getAttribute("persona") != null) {
+		
 
 			//String b = "texto 1";
 			//String cadenaCodificada = Base64.getEncoder().encodeToString(Base64.getDecoder().decode(a));	
@@ -87,8 +93,5 @@ public class UsuarioController {
 			//String base64String = Base64.getEncoder().encodeToString();
 
 			return "login/Bienvenido";
-		} else {
-			return "redirect:loginR";
-		}
 	}
 }

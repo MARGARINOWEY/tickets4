@@ -19,4 +19,8 @@ public interface ICompraService {
 	public Date Date2222();
 
 	void CancelarCompra(Long id_compra, String accion);
+
+	public List<Compra> BuscarTickets(String correo, String accion);
+
+	Integer Validar(String correo,Long id_sector, String accion);
 }

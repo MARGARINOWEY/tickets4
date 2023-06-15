@@ -73,35 +73,41 @@ public class EventoC_Controller {
 			Random numAleatorio = new Random();
 			System.out.println("entroooooooo");
 			if (sector.getAsientosDisponibles() > 0) {
-				Compra compra = new Compra();
-				compra.setFecha_compra(new Date());
-				compra.setEstado("NT");
-				compra.setEstadoCompraPorcentaje("0");
-				compra.setUsuario(usuario);
-				int p = Integer.parseInt(sector.getPrecio_unitario());
-				int res = p * sector.getAsientosDisponibles();
-				compra.setMonto_pagar(res);
-				compraService.save(compra);        
+				if (compraService.Validar(correo, sector.getId_sector(), "V1") == 0) {
+					System.out.println("entroooooooo2");
+					Compra compra = new Compra();
+					compra.setFecha_compra(new Date());
+					compra.setEstado("NT");
+					compra.setEstadoCompraPorcentaje("0");
+					compra.setUsuario(usuario);
+					int p = Integer.parseInt(sector.getPrecio_unitario());
+					int res = p * sector.getAsientosDisponibles();
+					compra.setMonto_pagar(res);
+					compraService.save(compra);        
 
-				for (int i = 1; i <= sector.getAsientosDisponibles(); i++) {
+					for (int i = 1; i <= sector.getAsientosDisponibles(); i++) {
 
-				Ticket ticket = new Ticket();
-				ticket.setCompra(compra);
-				ticket.setSector(sector);
-				ticket.setCod(numAleatorio.nextInt(900000-100000+1) + 100000);
-				ticket.setEstado("A"); // anular el ticket 
-				ticket.setValida("P");  // validacion del pago
-				ticket.setUtilizada("N"); // si ingreso o no
-				ticket.setFecha_uso(compraService.Date2222()); // fecha y hora del ultimo uso del ticket
-				ticketService.save(ticket);
+					Ticket ticket = new Ticket();
+					ticket.setCompra(compra);
+					ticket.setSector(sector);
+					ticket.setCod(numAleatorio.nextInt(900000-100000+1) + 100000);
+					ticket.setEstado("A"); // anular el ticket 
+					ticket.setValida("P");  // validacion del pago
+					ticket.setUtilizada("N"); // si ingreso o no
+					ticket.setFecha_uso(compraService.Date2222()); // fecha y hora del ultimo uso del ticket
+					ticketService.save(ticket);
+					}
+
+					sector.setAsientosDisponibles(0);
+					sectorService.save(sector);
+					emailService.enviarMensajeRegistro(usuario.getCorreo(), "Reserva: "+sector.getEvento().getDesc_evento(), compra.getMonto_pagar(), sector.getEvento().getDesc_evento(),"CompraC4Email/"+compra.getId_compra());
+					
+					return "redirect:/BuscarTickets";
 				}
-
-				sector.setAsientosDisponibles(0);
-				sectorService.save(sector);
-				emailService.enviarMensajeRegistro(usuario.getCorreo(), "Reserva: "+sector.getEvento().getDesc_evento(), compra.getMonto_pagar(), sector.getEvento().getDesc_evento(),"CompraC4Email/"+compra.getId_compra());
-				//emailService.sendEmail(usuario.getCorreo(), "Prueba de Envio tickets", "http://192.168.20.6:8080/ticketCR/"+compra.getId_compra());
-				//emailService.sendEmail(usuario.getCorreo(), "Prueba de Envio tickets", "sss");
-				return "redirect:/BuscarTickets";
+				
+				
+					return "redirect:/eventoCR/"+sector.getEvento().getId_evento();		
+				
 			}else{
 				if (compraService.Validar(correo, sector.getId_sector(), "V1") > 0) {
 					return "redirect:/BuscarTickets";

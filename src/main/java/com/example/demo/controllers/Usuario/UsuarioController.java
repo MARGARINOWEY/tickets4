@@ -53,9 +53,7 @@ public class UsuarioController {
 		
 		if (usuario != null) {
 			
-			if (usuario.getEstado() != "A" || usuario.getEstado() == null) {
-				return "redirect:/eventoCR";
-			}
+			
 			if (usuario.getEstado().equals("A")) {
 				HttpSession session = request.getSession(true);
 			
@@ -66,7 +64,7 @@ public class UsuarioController {
 
 			
 			
-			return "redirect:/BienvenidoR";	
+			return "redirect:/BienvenidoR";
 			}
 			return "redirect:/eventoCR";
 		} else{

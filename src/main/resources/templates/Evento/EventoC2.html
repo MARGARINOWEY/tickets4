@@ -174,7 +174,7 @@
                                                                                 <div class="card">
                                                                                     <div class="card-body">
                                                                                         <th:block th:if="${session.usuario == null}">
-                                                                                        <form  method="POST" novalidate>
+                                                                                        <form th:action="@{'../../../../ComprarTicketsEmailF/'+${l1.id_sector}}" method="POST" novalidate>
                                                                                             <div class="form-group">
                                                                                                 <div class="row">
                                                                                                     <div class="col-md-12">

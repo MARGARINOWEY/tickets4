@@ -3,6 +3,8 @@ package com.example.demo.service;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,5 +74,5 @@ public class CompraServiceImpl implements ICompraService{
     public Long InsertCompra(String correo, Long id_sector, String accion) {
         // TODO Auto-generated method stub
         return compraDao.InsertCompra(correo, id_sector, accion);
-    }    
+    }
 }

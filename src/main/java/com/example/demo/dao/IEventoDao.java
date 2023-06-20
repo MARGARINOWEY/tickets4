@@ -1,8 +1,10 @@
 package com.example.demo.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.CrudRepository;
 
 import com.example.demo.entity.Evento;
@@ -19,4 +21,5 @@ public interface IEventoDao extends CrudRepository<Evento, Long>{
 
     @Query(value = "exec Eventos @ID_evento = ?1, @accion = ?2 ", nativeQuery = true)
     public void C3(Long id_tipoEvento, String accion);
+
 }

@@ -7,35 +7,35 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
-    <div class="row">
+    <div class="row" style="background-color: black;">
         <div class="col-12 text-center">
             <center><img src='https://i.imgur.com/yOriwnw.png' alt='company-logo' width='200'></center>
         </div>
     </div>
     <div class="row">
         <div class="col-12" style="text-align: center;">
-            <h5>ESTIMADO CLIENTE,</h5>
-            <h5>POR FAVOR LEA ESTE CORREO COMPLETAMENTE, CONTIENE INFORMACIÓN SOBRE SU RESERVA E INSTRUCCIONES.</h5>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12" style="text-align: center;">
-            <p><strong>El pago del 50% de las entradas para la Mesa <b th:text="${sector}"></b> del evento <b th:text="${evento}"></b> se realizó con éxito!</strong></p>
+            <h5>ESTIMADO CLIENTE.</h5>
+            <h5>La compra de entradas para la Mesa <b th:text="${sector}"></b> del evento <b th:text="${evento}"></b>  se realizó con éxito.</h5>
         </div>
     </div>
     <div class="row"> 
         <div class="col-12" style="text-align: center;">
-            <p><strong><b>RECORDATORIO:</b></strong></p>
+            <p><strong><b>INTRUCCIONES:</b></strong></p>
         </div>
     </div>
     <div class="row"> 
         <div class="col-12" style="text-align: center;">
-            <p>Si usted no realiza el pago del 100% de su reserva antes del vencimiento de cada preventa, los precios y promociones se ajustarán automáticamente a la modalidad siguiente.</p>
+            <p>Usted debe descargarse el documento que contiene sus entradas y debe presentarlos en la puerta de ingreso respectivo para poder ingresar al mismo.</p>
         </div>
     </div>
     <div class="row">
         <div class="col-12" style="text-align: center;">
-            <p style="line-height: 100%;" >Para efectivizar el pago del saldo ingrese a la siguiente opción en la cual se le proporcionara el QR correspondiente:</p>
+            <p><b>Puede imprimir y presentar el documento o presentarlo mediante un dispositivo móvil.</b></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12" style="text-align: center;">
+            <p>Después de ser validada la entrada en el ingreso, NO PODRÁ ser utilizado nuevamente quedando invalidado su uso. En este mismo sentido, el intentar volver a utilizarlo, copiar o realizar cualquier tipo de adulteración de este, dará lugar a la denuncia correspondiente. Mantenga esta entrada en un lugar seguro ya que cualquiera que tenga acceso a ella la podrá utilizar.</p>
         </div>
     </div>
     <div class="row">
@@ -49,26 +49,35 @@
             -webkit-transition-duration: 0.4s; /* Safari */
             transition-duration: 0.4s;
             cursor: pointer;
+            border-radius: 10px;
             text-decoration: none;
             text-transform: uppercase;
-            background-color: goldenrod; 
+            background-color: #fcbf49; 
             color: white; 
-            border: 2px solid yellow;" th:href="${'https://touch-and-treat.up.railway.app/'+link}" >Completar el 100%</a>
+            border: 2px solid #fcbf49;" th:href="${'https://touch-and-treat.up.railway.app/'+link}" >Ver Tickets para Imprimir</a>
         </div>
         </center>
     </div><br>
+    <div class="row"> 
+        <div class="col-12" style="text-align: center;">
+            <p><strong><b>NOTA: En caso de presentar el documento impreso debe estar impreso de manera clara y legible para el control de ingreso.</b></strong></p>
+        </div>
+    </div>
+    <div class="row"> 
+        <div class="col-12" style="text-align: center;">
+            <p><strong><b>Nos vemos en el <b th:text="${evento}"></b>!</b></strong></p>
+        </div>
+    </div>
+    
+    
     <div class="row">
         <div class="col-12" style="text-align: center;">
-            <p>
-                    <strong>la información será validada y recibirá otro correo de confirmación.</strong>
-            </p>
             <p>
                     Ante cualquier duda o problema por favor envíenos un correo electrónico a: <a href="mailto:wayrasoluciones.tnt@gmail.com">wayrasoluciones.tnt@gmail.com</a>
             </p>
             <p> o </p>
-            <p>
-                    comuníquese vía WhatsApp al número <a href="https://wa.me/59178850666" >Whatsapp: +591 - 78850666</a>
-                
+            <p style="background-color: #80ed99;" >
+                    comuníquese vía WhatsApp al número <a href="https://wa.me/59178850666" >+591 - 78850666</a>
             </p>
         </div>
     </div>

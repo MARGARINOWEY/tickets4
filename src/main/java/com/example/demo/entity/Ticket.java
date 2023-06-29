@@ -37,6 +37,7 @@ public class Ticket implements Serializable {
     private String utilizada;
     private String estado;
     private Integer cod;
+    private String crypt;
 
     @ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_compra")

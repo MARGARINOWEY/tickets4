@@ -59,7 +59,6 @@ public class ImprimirTicketsController {
 		try {
 			String decryptedUrl = EncriptarUrl.decrypt(cod_ticket);
 			Integer cod_ticket2 = Integer.parseInt(decryptedUrl);
-			System.out.println(cod_ticket2);
 			Ticket ticket = ticketService.findOne(ticketService.imprimirTicket(cod_ticket2, "I1"));
 
 			model.addAttribute("ticket", ticket);

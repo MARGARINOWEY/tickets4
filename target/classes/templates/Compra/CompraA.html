@@ -75,18 +75,15 @@
                                                                 <a style="width: 30%;" th:href="${'../../../../enviarCorreoConfirmacion1/'+c.id_compra+'/1'}" type="button" class="btn btn-outline-success" ><i class="fa fa-envelope-o font-medium-3"></i></a>
                                                             </td>
                                                             <td>
-                                                                <button style="width: 30%;"  type="button" class="btn btn-outline-info" data-toggle="modal"  th:attr="data-target='#default3'+${c.id_compra}" ><i class="fa fa-eye font-medium-3"></i></button>
+                                                                <button style="width: 50%;"  type="button" class="btn btn-outline-info" data-toggle="modal"  th:attr="data-target='#default3'+${c.id_compra}" ><i class="fa fa-eye font-medium-3"></i></button>
                                                     
-                                                                <a style="width: 30%;" th:href="${'../../../../reiniciarC_A/'+c.id_compra+'/2'}" type="button" class="btn btn-outline-dark" data-toggle="modal"  th:attr="data-target='#modificar3'+${c.id_compra}" ><i class="fa fa-repeat font-medium-3"></i></a>
+                                                                <a style="width: 50%;" th:href="${'../../../../reiniciarC_A/'+c.id_compra+'/2'}" type="button" class="btn btn-outline-dark" data-toggle="modal"  th:attr="data-target='#modificar3'+${c.id_compra}" ><i class="fa fa-repeat font-medium-3"></i></a>
 
-                                                                <a style="width: 30%;" th:href="${'../../../../enviarCorreoConfirmacion2/'+c.id_compra+'/2'}" type="button" class="btn btn-outline-success" data-toggle="modal"  th:attr="data-target='#modificar2'+${c.id_compra}" ><i class="fa fa-envelope-o font-medium-3"></i></a>
                                                             </td>
                                                             <td>
-                                                                <button style="width: 30%;"  type="button" class="btn btn-outline-info" data-toggle="modal"  th:attr="data-target='#default4'+${c.id_compra}" ><i class="fa fa-eye font-medium-3"></i></button>
+                                                                <button style="width: 50%;"  type="button" class="btn btn-outline-info" data-toggle="modal"  th:attr="data-target='#default4'+${c.id_compra}" ><i class="fa fa-eye font-medium-3"></i></button>
                                                     
-                                                                <a style="width: 30%;" th:href="${'../../../../reiniciarC_A/'+c.id_compra+'/3'}" type="button" class="btn btn-outline-dark" data-toggle="modal"  th:attr="data-target='#modificar4'+${c.id_compra}" ><i class="fa fa-repeat font-medium-3"></i></a>
-
-                                                                <a style="width: 30%;" th:href="${'../../../../enviarCorreoConfirmacion3/'+c.id_compra+'/3'}" type="button" class="btn btn-outline-success" data-toggle="modal"  th:attr="data-target='#modificar2'+${c.id_compra}" ><i class="fa fa-envelope-o font-medium-3"></i></a>
+                                                                <a style="width: 50%;" th:href="${'../../../../reiniciarC_A/'+c.id_compra+'/3'}" type="button" class="btn btn-outline-dark" data-toggle="modal"  th:attr="data-target='#modificar4'+${c.id_compra}" ><i class="fa fa-repeat font-medium-3"></i></a>
                                                             </td>
 
                                                             
@@ -101,7 +98,7 @@
                                                                     <a th:href="${'../../../../Compra_editarA/'+c.id_compra}" style="width: 100%;" type="button" class="btn btn-warning">P</a>
                                                                 </th:block>
                                                                 <th:block th:if="${c.estado == 'V'}">
-                                                                    <button style="width: 100%;" type="button" class="btn btn-success">V</button>
+                                                                    <a style="width: 100%;" th:href="${'../../../../enviarCorreoConfirmacion1/'+c.id_compra+'/2'}" type="button" class="btn btn-success">V</a>
                                                                 </th:block>
                                                             </td>
                                                             <td>

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.EncriptarUrl;
 import com.example.demo.dao.ICompraDao;
 import com.example.demo.entity.Compra;
 import com.example.demo.entity.Evento;
@@ -118,7 +119,7 @@ public class CompraA_Controller {
 	}
 
 	@RequestMapping(value = "/enviarCorreoConfirmacion1/{id_compra}/{num_compra}")
-	public String enviarCorreoConfirmacion1(@PathVariable("id_compra")Long id_compra,@PathVariable("num_compra")Integer num_compra,Model model){
+	public String enviarCorreoConfirmacion1(@PathVariable("id_compra")Long id_compra,@PathVariable("num_compra")Integer num_compra,Model model) throws Exception{
 		Compra compra = compraService.findOne(id_compra);
 
 		if (num_compra == 1) {
@@ -129,12 +130,18 @@ public class CompraA_Controller {
 			emailService.enviarMensajeV50(usuario.getCorreo(), "VALIDACION DEL PAGO DEL 50%", evento.getDesc_evento(), "ticketCR/"+compra.getId_compra(), sector.getDesc_sector());
 		}
 		if (num_compra == 2) {
-			//
-			System.out.println(2);
+			Evento evento = eventoService.findOne(compraService.obtenerEvento(Math.toIntExact(id_compra), "E1"));
+			Sector sector = sectorService.findOne(compraService.obtenerSector(Math.toIntExact(id_compra), "E2"));
+			Usuario usuario = usuarioService.findOne(compra.getUsuario().getId_usuario());
+			String encryptedUrl = EncriptarUrl.encrypt(Long.toString(id_compra));
+			emailService.enviarMensajeV100(usuario.getCorreo(), "REMISIÓN DE TICKETS PAGO 100%", evento.getDesc_evento(), "VerTicketsImprimir/"+encryptedUrl, sector.getDesc_sector());
 		}
 		if (num_compra == 3) {
-			//
-			System.out.println(3);
+			Evento evento = eventoService.findOne(compraService.obtenerEvento(Math.toIntExact(id_compra), "E1"));
+			Sector sector = sectorService.findOne(compraService.obtenerSector(Math.toIntExact(id_compra), "E2"));
+			Usuario usuario = usuarioService.findOne(compra.getUsuario().getId_usuario());
+			String encryptedUrl = EncriptarUrl.encrypt(Long.toString(id_compra));
+			emailService.enviarMensajeV100(usuario.getCorreo(), "REMISIÓN DE TICKETS PAGO 100%", evento.getDesc_evento(), "VerTicketsImprimir/"+encryptedUrl, sector.getDesc_sector());
 		}
 		System.out.println(4);
 		return "redirect:/ComprasAR";

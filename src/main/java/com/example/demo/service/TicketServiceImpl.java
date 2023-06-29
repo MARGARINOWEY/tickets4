@@ -36,5 +36,11 @@ public class TicketServiceImpl implements ITicketService{
         // TODO Auto-generated method stub
         ticketDao.deleteById(id);
     }
+
+    @Override
+    public Long imprimirTicket(Integer correo, String accion) {
+        // TODO Auto-generated method stub
+        return ticketDao.imprimirTicket(correo, accion);
+    }
     
 }

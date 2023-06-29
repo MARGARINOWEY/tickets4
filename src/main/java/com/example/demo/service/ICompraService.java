@@ -25,4 +25,8 @@ public interface ICompraService {
 	Integer Validar(String correo,Long id_sector, String accion);
 
 	Long InsertCompra(String correo,Long id_sector, String accion);
+
+	Long obtenerEvento(Integer id_compra, String accion);
+
+	Long obtenerSector(Integer id_compra, String accion);
 }

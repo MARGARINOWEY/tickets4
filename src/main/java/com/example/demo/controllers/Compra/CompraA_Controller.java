@@ -22,11 +22,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dao.ICompraDao;
 import com.example.demo.entity.Compra;
+import com.example.demo.entity.Evento;
+import com.example.demo.entity.Sector;
 import com.example.demo.entity.Ticket;
 import com.example.demo.entity.Usuario;
 import com.example.demo.service.ICompraService;
+import com.example.demo.service.IEmailService;
 import com.example.demo.service.IEventoService;
+import com.example.demo.service.ISectorService;
 import com.example.demo.service.ITicketService;
+import com.example.demo.service.IUsuarioService;
 
 @Controller
 public class CompraA_Controller {
@@ -34,6 +39,14 @@ public class CompraA_Controller {
 	private ICompraService compraService;
     @Autowired
 	private ITicketService ticketService;
+	@Autowired
+	private IEmailService emailService;
+	@Autowired
+	private IUsuarioService usuarioService;
+	@Autowired
+	private IEventoService eventoService;
+	@Autowired
+	private ISectorService sectorService;
 
 
 
@@ -100,6 +113,30 @@ public class CompraA_Controller {
 			compraService.save(compra);
 			return "redirect:/ComprasAR";
 		}
+		return "redirect:/ComprasAR";
+		
+	}
+
+	@RequestMapping(value = "/enviarCorreoConfirmacion1/{id_compra}/{num_compra}")
+	public String enviarCorreoConfirmacion1(@PathVariable("id_compra")Long id_compra,@PathVariable("num_compra")Integer num_compra,Model model){
+		Compra compra = compraService.findOne(id_compra);
+
+		if (num_compra == 1) {
+			System.out.println(1);
+			Evento evento = eventoService.findOne(compraService.obtenerEvento(Math.toIntExact(id_compra), "E1"));
+			Sector sector = sectorService.findOne(compraService.obtenerSector(Math.toIntExact(id_compra), "E2"));
+			Usuario usuario = usuarioService.findOne(compra.getUsuario().getId_usuario());
+			emailService.enviarMensajeV50(usuario.getCorreo(), "VALIDACION DEL PAGO DEL 50%", evento.getDesc_evento(), "ticketCR/"+compra.getId_compra(), sector.getDesc_sector());
+		}
+		if (num_compra == 2) {
+			//
+			System.out.println(2);
+		}
+		if (num_compra == 3) {
+			//
+			System.out.println(3);
+		}
+		System.out.println(4);
 		return "redirect:/ComprasAR";
 		
 	}

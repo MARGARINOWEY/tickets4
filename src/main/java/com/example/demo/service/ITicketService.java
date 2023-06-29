@@ -12,4 +12,6 @@ public interface ITicketService {
 	public Ticket findOne(Long id);
 
 	public void delete(Long id);
+
+	Long imprimirTicket(Integer correo, String accion);
 }

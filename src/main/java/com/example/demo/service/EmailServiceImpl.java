@@ -24,6 +24,8 @@ public class EmailServiceImpl implements IEmailService {
     private JavaMailSender mailSender;
     @Autowired
     private TemplateEngine templateEngine;
+    @Autowired
+    private ITicketService ticketService;
 
     @Override
     public void sendEmail(String toUser, String subject, String message) {
@@ -74,6 +76,25 @@ public class EmailServiceImpl implements IEmailService {
         final String htmlContent = templateEngine.process("Ticket/compraEmail.html", ctx);
         
 
+        try {
+            helper.setTo(toUser);
+            helper.setSubject(subject);
+            helper.setText(htmlContent, true);
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void enviarMensajeV50(String toUser, String subject, String evento, String link, String sector) {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+        final Context ctx = new Context();
+        ctx.setVariable("link", link);
+        ctx.setVariable("evento", evento);
+        ctx.setVariable("sector", sector);
+        final String htmlContent = templateEngine.process("Ticket/CorreoValidacion50.html", ctx);
         try {
             helper.setTo(toUser);
             helper.setSubject(subject);

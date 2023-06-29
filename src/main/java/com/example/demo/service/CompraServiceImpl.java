@@ -75,4 +75,16 @@ public class CompraServiceImpl implements ICompraService{
         // TODO Auto-generated method stub
         return compraDao.InsertCompra(correo, id_sector, accion);
     }
+
+    @Override
+    public Long obtenerEvento(Integer id_compra, String accion) {
+        // TODO Auto-generated method stub
+        return compraDao.obtenerEvento(id_compra, accion);
+    }
+
+    @Override
+    public Long obtenerSector(Integer id_compra, String accion) {
+        // TODO Auto-generated method stub
+        return compraDao.obtenerSector(id_compra, accion);
+    }
 }

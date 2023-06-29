@@ -19,16 +19,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.entity.Evento;
 import com.example.demo.entity.Sector;
 import com.example.demo.service.ICompraService;
+import com.example.demo.service.ITicketService;
 
 @Controller
 public class CompraC_Controller {
 
 	@Autowired
 	private ICompraService compraService;
+	@Autowired
+	private ITicketService ticketService;
 
     @RequestMapping(value = "/BuscarTickets", method = RequestMethod.GET) // Pagina principal
-	public String BuscarTickets(HttpServletRequest request) {
-		
+	public String BuscarTickets(HttpServletRequest request,Model model) {
+		model.addAttribute("tickets", ticketService.findAll());
 		return "Compra/buscarCompra";
 	}
 
@@ -36,6 +39,7 @@ public class CompraC_Controller {
 	public String BuscarTicketsF(@RequestParam(name = "correo") String correo ,RedirectAttributes flash,HttpServletRequest request, Model model){ //validar los datos capturados (1)
 		
 		model.addAttribute("compras", compraService.BuscarTickets(correo, "C9"));
+		model.addAttribute("tickets", ticketService.findAll());
 
 		return "Compra/buscarCompra";
 	}

@@ -6,4 +6,6 @@ public interface IEmailService {
     void sendEmail(String toUser, String subject, String message);
     void sendEmailWithFile(String toUser, String subject, String message, File file);
     public void enviarMensajeRegistro(String toUser, String subject, Integer monto_pagar, String evento,String link, String mesa);
+
+    public void enviarMensajeV50(String toUser, String subject, String evento,String link, String sector);
 }

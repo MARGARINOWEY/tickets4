@@ -66,10 +66,30 @@
                                                             <i class="text-white font-large-2 float-left">P</i>
                                                         </div>
                                                         <div class="media-body text-white text-right">
-                                                            
-                                                            <h5 class="text-white" th:text="${'Total pagado: 100%'}"></h5>
+                                                            <th:block th:if="${c.estadoCompraPorcentaje == '1' && c.img_comprobante != null}">
+                                                                <h5 class="text-white" th:text="${'Total pagado: 50%'}"></h5>
+                                                            </th:block>
+                                                            <th:block th:if="${c.estadoCompraPorcentaje == '2' && c.img_comprobante2 != null}">
+                                                                <h5 class="text-white" th:text="${'Total pagado: 100%'}"></h5>
+                                                            </th:block>
+                                                            <th:block th:if="${c.estadoCompraPorcentaje == '3' && c.img_comprobante3 != null}">
+                                                                <h5 class="text-white" th:text="${'Total pagado: 100%'}"></h5>
+                                                            </th:block>
+
+                                                            <th:block th:if="${c.estadoCompraPorcentaje == '1' && c.img_comprobante == null}">
+                                                                <h5 class="text-white" th:text="${'Total pagado: 0%'}"></h5>
+                                                            </th:block>
+                                                            <th:block th:if="${c.estadoCompraPorcentaje == '2' && c.img_comprobante2 == null}">
+                                                                <h5 class="text-white" th:text="${'Total pagado: 50%'}"></h5>
+                                                            </th:block>
+                                                            <th:block th:if="${c.estadoCompraPorcentaje == '3' && c.img_comprobante3 == null}">
+                                                                <h5 class="text-white" th:text="${'Total pagado: 0%'}"></h5>
+                                                            </th:block>
+                                                            <th:block th:each="tks : ${c.tickets[0]}" th:if="${tks.compra.id_compra == c.id_compra}" >
+                                                                <h6 class="text-white" th:text="${'Mesa: '+tks.sector.desc_sector}" ></h6>
+                                                            </th:block>
                                                             <h7 class="text-white" th:text="${'Fecha de compra : '+ c.fecha_compra}"></h7>
-                                                            <span th:text="${'Monto a Pagar: '+c.monto_pagar}" ></span>
+                                                            <span th:text="${'Monto total a pagar: '+c.monto_pagar}" ></span>
                                                         </div>
                                                         </div>
                                                     </div>
@@ -78,7 +98,7 @@
                                         </div>
                                     </div>
                                 </th:block>
-                                <th:block th:if="${c.estado == 'NT'}">
+                                <th:block th:if="${c.estado == 'NT' && c.estadoCompraPorcentaje != '0'}">
                                     <div class="row">
                                         <div class="col-xl-3 col-lg-6 col-12">
                                             <div class="card" style="background: #4b6cb7;  /* fallback for old browsers */
@@ -93,9 +113,12 @@
                                                         </div>
                                                         <div class="media-body text-white text-right">
                                                             
-                                                            <h5 class="text-white" th:text="${'Total pagado: 100%'}"></h5>
+                                                            <h5 class="text-white" th:text="${'Total pagado: 0%'}"></h5>
+                                                            <th:block th:each="tks : ${c.tickets[0]}" th:if="${tks.compra.id_compra == c.id_compra}" >
+                                                                <h6 class="text-white" th:text="${'Mesa: '+tks.sector.desc_sector}" ></h6>
+                                                            </th:block>
                                                             <h7 class="text-white" th:text="${'Fecha de compra : '+ c.fecha_compra}"></h7>
-                                                            <span th:text="${'Monto a Pagar: '+c.monto_pagar}" ></span>
+                                                            <span th:text="${'Monto total a pagar: '+c.monto_pagar}" ></span>
                                                         </div>
                                                         </div>
                                                     </div>
@@ -117,8 +140,40 @@
                                                         <div class="media-body text-white text-right">
                                                             
                                                             <h5 class="text-white" th:text="${'Total pagado: 100%'}"></h5>
+                                                            <th:block th:each="tks : ${c.tickets[0]}" th:if="${tks.compra.id_compra == c.id_compra}" >
+                                                                <h6 class="text-white" th:text="${'Mesa: '+tks.sector.desc_sector}" ></h6>
+                                                            </th:block>
                                                             <h7 class="text-white" th:text="${'Fecha de compra : '+ c.fecha_compra}"></h7>
-                                                            <span th:text="${'Monto a Pagar: '+c.monto_pagar}" ></span>
+                                                            <span th:text="${'Monto total a pagar: '+c.monto_pagar}" ></span>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th:block>
+                                <th:block th:if="${c.estadoCompraPorcentaje == '0'}">
+                                    <div class="row">
+                                        <div class="col-xl-3 col-lg-6 col-12">
+                                            <div class="card" style="background: #4b6cb7;  /* fallback for old browsers */
+                                            background: -webkit-linear-gradient(to right, #182848, #4b6cb7);  /* Chrome 10-25, Safari 5.1-6 */
+                                            background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                                            ">
+                                                <div class="card-body">
+                                                    <div class="px-3 py-3">
+                                                        <div class="media">
+                                                        <div class="align-center">
+                                                            <i class="text-white font-large-2 float-left">NT</i>
+                                                        </div>
+                                                        <div class="media-body text-white text-right">
+                                                            
+                                                            <h5 class="text-white" th:text="${'Revisar su correo'}"></h5><br>
+                                                            <th:block th:each="tks : ${c.tickets[0]}" th:if="${tks.compra.id_compra == c.id_compra}" >
+                                                                <h6 class="text-white" th:text="${'Mesa: '+tks.sector.desc_sector}" ></h6>
+                                                            </th:block>
+                                                            <h7 class="text-white" th:text="${'Fecha de compra : '+ c.fecha_compra}"></h7>
+                                                            <span th:text="${'Monto total a pagar: '+c.monto_pagar}" ></span>
                                                         </div>
                                                         </div>
                                                     </div>

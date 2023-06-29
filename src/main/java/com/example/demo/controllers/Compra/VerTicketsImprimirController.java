@@ -45,10 +45,9 @@ public class VerTicketsImprimirController {
             for (Ticket ticket : compraService.findOne(id_com).getTickets()) {
 
                 if(ticket.getCrypt() == null){
-                    String encryptedUrl = EncriptarUrl.encrypt(Long.toString(ticket.getId_ticket()));
+                    String encryptedUrl = EncriptarUrl.encrypt(Long.toString(ticket.getCod()));
                     ticket.setCrypt(encryptedUrl);
                     ticketService.save(ticket);
-                    System.out.println(ticket.getCrypt());
                 }
             }
 

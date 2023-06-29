@@ -63,7 +63,7 @@ public class VerTicketsImprimirController {
         
             return "ImprimirTickets/TicketsImprimirFinal";
         } catch (Exception e) {
-            return "redirect:EventoCR";
+            return "redirect:/eventoCR";
         }
         
         

@@ -87,4 +87,11 @@ public class CompraServiceImpl implements ICompraService{
         // TODO Auto-generated method stub
         return compraDao.obtenerSector(id_compra, accion);
     }
+
+    @Override
+    public List<Object[]> prueba8(Integer id_evento, String accion) {
+        // TODO Auto-generated method stub
+        return compraDao.prueba8(id_evento, accion);
+        //return (List<Object[]>) compraDao.prueba8(id_evento, accion);
+    }
 }

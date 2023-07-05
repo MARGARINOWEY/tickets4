@@ -1,92 +1,86 @@
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-</head>
-<body>
-    <div class="row">
-        <div class="col-12 text-center">
-            <center><img src='https://i.imgur.com/yOriwnw.png' alt='company-logo' width='200'></center>
+<html lang="en" class="loading">
+    <head th:replace="layout/layoutMain :: head"></head>
+
+    <body data-col="2-columns" class=" 2-columns ">
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+    <div class="wrapper">
+        <div th:replace="layout/layoutMain :: menuLateral"></div>
+        <div th:replace="layout/layoutMain :: menuNavbar"></div>
+
+        <div class="main-panel">
+            <div class="main-content">
+                <div class="content-wrapper">
+                    <div class="container-fluid">
+                        <section id="alert">
+                            <!--Alert States Starts-->
+                            <div class="row match-height">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="card-block">
+                                                <section id="file-export">
+                                                    <table class="table table-striped table-bordered file-export">
+                                                        <thead>
+                                                            <tr>
+                                                                <!--<th>ID_E</th>-->
+                                                                <th>Evento</th>
+                                                                <!-- <th>ID_U</th> -->
+                                                                <th>Nombre</th>
+                                                                <th>N° Cel</th>
+                                                                <!-- <th>Correo</th> -->
+                                                                <!-- <th>ID_S</th> -->
+                                                                <th>Sector</th>
+                                                                <th>Cantidad</th>
+                                                                <th>Total Pagar</th>
+                                                                <th>F. Compra</th>
+                                                                <th>ID_C</th>
+                                                                <!-- <th>Estado C.</th> -->
+                                                                <th>Pagado</th>
+                                                                <th>Estado</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr th:each="ss : ${prueba8}">
+                                                                <!-- <td th:text="${ss[0]}" ></td> -->
+                                                                <td th:text="${ss[1]}" ></td>
+                                                                <!-- <td th:text="${ss[2]}" ></td> -->
+                                                                <td th:text="${ss[3]}" ></td>
+                                                                <td th:text="${ss[4]}" ></td>
+                                                                <!-- <td th:text="${ss[5]}" ></td> -->
+                                                                <!-- <td th:text="${ss[6]}" ></td> -->
+                                                                <td th:text="${ss[7]}" ></td>
+                                                                <td th:text="${ss[8]}" ></td>
+                                                                <td th:text="${ss[9]}" ></td>
+                                                                <td th:text = "${#dates.format(ss[10], 'dd/MM/yyyy')}"></td>
+                                                                <td th:text="${ss[11]}" ></td>
+                                                                <!-- <td th:text="${ss[12]}" ></td> -->
+                                                                <td th:text="${ss[13]}" ></td>
+                                                                <td th:text="${ss[14]}" ></td>
+                                                            </tr>
+                                                        </tbody>
+                                                        
+                                                    </table>
+                                                </section>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer footer-static footer-light">
+            <p class="clearfix text-muted text-center px-2"><span>Copyright  &copy; 2018 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" id="pixinventLink" target="_blank" class="text-bold-800 primary darken-2">PIXINVENT </a>, All rights reserved. </span></p>
+            </footer>
+
         </div>
     </div>
-    <div class="row">
-        <div class="col-12" style="text-align: center;">
-            <h5>POR FAVOR LEA ESTE CORREO COMPLETAMENTE, CONTIENE INFORMACIÓN SOBRE SU RESERVA E INSTRUCCIONES.</h5>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12" style="text-align: center;">
-            <p><strong>FELICITACIONES! ¡SU RESERVA PARA EL EVENTO <b >evevevev</b> SE HA COMPLETADO CON ÉXITO!</strong></p>
-        </div>
-    </div>
-    <div class="row"> 
-        <div class="col-12" style="text-align: center;">
-            <p>Para obtener sus entradas y poder asistir a este evento inolvidable, usted deberá efectuar el pago bs. <strong >1000</strong></p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12" style="text-align: center;">
-            <p><strong>Para PREVENTA 1 y PREVENTA 2</strong></p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12" style="text-align: center;">
-            <p>
-                <strong>
-                Usted tiene 14 DÍAS para realizar el pago correspondiente al 50%, pasados los 14 DÍAS, su reserva quedará anulada y deberá volver a realizar el proceso de reserva y compra.
-            </p><br>
-            <p>
-                Si usted no realiza el pago del 100% de su reserva antes del vencimiento de cada preventa, los precios y promociones se ajustarán automáticamente a la modalidad siguiente.
-            </p><br>
-            <p>
-                Para efectivizar el pago ingrese a una de las siguientes opciones en las cuales se le proporcionara el QR correspondiente:
-                </strong>
-                <a>ssss</a>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <center><div class="col-lg-6 col-sm-12">
-            <a style="
-            padding: 16px 32px;
-            text-align: center;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            -webkit-transition-duration: 0.4s; /* Safari */
-            transition-duration: 0.4s;
-            cursor: pointer;
-            text-decoration: none;
-            text-transform: uppercase;
-            background-color: blue; 
-            color: white; 
-            border: 2px solid #008CBA;">Pagar el 50%</a>
-            <a style="
-            padding: 16px 32px;
-            text-align: center;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            -webkit-transition-duration: 0.4s; /* Safari */
-            transition-duration: 0.4s;
-            cursor: pointer;
-            text-decoration: none;
-            text-transform: uppercase;
-            background-color: goldenrod; 
-            color: white; 
-            border: 2px solid yellow;">Pagar el 100%</a>
-        </div>
-        </center>
-    </div>
-    <div class="row">
-        <div class="col-12" style="text-align: center;">
-            <p>la información será validada y recibirá otro correo de confirmación. Ante cualquier duda o problema por favor envíenos un correo electrónico a:</p>
-            <a href="mailto:wayrasoluciones.tnt@gmail.com">wayrasoluciones.tnt@gmail.com</a>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-</body>
+        <div th:replace="layout/layoutMain :: scripts2"></div>
+    </body>
 </html>

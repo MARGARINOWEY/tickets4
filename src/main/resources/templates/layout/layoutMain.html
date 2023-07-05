@@ -42,6 +42,7 @@
         <div class="sidebar-content">
         <div class="nav-container">
             <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
+            
             <th:block th:if="${session.usuario != null}">
                 <li class="has-sub nav-item" th:if="${session.usuario.estado == 'A'}">
                     <a>
@@ -67,17 +68,23 @@
                     </ul>
                 </li>
             </th:block>
-            <li class=" nav-item">
-                <a href="../../../../eventoCR">
+            <li class=" nav-item" th:if="${session.usuario == null}">
+                <a href="../../../../eventoCR" >
                     <i class="icon-disc"></i>
                     <span data-i18n="" class="menu-title">Eventos</span>
                 </a>
             </li>
             <th:block th:if="${session.usuario != null}">
-                <li class=" nav-item">
+                <li class=" nav-item" th:if="${session.usuario.estado == 'A'}">
                     <a href="../../../../ComprasR">
                         <i class="icon-basket-loaded"></i>
                         <span data-i18n="" class="menu-title">Mis Compras</span>
+                    </a>
+                </li>
+                <li class=" nav-item" th:if="${session.usuario.estado == 'R'}">
+                    <a href="../../../../Estadisticas">
+                        <i class="icon icon-notebook"></i>
+                        <span data-i18n="" class="menu-title">Ver Consulta</span>
                     </a>
                 </li>
             </th:block>

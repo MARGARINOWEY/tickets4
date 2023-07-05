@@ -10,4 +10,6 @@ public interface IEmailService {
     public void enviarMensajeV50(String toUser, String subject, String evento,String link, String sector);
 
     public void enviarMensajeV100(String toUser, String subject, String evento,String link, String sector);
+
+    public void enviarMensajeRechazo2(String toUser, String subject, String evento,String link, String sector, String motivo);
 }

@@ -29,4 +29,6 @@ public interface ICompraService {
 	Long obtenerEvento(Integer id_compra, String accion);
 
 	Long obtenerSector(Integer id_compra, String accion);
+
+	public List<Object[]> prueba8(Integer id_evento, String accion);
 }

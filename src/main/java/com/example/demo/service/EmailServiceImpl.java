@@ -121,5 +121,23 @@ public class EmailServiceImpl implements IEmailService {
             throw new RuntimeException(e);
         }
     }
+    public void enviarMensajeRechazo2(String toUser, String subject, String evento, String link, String sector,String motivo) {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+        final Context ctx = new Context();
+        ctx.setVariable("link", link);
+        ctx.setVariable("evento", evento);
+        ctx.setVariable("sector", sector);
+        ctx.setVariable("motivo", motivo);
+        final String htmlContent = templateEngine.process("Ticket/CorreoRechazo2.html", ctx);
+        try {
+            helper.setTo(toUser);
+            helper.setSubject(subject);
+            helper.setText(htmlContent, true);
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
     
 }

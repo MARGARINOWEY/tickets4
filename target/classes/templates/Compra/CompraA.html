@@ -17,23 +17,13 @@
                 <div class="content-wrapper">
                     <div class="container-fluid">
                         <section id="alert">
-                            <div class="row match-height">
-                                <div class="col-sm-12">
-                                    <h2 class="content-header">Administrar Compras</h2>
-                                </div>
-                            </div>
                             <!--Alert States Starts-->
                             <div class="row match-height">
                                 <div class="col-md-12">
                                     <div class="card">
-                                        <div class="card-header">
-                                            <div class="card-title-wrap bar-success">
-                                                <h4 class="card-title">Lista de Compras de los clientes</h4>
-                                            </div>
-                                        </div>
                                         <div class="card-body">
                                             <div class="card-block">
-                                                <table class="table display nowrap table-striped table-bordered scroll-horizontal">
+                                                <table  style="font-size: 11px;" class="table display nowrap table-striped table-bordered scroll-horizontal-vertical">
                                                     <thead>
                                                         <tr>
                                                             <th>ID_U</th>
@@ -42,8 +32,8 @@
                                                             <th>Correo</th>
                                                             <th>Monto</th>
                                                             <th>Mesa</th>
-                                                            <th>Cantidad</th>
-                                                            <th>Fecha compra</th>
+                                                            <th>N° C</th>
+                                                            <th>F. Compra</th>
                                                             <th>Pago-1</th>
                                                             <th>Pago-2</th>
                                                             <th>Pago-3</th>
@@ -55,7 +45,12 @@
                                                     <tbody>
                                                         <tr th:each ="c : ${compras}" th:if="${c.estado != 'X'}" >
                                                             <td th:text="${c.usuario.id_usuario}" ></td>
-                                                            <td th:text = "${c.usuario.persona.nombre+' '+c.usuario.persona.apellido_p+' '+c.usuario.persona.apellido_m}"></td>
+                                                            <td th:text = "${c.usuario.persona.nombre+' '+c.usuario.persona.apellido_p+' '+c.usuario.persona.apellido_m}" ></td> 
+                                                            <!-- <td>
+                                                                <p style="font-size: 11px;" th:text = "${c.usuario.persona.nombre}" ></p>
+                                                                <p style="font-size: 11px;" th:text = "${c.usuario.persona.apellido_p}"></p>
+                                                                <p style="font-size: 11px;" th:text = "${c.usuario.persona.apellido_m}"></p>
+                                                            </td> -->
                                                             <td th:text = "${c.usuario.persona.num_celular}"></td>
                                                             <td th:text = "${c.usuario.correo}"></td>
                                                             <td th:text = "${c.monto_pagar+' Bs.'}"></td>
@@ -70,20 +65,20 @@
                                                             <td>
                                                                 <button style="width: 30%;"  type="button" class="btn btn-outline-info" data-toggle="modal"  th:attr="data-target='#default2'+${c.id_compra}" ><i class="fa fa-eye font-medium-3"></i></button>
                                                                 
-                                                                <a style="width: 30%;" th:href="${'../../../../reiniciarC_A/'+c.id_compra+'/1'}" type="button" class="btn btn-outline-dark" data-toggle="modal"  th:attr="data-target='#modificar2'+${c.id_compra}" ><i class="fa fa-repeat font-medium-3"></i></a>
+                                                                <a style="width: 30%;" th:href="${'../../../../reiniciarC_A/'+c.id_compra+'/1'}" type="button" class="btn btn-outline-dark" ><i class="fa fa-repeat font-medium-3"></i></a>
 
                                                                 <a style="width: 30%;" th:href="${'../../../../enviarCorreoConfirmacion1/'+c.id_compra+'/1'}" type="button" class="btn btn-outline-success" ><i class="fa fa-envelope-o font-medium-3"></i></a>
                                                             </td>
                                                             <td>
                                                                 <button style="width: 50%;"  type="button" class="btn btn-outline-info" data-toggle="modal"  th:attr="data-target='#default3'+${c.id_compra}" ><i class="fa fa-eye font-medium-3"></i></button>
                                                     
-                                                                <a style="width: 50%;" th:href="${'../../../../reiniciarC_A/'+c.id_compra+'/2'}" type="button" class="btn btn-outline-dark" data-toggle="modal"  th:attr="data-target='#modificar3'+${c.id_compra}" ><i class="fa fa-repeat font-medium-3"></i></a>
+                                                                <button style="width: 50%;" type="button" class="btn btn-outline-dark" data-toggle="modal"  th:attr="data-target='#mordalR2'+${c.id_compra}"><i class="fa fa-repeat font-medium-3"></i></button>
 
                                                             </td>
                                                             <td>
                                                                 <button style="width: 50%;"  type="button" class="btn btn-outline-info" data-toggle="modal"  th:attr="data-target='#default4'+${c.id_compra}" ><i class="fa fa-eye font-medium-3"></i></button>
                                                     
-                                                                <a style="width: 50%;" th:href="${'../../../../reiniciarC_A/'+c.id_compra+'/3'}" type="button" class="btn btn-outline-dark" data-toggle="modal"  th:attr="data-target='#modificar4'+${c.id_compra}" ><i class="fa fa-repeat font-medium-3"></i></a>
+                                                                <a style="width: 50%;" th:href="${'../../../../reiniciarC_A/'+c.id_compra+'/3'}" type="button" class="btn btn-outline-dark" ><i class="fa fa-repeat font-medium-3"></i></a>
                                                             </td>
 
                                                             
@@ -153,54 +148,35 @@
                                                     </table>
                                                     -->
                                                 
-                                                <!--<th:block  th:each ="c1 : ${compras}">
-                                                    <div class="modal fade text-left" th:id="${'default'+c1.id_compra}" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true" >
+                                                <th:block th:each="c1 : ${compras}">
+                                                    <div class="modal fade text-left" th:id="${'mordalR2'+c1.id_compra}" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
-                                                            <div class="modal-content" >
+                                                            <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h4 class="modal-title" id="myModalLabel1">Tickets Comprados</h4>
+                                                                    <h4 class="modal-title" id="myModalLabel1">Motivo del rechazo Pago - 2</h4>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
+                                                                        <span aria-hidden="true">&times;</span>
                                                                     </button>
                                                                 </div>
+                                                                <!-- th:href="${'../../../../reiniciarC_A/'+c.id_compra+'/2'}" -->
+                                                                <form id="formR2" th:action="${'../../../../reiniciarC_A/'+c1.id_compra+'/2'}" method="post">
                                                                 <div class="modal-body">
                                                                     <div class="row">
-                                                                        <div class="col-12" >
-                                                                            <div class="table-responsive">
-                                                                                <table class="table display nowrap table-striped table-bordered">
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th>EVENTO</th>
-                                                                                            <th>SECTOR</th>
-                                                                                            <th>ESTADO DE UTILIZADO</th>
-                                                                                            <th>ESTADO DE VALIDADO</th>
-                                                                                            <th>FECHA DE ULTIMO USO</th>
-                                                                                            <th>ESTADO</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <tr th:each ="t : ${tickets}" th:if="${t.compra.id_compra == c1.id_compra}">
-                                                                                            <td th:text = "${t.sector.evento.desc_evento}"></td>
-                                                                                            <td th:text = "${t.sector.desc_sector}"></td>
-                                                                                            <td th:text = "${t.utilizada}"></td>
-                                                                                            <td th:text = "${t.valida}"></td>
-                                                                                            <td th:text = "${t.fecha_uso}"></td>
-                                                                                            <td th:text = "${t.estado}"></td>
-                                                                                        </tr>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                            
+                                                                        <div class="col-12">
+                                                                                <div class="controls">
+                                                                                    <input type="text" class="form-control" placeholder="Motivo" name="motivosR" required data-validation-required-message="Debe introducir el motivo">
+                                                                                </div>
                                                                         </div>
-                                                                    </div>    
-                                                                    <div class="modal-footer text-center" >                                
-                                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>                                                                
                                                                     </div>
                                                                 </div>
+                                                                <div class="modal-footer text-center" >     
+                                                                    <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>
+                                                                    <button type="submit" class="btn btn-warning">Enviar rechazo</button>
+                                                                </div>
+                                                                </form>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </th:block>-->
+                                                </th:block>
                                                 <th:block  th:each ="c2 : ${compras}">
                                                     <div class="modal fade text-left" th:id="${'default2'+c2.id_compra}" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true" >
                                                         <div class="modal-dialog" role="document">

@@ -17,15 +17,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.service.ICompraService;
+
 
 @Controller
 public class EstadisticasController {
     
+	@Autowired
+	private ICompraService compraService;
+
     @RequestMapping(value = "/Estadisticas", method = RequestMethod.GET) // Pagina principal
 	public String BienvenidoR(HttpServletRequest request,Model model) {
 		if (request.getSession().getAttribute("persona") != null) {
 
-            
+            model.addAttribute("prueba8", compraService.prueba8(2, "C10"));
 			return "login/estadisticas";
 		} else {
 			return "redirect:loginR";

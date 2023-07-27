@@ -87,6 +87,31 @@ public class EmailServiceImpl implements IEmailService {
     }
 
     @Override
+    public void enviarMensajeRegistro2(String toUser, String subject, Integer monto_pagar, String evento, String link, String mesa) {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        final Context ctx = new Context();
+
+        ctx.setVariable("monto_pagar", monto_pagar);
+        ctx.setVariable("evento", evento);
+        ctx.setVariable("link", link);
+        ctx.setVariable("mesa", mesa);
+
+        final String htmlContent = templateEngine.process("Ticket/compraEmail2.html", ctx);
+        
+
+        try {
+            helper.setTo(toUser);
+            helper.setSubject(subject);
+            helper.setText(htmlContent, true);
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public void enviarMensajeV50(String toUser, String subject, String evento, String link, String sector) {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);

@@ -13,12 +13,7 @@
             <div class="main-content">
                 <div class="content-wrapper">
                     <div class="container-fluid">
-                        <section id="alert">
-                            <div class="row match-height">
-                                <div class="col-sm-12">
-                                    <h2 class="content-header">Tickets</h2>
-                                </div>
-                            </div>
+                        <section id="alert">                            
                             <!--Alert States Starts-->
                             <div class="row match-height">
                                 <div class="col-md-12">
@@ -28,17 +23,16 @@
                                                 <h4 class="card-title">Imprimir Tickets</h4>
                                             </div>
                                             <p>No compartas esta dirección con nadie</p>
-                                        </div>
-                                        
-                                            <div class="card-body">
+                                        </div>                                        
+                                            <div class="card-body">                                                                                        
                                                 <div class="card-block">
-                                                    <th:block th:each="tks : ${tickets}" th:if="${tks.compra.id_compra == compra.id_compra}">
+                                                    <th:block th:each="tks, index : ${tickets}" th:if="${tks.compra.id_compra == compra.id_compra}">
                                                     <div class="card gradient-mint">
                                                         <div class="card-body">
                                                           <div class="px-3 py-3">
                                                             <div class="media">
                                                                 <div class="row">
-                                                                    <div class="col-6">
+                                                                    <div class="col-5">
                                                                         <div class="row">
                                                                             <div class="col-12">
                                                                                 <div class="align-center">
@@ -48,15 +42,16 @@
                                                                         </div>
                                                                         <div class="row">
                                                                             <div class="col-12">
-                                                                                <h1 class="white" th:text="${tks.sector.desc_sector}"></h1>
+                                                                                <h1 class="white" th:text="${index.index}"></h1>
+                                                                                <!-- <h1 class="white" th:text="${tks.sector.desc_sector}"></h1> -->
                                                                             </div>
                                                                         </div>
                                                                         
                                                                     </div>
-                                                                    <div class="col-6">
+                                                                    <div class="col-7">
                                                                         <div class="media-body text-white text-right">
-                                                                            <a style="width: 100%;" th:href="${'../../../../imprimirR2/'+tks.crypt}" class="btn btn-dark"><i class="fa fa-print"></i>Imprimir</a>
-                                                                            <a style="width: 100%;" th:href="${'../../../../imprimirR2/'+tks.crypt}" class="btn btn-dark"><i class="fa fa-download"></i>Guardar</a>
+                                                                            <a style="width: 100%;" th:href="${'../../../../imprimirR2/'+tks.crypt}" class="btn btn-round btn-lg btn-dark mr-1"><i class="fa fa-print"></i>Imprimir</a>
+                                                                            <a style="width: 100%;" th:href="${'../../../../imprimirR2/'+tks.crypt}" class="btn btn-round btn-lg btn-dark mr-1"><i class="fa fa-download"></i>Guardar</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -75,11 +70,6 @@
                     </div>
                 </div>
             </div>
-
-            <footer class="footer footer-static footer-light">
-            <p class="clearfix text-muted text-center px-2"><span>Copyright  &copy; 2018 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" id="pixinventLink" target="_blank" class="text-bold-800 primary darken-2">PIXINVENT </a>, All rights reserved. </span></p>
-            </footer>
-
         </div>
     </div>
         <div th:replace="layout/layoutMain :: scripts"></div>

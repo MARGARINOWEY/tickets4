@@ -160,7 +160,7 @@
                                                                                                         <h3 class="card-title text-white"><strong>Asientos Disponibles</strong></h3>
                                                                                                         <h3 class="text-white" th:text="${l1.asientosDisponibles}"></h3>
                                                                                                         <h3 class="card-title text-white"><strong>Precio Total</strong></h3>
-                                                                                                        <h3 class="text-white" th:text="${l1.asientosDisponibles * 140}"></h3>
+                                                                                                        <h3 class="text-white" th:text="${l1.asientosDisponibles * 150}"></h3>
                                                                                                         <th:block th:if="${session.usuario != null}">
                                                                                                             <button th:attr="onclick=${'MandarURL('+l1.id_sector+')'}" id="btn_com" class="btn btn-warning px-4 py-2 text-uppercase white font-small-4 box-shadow-2 border-0" type="button">Comprar tickets</button>
                                                                                                         </th:block>

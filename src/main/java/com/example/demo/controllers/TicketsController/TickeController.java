@@ -92,7 +92,18 @@ public class TickeController {
 
 		model.addAttribute("compra", compra);
 		model.addAttribute("tickets", ticketService.findAll());
-		
+
+        String[] qrData = compraService.Qr(Math.toIntExact(compra.getId_compra()), "QR1");
+        String[] qrData2 = qrData[0].split(",");        
+        System.out.println(qrData2[13]);
+        if (qrData2[13] != "qrs") {
+            model.addAttribute("qrTicket", qrData2[13]);
+        }else{
+            model.addAttribute("qrTicket", "qr5.png");
+            model.addAttribute("qrTicket2", "qr4.png");
+        }
+
+
 		return "Ticket/ticketC";
 		
 	}

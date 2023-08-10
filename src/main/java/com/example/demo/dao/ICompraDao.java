@@ -42,4 +42,7 @@ public interface ICompraDao extends CrudRepository<Compra, Long>{
     @Query(value = "exec Eventos @ID_evento = ?1,  @accion = ?2", nativeQuery = true)
     public List<Object[]> prueba8(Integer id_evento, String accion);
 
+    @Query(value = "exec Eventos @ID_compra = ?1,  @accion = ?2", nativeQuery = true)
+    public String[] Qr(Integer id_compra, String accion);
+
 }

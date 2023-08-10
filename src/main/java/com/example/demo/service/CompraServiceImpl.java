@@ -94,4 +94,16 @@ public class CompraServiceImpl implements ICompraService{
         return compraDao.prueba8(id_evento, accion);
         //return (List<Object[]>) compraDao.prueba8(id_evento, accion);
     }
+
+    @Override
+    public String[] Qr(Integer id_compra, String accion) {
+        // TODO Auto-generated method stub
+        return compraDao.Qr(id_compra, accion);
+    }
+
+    
+
+    
+
+    
 }

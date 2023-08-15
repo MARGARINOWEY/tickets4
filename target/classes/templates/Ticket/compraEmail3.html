@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 0;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.8);
+        }
+
+        .email-header {
+            text-align: center;
+            margin-bottom: 20px;
+            background-color: black;
+            border-radius: 20px;
+        }
+
+        .email-content {
+            margin-bottom: 20px;
+        }
+
+        .email-footer {
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 10px;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px 0;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <center><img src='https://i.imgur.com/yOriwnw.png' alt='company-logo' width='200'></center>
+        </div>
+
+        <div class="email-content">
+            <h5 style="color: red;"><b>* POR FAVOR LEA ESTE CORREO COMPLETAMENTE, CONTIENE INFORMACIÓN SOBRE SU RESERVA E INSTRUCCIONES.</b></h5>
+            <p th:text="${'Estimado '+nombre+'.'}"></p>
+            <hr>
+            <p><strong>FELICITACIONES!</strong></p>
+            <p><strong>¡SU RESERVA DE <b style="color: #023e8a;" th:text="${asientos}"></b> ASIENTO(S) PARA LA MESA <b style="color: #023e8a;" th:text="${mesa}"></b> PARA EL EVENTO <b style="color: #023e8a;" th:text="${evento}"></b> SE HA COMPLETADO CON ÉXITO!</strong></p>
+
+            <p>Para obtener sus entradas y poder asistir a este evento inolvidable, usted deberá efectuar el pago de Bs. <strong style="color: #023e8a;" th:text="${monto_pagar}"></strong></p>
+
+            <p>Para efectivizar el pago ingrese a la siguiente opción en la cual se le proporcionará el QR correspondiente:</p>
+
+            <center><a th:href="${'https://touch-and-treat.up.railway.app/'+link+'/3'}" class="btn">Realizar el Pago</a></center>
+
+            <p style="color: red;" ><b>* Usted tiene 14 DÍAS para realizar el pago correspondiente, pasados los 14 DÍAS, su reserva quedará anulada y deberá volver a realizar el proceso de reserva y compra.</b></p>
+        </div>
+
+        <div class="email-footer">
+            <p>La información será validada y recibirá otro correo de confirmación.</p>
+            <p>Ante cualquier duda o problema por favor envíenos un correo electrónico a:</p>
+            <a href="mailto:wayrasoluciones.tnt@gmail.com">wayrasoluciones.tnt@gmail.com</a>
+        </div>
+    </div>
+</body>
+</html>

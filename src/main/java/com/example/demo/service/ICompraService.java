@@ -26,6 +26,8 @@ public interface ICompraService {
 
 	Long InsertCompra(String correo,Long id_sector, String accion);
 
+	Long InsertCompra2(String correo,Long id_sector,Integer asientos_compra, String accion);
+
 	Long obtenerEvento(Integer id_compra, String accion);
 
 	Long obtenerSector(Integer id_compra, String accion);
@@ -33,4 +35,8 @@ public interface ICompraService {
 	public List<Object[]> prueba8(Integer id_evento, String accion);
 
 	public String[] Qr(Integer id_compra, String accion);
+
+	public String[] Qr2(Integer id_compra, String accion);
+
+
 }

@@ -33,6 +33,9 @@ public interface ICompraDao extends CrudRepository<Compra, Long>{
     @Query(value = "exec Eventos @correo = ?1, @id_sector = ?2,  @accion = ?3", nativeQuery = true)
     Long InsertCompra(String correo,Long id_sector, String accion);
 
+    @Query(value = "exec Eventos @correo = ?1, @id_sector = ?2, @Asientos_compra = ?3 ,  @accion = ?4", nativeQuery = true)
+    Long InsertCompra2(String correo,Long id_sector,Integer asientos_compra, String accion);
+
     @Query(value = "exec Eventos @id_compra = ?1,  @accion = ?2", nativeQuery = true)
     Long obtenerEvento(Integer id_compra, String accion);
 
@@ -44,5 +47,10 @@ public interface ICompraDao extends CrudRepository<Compra, Long>{
 
     @Query(value = "exec Eventos @ID_compra = ?1,  @accion = ?2", nativeQuery = true)
     public String[] Qr(Integer id_compra, String accion);
+
+    @Query(value = "exec Eventos @ID_compra = ?1,  @accion = ?2", nativeQuery = true)
+    public String[] Qr2(Integer id_compra, String accion);
+
+
 
 }

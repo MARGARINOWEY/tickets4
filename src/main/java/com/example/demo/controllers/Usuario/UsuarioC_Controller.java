@@ -33,10 +33,10 @@ import com.example.demo.service.IUsuarioService;
 
 @Controller
 public class UsuarioC_Controller {
-    
-    @Autowired
+
+	@Autowired
 	private IUsuarioService usuarioService;
-    @Autowired
+	@Autowired
 	private IPersonaService personaService;
 	@Autowired
 	private ISectorService sectorService;
@@ -47,52 +47,58 @@ public class UsuarioC_Controller {
 	@Autowired
 	private IEmailService emailService;
 
-    @RequestMapping(value = "/loginCR", method = RequestMethod.GET) // Pagina principal
-	public String loginCR(@Validated Persona persona,@Validated Usuario usuario,RedirectAttributes flash, HttpServletRequest request) {
-		
+	@RequestMapping(value = "/loginCR", method = RequestMethod.GET) // Pagina principal
+	public String loginCR(@Validated Persona persona, @Validated Usuario usuario, RedirectAttributes flash,
+			HttpServletRequest request) {
+
 		return "login/RegistroPersonaC";
 	}
 
-	@RequestMapping(value = "/loginCR2/{id_usuario}/{id_sector}") // Pagina principal
-	public String loginCR2(@PathVariable("id_usuario")Long id_usuario,@PathVariable("id_sector")Long id_sector,RedirectAttributes flash, HttpServletRequest request,Model model) {
+	@RequestMapping(value = "/loginCR2/{id_usuario}/{id_sector}/{num_asientos}") // Pagina principal
+	public String loginCR2(@PathVariable("id_usuario") Long id_usuario, @PathVariable("id_sector") Long id_sector,
+			@PathVariable("num_asientos") Integer num_asientos, RedirectAttributes flash, HttpServletRequest request,
+			Model model) {
 		Usuario usuario = usuarioService.findOne(id_usuario);
 		Sector sector = sectorService.findOne(id_sector);
 
 		model.addAttribute("usuario", usuario);
 		model.addAttribute("sector", sector);
+		model.addAttribute("num_asientos", num_asientos);
 
 		return "login/RegistroPersonaC2";
 	}
 
-    @RequestMapping(value = "/loginCF", method = RequestMethod.POST)
-	public String LoginF(@Validated Persona persona,@Validated Usuario usuario, Model model, HttpServletRequest request,RedirectAttributes flash){
-		
-        persona.setEstado("A");
+	@RequestMapping(value = "/loginCF", method = RequestMethod.POST)
+	public String LoginF(@Validated Persona persona, @Validated Usuario usuario, Model model,
+			HttpServletRequest request, RedirectAttributes flash) {
+
+		persona.setEstado("A");
 		personaService.save(persona);
 
-        usuario.setEstado("C");
-        usuario.setPersona(persona);
-        usuarioService.save(usuario);
-
+		usuario.setEstado("C");
+		usuario.setPersona(persona);
+		usuarioService.save(usuario);
 
 		flash.addAttribute("success", "Registro realizado con exito");
 
 		return "redirect:/loginR";
-	
+
 	}
 
 	@RequestMapping(value = "/loginCF2", method = RequestMethod.POST)
-	public String LoginF(Model model, HttpServletRequest request,RedirectAttributes flash,
-	@RequestParam("id_persona")Long id_persona,
-	@RequestParam("id_sector")Long id_sector,
-	@RequestParam("id_usuario")Long id_usuario,
-	@RequestParam("nombre")String nombre,
-	@RequestParam("apellido_p")String apellido_p,
-	@RequestParam("apellido_m")String apellido_m,
-	@RequestParam("celular")String celular,
-	@RequestParam("ci")String ci,
-	@RequestParam("correo")String correo
-	){
+	public String LoginF(Model model, HttpServletRequest request, RedirectAttributes flash,
+			@RequestParam("id_persona") Long id_persona,
+			@RequestParam("id_sector") Long id_sector,
+			@RequestParam("id_usuario") Long id_usuario,
+			@RequestParam("nombre") String nombre,
+			@RequestParam("apellido_p") String apellido_p,
+			@RequestParam("apellido_m") String apellido_m,
+			@RequestParam("celular") String celular,
+			@RequestParam("ci") String ci,
+			@RequestParam("correo") String correo,
+			@RequestParam("num_asientos") Integer num_asientos) {
+
+				
 		Sector sector = sectorService.findOne(id_sector);
 		Persona persona = personaService.findOne(id_persona);
 		persona.setNombre(nombre);
@@ -102,59 +108,81 @@ public class UsuarioC_Controller {
 		persona.setCi(ci);
 		personaService.save(persona);
 
-		Long id_compra = compraService.InsertCompra(correo, id_sector, "AC1");
-		if (id_compra != 0) {
-			Compra compra = compraService.findOne(id_compra);
-			Usuario usuario = usuarioService.findOne(compra.getUsuario().getId_usuario());
-			//emailService.enviarMensajeRegistro2(usuario.getCorreo(), "Reserva: "+sector.getEvento().getDesc_evento(), compra.getMonto_pagar(), sector.getEvento().getDesc_evento(),"CompraC4Email/"+compra.getId_compra(),sector.getDesc_sector());
-			emailService.enviarMensajeRegistro(usuario.getCorreo(), "Reserva: "+sector.getEvento().getDesc_evento(), compra.getMonto_pagar(), sector.getEvento().getDesc_evento(),"CompraC4Email/"+compra.getId_compra(),sector.getDesc_sector());
-			return "redirect:/BuscarTickets";
-		}else{
-			return "redirect:/eventoCR/"+sector.getEvento().getId_evento();
-		}
-		
+		try {
 
-		
-		//Usuario usuario = usuarioService.findOne(id_usuario);
-		//Compra compra = compraService.findOne(id_compra);
+			if (num_asientos == sector.getAsientosIniciales()) {
+				System.out.println("entro1");
 
+				Long id_compra = compraService.InsertCompra2(correo, id_sector, num_asientos, "AC1");
 
-		//Random numAleatorio = new Random();
+				System.out.println(id_compra);
 
-		
-
-		/*if (sector.getAsientosDisponibles() > 0) {
-				Compra compra = new Compra();
-				compra.setFecha_compra(new Date());
-				compra.setEstado("NT");
-				compra.setEstadoCompraPorcentaje("0");
-				compra.setUsuario(usuario);
-				int p = Integer.parseInt(sector.getPrecio_unitario());
-				int res = p * sector.getAsientosDisponibles();
-				compra.setMonto_pagar(res);
-				compraService.save(compra);        
-
-				for (int i = 1; i <= sector.getAsientosDisponibles(); i++) {
-
-				Ticket ticket = new Ticket();
-				ticket.setCompra(compra);
-				ticket.setSector(sector);
-				ticket.setCod(numAleatorio.nextInt(900000-100000+1) + 100000);
-				ticket.setEstado("A"); // anular el ticket 
-				ticket.setValida("P");  // validacion del pago
-				ticket.setUtilizada("N"); // si ingreso o no
-				ticket.setFecha_uso(compraService.Date2222()); // fecha y hora del ultimo uso del ticket
-				ticketService.save(ticket);
+				Compra compra = compraService.findOne(id_compra);
+				if (id_compra != 0) {
+					Usuario usuario = usuarioService.findOne(compra.getUsuario().getId_usuario());
+					emailService.enviarMensajeRegistro(usuario.getCorreo(),
+							"Reserva: " + sector.getEvento().getDesc_evento(), compra.getMonto_pagar(),
+							sector.getEvento().getDesc_evento(), "CompraC4Email/" + compra.getId_compra(),
+							sector.getDesc_sector());
+					return "redirect:/BuscarTickets";
+				} else {
+					return "redirect:/eventoCR/" + sector.getEvento().getId_evento();
 				}
 
-				sector.setAsientosDisponibles(0);
-				sectorService.save(sector);
-				emailService.enviarMensajeRegistro(usuario.getCorreo(), "Reserva: "+sector.getEvento().getDesc_evento(), compra.getMonto_pagar(), sector.getEvento().getDesc_evento(),"CompraC4Email/"+compra.getId_compra());
-				return "redirect:/BuscarTickets";
-			}else{
-				System.out.println("entro2");
-				return "redirect:/eventoCR/"+sector.getEvento().getId_evento();
-			}*/
-	
+			} else { // ================================================================
+
+				Long id_compra = compraService.InsertCompra2(correo, id_sector, num_asientos, "AC1");
+
+				System.out.println("compra" + id_compra);
+
+				Compra compra = compraService.findOne(id_compra);
+				if (id_compra != 0) {
+					Usuario usuario = usuarioService.findOne(compra.getUsuario().getId_usuario());
+
+					System.out.println("================================================================");
+					System.out.println(usuario.getCorreo());
+					System.out.println("================================================================");
+
+					emailService.enviarMensajeRegistro3(
+							num_asientos,
+							usuario.getPersona().getNombre() + " " + usuario.getPersona().getApellido_p() + " "
+									+ usuario.getPersona().getApellido_m() + ".",
+							usuario.getCorreo(),
+							"Reserva: " + sector.getEvento().getDesc_evento(),
+							compra.getMonto_pagar(),
+							sector.getEvento().getDesc_evento(),
+							"CompraC4Email/" + compra.getId_compra(),
+							sector.getDesc_sector());
+					return "redirect:/BuscarTickets";
+				} else {
+					return "redirect:/eventoCR/" + sector.getEvento().getId_evento();
+				}
+			}
+
+		} catch (Exception e) {
+			return "redirect:/BuscarTickets";
+		}
+		// try {
+
+		// } catch (Exception e) {
+		// // TODO: handle exception
+		// }
+
+		// Long id_compra = compraService.InsertCompra(correo, id_sector, "AC1");
+		// if (id_compra != 0) {
+		// Compra compra = compraService.findOne(id_compra);
+		// Usuario usuario =
+		// usuarioService.findOne(compra.getUsuario().getId_usuario());
+		// //emailService.enviarMensajeRegistro2(usuario.getCorreo(), "Reserva:
+		// "+sector.getEvento().getDesc_evento(), compra.getMonto_pagar(),
+		// sector.getEvento().getDesc_evento(),"CompraC4Email/"+compra.getId_compra(),sector.getDesc_sector());
+		// emailService.enviarMensajeRegistro(usuario.getCorreo(), "Reserva:
+		// "+sector.getEvento().getDesc_evento(), compra.getMonto_pagar(),
+		// sector.getEvento().getDesc_evento(),"CompraC4Email/"+compra.getId_compra(),sector.getDesc_sector());
+		// return "redirect:/BuscarTickets";
+		// }else{
+		// return "redirect:/eventoCR/"+sector.getEvento().getId_evento();
+		// }
+
 	}
 }

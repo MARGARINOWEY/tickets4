@@ -39,11 +39,12 @@
                     </div>
                     <div class="card-body">
                         <div class="card-block mx-auto">
-                            <form  action="../../../../loginCF2" method="POST">
+                            <form id="form2" action="/loginCF2" method="POST">
                                 <p class="white"><strong>REGISTRARSE</strong></p>
                                 <input type="hidden" name="id_sector" th:value="${sector.id_sector}">
                                 <input type="hidden" name="id_persona" th:value="${usuario.persona.id_persona}">
                                 <input type="hidden" name="id_usuario" th:value="${usuario.id_usuario}">
+                                <input type="hidden" name="num_asientos" th:value="${num_asientos}">
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <input onkeyup="javascript:this.value=this.value.toUpperCase();" style="text-transform:uppercase;" type="text" class="form-control form-control-lg" name="nombre" id="fname" placeholder="Nombre" th:value="${usuario.persona.nombre}" required>
@@ -107,5 +108,18 @@
     <!-- END CONVEX JS-->
     <!-- BEGIN PAGE LEVEL JS-->
     <!-- END PAGE LEVEL JS-->
+    <script>
+        $(document).ready(function () {
+            $('#form2').submit(function (event) {
+                
+                var form = $(this);
+                var submitBtn = form.find('button[type="submit"]'); // Encuentra el botón de envío del formulario
+                submitBtn.prop('disabled', true); // Desactiva el botón
+                submitBtn.text("Enviando...");                
+            });
+        });
+
+    </script>
+
   </body>
 </html>

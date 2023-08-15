@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+    <head th:replace="layout/layoutMain :: head"></head>
+
+    <body data-col="2-columns" class=" 2-columns ">
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+    <div class="wrapper">
+        <div th:replace="layout/layoutMain :: menuLateral"></div>
+        <div th:replace="layout/layoutMain :: menuNavbar"></div>
+
+        <div class="main-panel">
+            <div class="main-content">
+                <div class="content-wrapper">
+                    <div class="container-fluid">
+                        <section id="alert">
+                            <!--Alert States Starts-->
+                            <div class="row match-height">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="card-title-wrap bar-success">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <h4 class="card-title">Lista Sector Botella</h4>
+                                                    </div>
+                                                    <div class="col-6 text-right">
+                                                        <button id="buttonF" type="button" class="btn btn-success">Recargar</button>
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div id="fragmentContainer" class="card-body">
+                                            <div th:replace="Sector/SectorBotellaElegidaF :: table"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- BEGIN VENDOR JS-->
+    <script src="app-assets/vendors/js/core/jquery-3.3.1.min.js"></script>
+    <script src="app-assets/vendors/js/core/popper.min.js"></script>
+    <script src="app-assets/vendors/js/core/bootstrap.min.js"></script>
+    <script src="app-assets/vendors/js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="app-assets/vendors/js/prism.min.js"></script>
+    <script src="app-assets/vendors/js/jquery.matchHeight-min.js"></script>
+    <script src="app-assets/vendors/js/screenfull.min.js"></script>
+    <script src="app-assets/vendors/js/pace/pace.min.js"></script>
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN PAGE VENDOR JS-->
+    <script src="app-assets/vendors/js/datatable/datatables.min.js"></script>
+    <script src="app-assets/vendors/js/datatable/dataTables.buttons.min.js"></script>
+    <script src="app-assets/vendors/js/datatable/buttons.flash.min.js"></script>
+    <script src="app-assets/vendors/js/datatable/jszip.min.js"></script>
+    <script src="app-assets/vendors/js/datatable/pdfmake.min.js"></script>
+    <script src="app-assets/vendors/js/datatable/vfs_fonts.js"></script>
+    <script src="app-assets/vendors/js/datatable/buttons.html5.min.js"></script>
+    <script src="app-assets/vendors/js/datatable/buttons.print.min.js"></script>
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN CONVEX JS-->
+    <script src="app-assets/js/app-sidebar.js"></script>
+    <script src="app-assets/js/notification-sidebar.js"></script>
+    <!-- END CONVEX JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script src="app-assets/js/data-tables/datatable-advanced.js"></script>
+    <!-- END PAGE LEVEL JS-->
+
+    <script>
+        $(document).ready(function () {
+
+                $('#buttonF').click(loadFragment);
+                function loadFragment() {
+                    $.ajax({
+                        url: '/loadFragment', // The controller endpoint that returns the fragment
+                        method: 'GET',
+                        success: function (data) {
+                            $('#fragmentContainer').html(data);
+                            $(document).ready(function () {
+                                $('.file-export').DataTable({
+                                    dom: 'Bfrtip',
+                                    buttons: [
+                                        'copy', 'csv', 'excel', 'pdf', 'print'
+                                    ]
+                                });
+                                $('.buttons-copy, .buttons-csv, .buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-outline-primary mr-1');
+                            });
+                        },
+                        error: function (error) {
+                            console.log('Failed to load fragment:', error);
+                        }
+                    });
+                }
+            });
+    </script>
+    </body>
+</html>

@@ -64,7 +64,7 @@ public class EmailServiceImpl implements IEmailService {
     @Override
     public void enviarMensajeRegistro(String toUser, String subject, Integer monto_pagar, String evento, String link, String mesa) {
         MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message);
+        MimeMessageHelper helper = new MimeMessageHelper(message,"UTF-8");
 
         final Context ctx = new Context();
 
@@ -74,6 +74,32 @@ public class EmailServiceImpl implements IEmailService {
         ctx.setVariable("mesa", mesa);
 
         final String htmlContent = templateEngine.process("Ticket/compraEmail.html", ctx);
+        
+
+        try {
+            helper.setTo(toUser);
+            helper.setSubject(subject);
+            helper.setText(htmlContent, true);
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    @Override
+    public void enviarMensajeRegistro3(Integer num_asientos, String nombre,String toUser, String subject, Integer monto_pagar, String evento,String link, String mesa) {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
+
+        final Context ctx = new Context();
+        ctx.setVariable("nombre", nombre);
+        ctx.setVariable("monto_pagar", monto_pagar);
+        ctx.setVariable("evento", evento);
+        ctx.setVariable("link", link);
+        ctx.setVariable("mesa", mesa);
+        ctx.setVariable("asientos", num_asientos);
+
+        final String htmlContent = templateEngine.process("Ticket/compraEmail3.html", ctx);
         
 
         try {

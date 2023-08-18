@@ -18,7 +18,7 @@ public class MailConfiguration {
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
         mailSender.setUsername("wayrasoluciones.tnt@gmail.com");
-        mailSender.setPassword("bocogdmghaqdkiur");
+        mailSender.setPassword("knfoqkmqzyqnftib");
         //mailSender.setUsername("cridichinaus998@gmail.com");
         //mailSender.setPassword("emyzauzavciudbqz");
         

@@ -1,9 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en" class="loading">
-    <head th:replace="layout/layoutMain :: head"></head>
 
-    <body data-col="2-columns" class=" 2-columns ">
+<head th:replace="layout/layoutMain :: head"></head>
+
+<body data-col="2-columns" class=" 2-columns ">
     <!-- ////////////////////////////////////////////////////////////////////////////-->
     <div class="wrapper nav-collapsed menu-collapsed">
         <div th:replace="layout/layoutMain :: menuLateral"></div>
@@ -13,7 +13,7 @@
             <div class="main-content">
                 <div class="content-wrapper">
                     <div class="container-fluid">
-                        <section id="alert">                            
+                        <section id="alert">
                             <!--Alert States Starts-->
                             <div class="row match-height">
                                 <div class="col-md-12">
@@ -23,46 +23,65 @@
                                                 <h4 class="card-title">Imprimir Tickets</h4>
                                             </div>
                                             <p>No compartas esta dirección con nadie</p>
-                                        </div>                                        
-                                            <div class="card-body">                                                                                        
-                                                <div class="card-block">
-                                                    <th:block th:each="tks, index : ${tickets}" th:if="${tks.compra.id_compra == compra.id_compra}">
-                                                    <div class="card gradient-mint">
-                                                        <div class="card-body">
-                                                          <div class="px-3 py-3">
-                                                            <div class="media">
-                                                                <div class="row">
-                                                                    <div class="col-5">
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-block">
+                                                <th:block th:each="tks, index : ${tickets}"
+                                                    th:if="${tks.compra.id_compra == compra.id_compra}">
+                                                    <div th:id="${'id'+tks.id_ticket}">
+                                                        <div class="card gradient-mint">
+                                                            <div class="card-body">
+                                                                <div class="px-3 py-3">
+                                                                    <div class="media">
                                                                         <div class="row">
-                                                                            <div class="col-12">
-                                                                                <div class="align-center">
-                                                                                    <i class="fa fa-tag text-white font-large-2 float-left"></i>
+                                                                            <div class="col-5">
+                                                                                <div class="row">
+                                                                                    <div class="col-12">
+                                                                                        <div class="align-center">
+                                                                                            <i
+                                                                                                class="fa fa-tag text-white font-large-2 float-left"></i>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-12">
+                                                                                        <h3 class="white"
+                                                                                            th:text="${tks.id_ticket}">
+                                                                                        </h3>
+                                                                                        <!-- <h1 class="white" th:text="${tks.sector.desc_sector}"></h1> -->
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <div class="col-7">
+                                                                                <div
+                                                                                    class="media-body text-white text-center">
+                                                                                    <center>
+                                                                                    <a 
+                                                                                        th:href="${'../../../../imprimirR2/'+tks.crypt}"
+                                                                                        class="btn btn-round btn-lg btn-dark mr-1">
+                                                                                        <i class="fa fa-print"></i> <br>Vista Previa </a>
+                                                                                    </center>
+                                                                                    <!-- <button style="width: 100%;"
+                                                                                        th:href="${'../../../../imprimirR2/'+tks.crypt}"
+                                                                                        class="btn btn-round btn-lg btn-dark mr-1"
+                                                                                        oncl
+                                                                                        >
+                                                                                        <i class="fa fa-download"></i>
+                                                                                        Guardar
+                                                                                    </button> -->
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-12">
-                                                                                <h1 class="white" th:text="${index.index}"></h1>
-                                                                                <!-- <h1 class="white" th:text="${tks.sector.desc_sector}"></h1> -->
-                                                                            </div>
-                                                                        </div>
-                                                                        
-                                                                    </div>
-                                                                    <div class="col-7">
-                                                                        <div class="media-body text-white text-right">
-                                                                            <a style="width: 100%;" th:href="${'../../../../imprimirR2/'+tks.crypt}" class="btn btn-round btn-lg btn-dark mr-1"><i class="fa fa-print"></i>Imprimir</a>
-                                                                            <a style="width: 100%;" th:href="${'../../../../imprimirR2/'+tks.crypt}" class="btn btn-round btn-lg btn-dark mr-1"><i class="fa fa-download"></i>Guardar</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                          </div>
                                                         </div>
                                                     </div>
-                                                    </th:block>
-                                                </div>
+                                                </th:block>
                                             </div>
-                                        
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -72,6 +91,7 @@
             </div>
         </div>
     </div>
-        <div th:replace="layout/layoutMain :: scripts"></div>
-    </body>
+    <div th:replace="layout/layoutMain :: scripts"></div>
+</body>
+
 </html>

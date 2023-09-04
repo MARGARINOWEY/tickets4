@@ -10,4 +10,6 @@ public interface ISectorBotellaService {
 	public void save(SectorBotella sectorBotella);
 
 	public SectorBotella findOne(Long id);
+
+	String VO(Long id_sector, Integer cod, String accion);
 }

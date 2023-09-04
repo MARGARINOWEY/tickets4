@@ -107,5 +107,17 @@
                 $('body').removeClass('hidden');
             }
         </script>
+        <th:block th:if="${success!=null}">
+            <script>
+                $(document).ready(function Mostrar() {
+                    console.log("g")
+                    swal({
+                        title: 'Gracias por escoger su botella',
+                        type: 'success',
+
+                    }).then().done();
+                });
+            </script>
+        </th:block>
     </body>
 </html>

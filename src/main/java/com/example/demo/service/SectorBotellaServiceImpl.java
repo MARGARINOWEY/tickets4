@@ -32,5 +32,13 @@ public class SectorBotellaServiceImpl implements ISectorBotellaService{
         return sectorBotellaDao.findById(id).orElse(null);
     }
 
+    @Override
+    public String VO(Long id_sector, Integer cod, String accion) {
+        // TODO Auto-generated method stub
+        return sectorBotellaDao.VO(id_sector, cod, accion);
+    }
+
+    
+
     
 }

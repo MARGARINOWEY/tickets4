@@ -53,12 +53,18 @@ public class EventoC_Controller {
 	private IEmailService emailService;
 
     @RequestMapping(value = "/eventoCR", method = RequestMethod.GET) // Pagina principal
-	public String PersonaM(Model model,HttpServletRequest request) {
+	public String PersonaM(Model model,HttpServletRequest request,@RequestParam(name="success",required = false)String success,RedirectAttributes flash) {
 
 		
 
 		model.addAttribute("eventos", eventoService.findAll());
 		model.addAttribute("tipoEventos", tipoEventoService.findAll());
+
+		if (success!=null) {
+				
+			model.addAttribute("success" , success);
+			
+		}
 
 			
 		return "Evento/EventoC";

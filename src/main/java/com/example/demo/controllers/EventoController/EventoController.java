@@ -20,8 +20,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.Archivo;
 import com.example.demo.entity.Evento;
 import com.example.demo.entity.Sector;
+import com.example.demo.entity.SectorBotella;
 import com.example.demo.service.IEventoService;
 import com.example.demo.service.ILugarService;
+import com.example.demo.service.ISectorBotellaService;
 import com.example.demo.service.ISectorService;
 import com.example.demo.service.ITipoEventoService;
 
@@ -36,6 +38,9 @@ public class EventoController {
 	private IEventoService eventoService;
 	@Autowired
 	private ISectorService sectorService;
+
+	@Autowired
+	private ISectorBotellaService sectorBotellaService;
 
     @RequestMapping(value = "/eventoR", method = RequestMethod.GET) // Pagina principal
 	public String PersonaM(@Validated Evento evento,Model model,RedirectAttributes flash, HttpServletRequest request) {
@@ -52,6 +57,14 @@ public class EventoController {
 			return "redirect:loginR";
 		}
 
+	}
+
+	@RequestMapping(value = "/botellaElegida/{id_sector}/{num_sectorBotella}") // Pagina principal
+	public String botellaElegida(@PathVariable("id_sector")Long id_sector, @PathVariable("num_sectorBotella")Integer num_sectorBotella, RedirectAttributes flash) {
+
+		sectorBotellaService.VO(id_sector, num_sectorBotella, "VO");
+		flash.addAttribute("success", "Gracias por escoger su botella");
+		return "redirect:/eventoCR";
 	}
 
     @RequestMapping(value = "/eventoF", method = RequestMethod.POST) // Enviar datos de Registro a Lista
@@ -91,3 +104,5 @@ public class EventoController {
 		return "redirect:/eventoR";
 	}
 }
+
+

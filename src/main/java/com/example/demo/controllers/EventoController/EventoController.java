@@ -65,7 +65,7 @@ public class EventoController {
 		try {
 			if (num_sectorBotella == 3) {
 				sectorBotellaService.VO(id_sector, num_sectorBotella, "VO");
-				flash.addAttribute("success", "https://i.imgur.com/f9tTCQL.png");
+				flash.addAttribute("success", "https://i.imgur.com/51Pbh9s.png");
 				flash.addAttribute("success2", "WHISKEY JOHNNIE WALKER ETIQUETA NEGRA");
 				return "redirect:/eventoCR";
 			

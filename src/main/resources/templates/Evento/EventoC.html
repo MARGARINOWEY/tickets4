@@ -108,12 +108,21 @@
             }
         </script>
         <th:block th:if="${success!=null}">
+            <input id="urlImg" type="hidden" th:value="${success}">
+            <input id="textoAux" type="hidden" th:value="${success2}">
             <script>
                 $(document).ready(function Mostrar() {
-                    console.log("g")
+
+                    var valorDelInput = $('#urlImg').val();
+                    var valorDelInput2 = $('#textoAux').val();
+
                     swal({
-                        title: 'Gracias por escoger su botella',
-                        type: 'success',
+                        title: 'Gracias por escoger',
+                        text: valorDelInput2,
+                        imageUrl: valorDelInput,
+                        imageWidth: 400,
+                        imageHeight: 350,
+                        imageAlt: 'Custom image',
 
                     }).then().done();
                 });

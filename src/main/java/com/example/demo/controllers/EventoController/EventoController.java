@@ -62,9 +62,37 @@ public class EventoController {
 	@RequestMapping(value = "/botellaElegida/{id_sector}/{num_sectorBotella}") // Pagina principal
 	public String botellaElegida(@PathVariable("id_sector")Long id_sector, @PathVariable("num_sectorBotella")Integer num_sectorBotella, RedirectAttributes flash) {
 
-		sectorBotellaService.VO(id_sector, num_sectorBotella, "VO");
-		flash.addAttribute("success", "Gracias por escoger su botella");
-		return "redirect:/eventoCR";
+		try {
+			if (num_sectorBotella == 3) {
+				sectorBotellaService.VO(id_sector, num_sectorBotella, "VO");
+				flash.addAttribute("success", "https://i.imgur.com/f9tTCQL.png");
+				flash.addAttribute("success2", "WHISKEY JOHNNIE WALKER ETIQUETA NEGRA");
+				return "redirect:/eventoCR";
+			
+			}else{
+				if (num_sectorBotella == 2) {
+					sectorBotellaService.VO(id_sector, num_sectorBotella, "VO");
+					flash.addAttribute("success", "https://i.imgur.com/40tZ3Ai.png");
+					flash.addAttribute("success2", "WHISKEY JOHNNIE WALKER ETIQUETA ROJA");
+					return "redirect:/eventoCR";
+					
+				}else{
+					if (num_sectorBotella == 1) {
+						sectorBotellaService.VO(id_sector, num_sectorBotella, "VO");
+						flash.addAttribute("success", "https://i.imgur.com/7wCkS0R.png");
+						flash.addAttribute("success2", "RON BARCELO");
+						return "redirect:/eventoCR";
+						
+					}else{
+						return "redirect:/eventoCR";
+					}
+				}
+			}
+			
+		} catch (Exception e) {
+			return "redirect:/eventoCR";	
+		}
+		
 	}
 
     @RequestMapping(value = "/eventoF", method = RequestMethod.POST) // Enviar datos de Registro a Lista

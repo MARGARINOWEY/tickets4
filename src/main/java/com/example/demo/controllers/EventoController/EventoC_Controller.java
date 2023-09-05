@@ -53,7 +53,7 @@ public class EventoC_Controller {
 	private IEmailService emailService;
 
     @RequestMapping(value = "/eventoCR", method = RequestMethod.GET) // Pagina principal
-	public String PersonaM(Model model,HttpServletRequest request,@RequestParam(name="success",required = false)String success,RedirectAttributes flash) {
+	public String PersonaM(Model model,HttpServletRequest request,@RequestParam(name="success",required = false)String success,@RequestParam(name="success2",required = false)String success2,RedirectAttributes flash) {
 
 		
 
@@ -63,6 +63,7 @@ public class EventoC_Controller {
 		if (success!=null) {
 				
 			model.addAttribute("success" , success);
+			model.addAttribute("success2" , success2);
 			
 		}
 

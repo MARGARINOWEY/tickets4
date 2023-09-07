@@ -24,8 +24,9 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12">
-                                    <button class="btn btn-success">Disponible</button>
-                                    <button class="btn btn-danger">Comprado</button>
+                                    <button class="btn btn-success">Mesa Libre</button>
+                                    <button class="btn btn-danger">Mesa Ocupada</button>
+                                    <button class="btn btn-primary">Mesa parcialmente libre</button>
                                 </div>
                             </div>
                             <div class="row match-height">
@@ -57,10 +58,13 @@
                                                                                     <a class=" btn-danger" style="font-size: 30px; margin: 0; opacity: 0.75; "><p th:text="${'🔴'}" style="font-size: 30px;margin: 0;"></p></a>
 
                                                                                 </th:block>
-                                                                                <th:block th:if="${l.habilitado == 'H' && l.asientosDisponibles != 0}">
+                                                                                <th:block th:if="${l.habilitado == 'H' && l.asientosDisponibles == 12}">
 
                                                                                     <a class=" btn-success" style="font-size: 30px; margin: 0; opacity: 0.75;" data-toggle="modal"  th:attr="data-target='#default'+${l.id_sector}" ><p th:text="${'🟢'}" style="font-size: 30px;margin: 0;"></p></a>
 
+                                                                                </th:block>
+                                                                                <th:block th:if="${l.habilitado == 'H' && l.asientosDisponibles > 0 && l.asientosDisponibles < 12}">
+                                                                                    <a class=" btn-success" style="font-size: 30px; margin: 0; opacity: 0.75;" data-toggle="modal"  th:attr="data-target='#default'+${l.id_sector}" ><p th:text="${'🟣'}" style="font-size: 30px;margin: 0;"></p></a>
                                                                                 </th:block>
                                                                             </th:block>
                                                                         </td>

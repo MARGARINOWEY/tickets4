@@ -94,14 +94,7 @@ public class CompraA_Controller {
 	@RequestMapping(value = "/reiniciarC_A/{id_compra}/{num_compra}", method = RequestMethod.POST)
 	public String reiniciarC_A(@PathVariable("id_compra")Long id_compra,@PathVariable("num_compra")Integer num_compra,Model model, @RequestParam(name = "motivosR") String motivosR){
 		Compra compra = compraService.findOne(id_compra);
-
-		if (num_compra == 1) {
-			compra.setEstadoCompraPorcentaje("1");
-			compra.setEstado("NT");
-			compra.setImg_comprobante(null);
-			compraService.save(compra);
-			return "redirect:/ComprasAR";
-		}
+		
 		if (num_compra == 2) {
 			System.out.println(motivosR);
 			Evento evento = eventoService.findOne(compraService.obtenerEvento(Math.toIntExact(id_compra), "E1"));
@@ -112,6 +105,23 @@ public class CompraA_Controller {
 			compra.setNro_comprobante2(null);
 			compraService.save(compra);
 			emailService.enviarMensajeRechazo2(usuario.getCorreo(), "RECHAZO DEL PAGO 2DO PAGO", evento.getDesc_evento(), "ticketCR/"+compra.getId_compra(), sector.getDesc_sector(), motivosR);
+			return "redirect:/ComprasAR";
+		}else{
+			return "redirect:/ComprasAR";
+		}		
+		
+		
+	}
+
+	@RequestMapping(value = "/reiniciarC_A2/{id_compra}/{num_compra}", method = RequestMethod.GET)
+	public String reiniciarC_A2(@PathVariable("id_compra")Long id_compra,@PathVariable("num_compra")Integer num_compra,Model model){
+		Compra compra = compraService.findOne(id_compra);
+
+		if (num_compra == 1) {
+			compra.setEstadoCompraPorcentaje("1");
+			compra.setEstado("NT");
+			compra.setImg_comprobante(null);
+			compraService.save(compra);			
 			return "redirect:/ComprasAR";
 		}
 		if (num_compra == 3) {

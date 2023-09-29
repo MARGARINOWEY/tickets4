@@ -38,5 +38,7 @@ public interface ICompraService {
 
 	public String[] Qr2(Integer id_compra, String accion);
 
+	public String[] T1(Integer id_compra, String accion);
+
 
 }

@@ -113,6 +113,12 @@ public class CompraServiceImpl implements ICompraService{
         return compraDao.Qr2(id_compra, accion);
     }
 
+    @Override
+    public String[] T1(Integer id_compra, String accion) {
+        // TODO Auto-generated method stub
+        return compraDao.T1(id_compra, accion);
+    }
+
     
 
     

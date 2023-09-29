@@ -159,7 +159,7 @@ public class TickeController {
             String[] qrData3 = compraService.Qr2(Math.toIntExact(compra.getId_compra()), "QR2");
             String[] qrData4 = qrData3[0].split(",");
 
-            System.out.println(qrData4[13]);
+            
 
             if (qrData4[13].equals("qrs")) {
                 model.addAttribute("qrTicket", "qr5.png");
@@ -167,6 +167,12 @@ public class TickeController {
             }else{
                 model.addAttribute("qrTicket", qrData4[13]);
             }
+
+            String[] t1 = compraService.T1(Math.toIntExact(compra.getId_compra()), "T1");
+            String[] t1_x = t1[0].split(",");
+            
+            model.addAttribute("dias", t1_x[4]);
+
 
 
             return "Ticket/ticketC";    

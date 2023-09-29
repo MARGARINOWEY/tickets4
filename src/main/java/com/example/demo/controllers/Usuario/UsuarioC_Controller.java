@@ -118,12 +118,17 @@ public class UsuarioC_Controller {
 				System.out.println(id_compra);
 
 				Compra compra = compraService.findOne(id_compra);
+
+				String[] t1 = compraService.T1(Math.toIntExact(compra.getId_compra()), "T1");
+				String[] t1_x = t1[0].split(",");
+
+
 				if (id_compra != 0) {
 					Usuario usuario = usuarioService.findOne(compra.getUsuario().getId_usuario());
 					emailService.enviarMensajeRegistro(usuario.getCorreo(),
 							"Reserva: " + sector.getEvento().getDesc_evento(), compra.getMonto_pagar(),
 							sector.getEvento().getDesc_evento(), "CompraC4Email/" + compra.getId_compra(),
-							sector.getDesc_sector());
+							sector.getDesc_sector(),t1_x[4]);
 					return "redirect:/BuscarTickets";
 				} else {
 					return "redirect:/eventoCR/" + sector.getEvento().getId_evento();

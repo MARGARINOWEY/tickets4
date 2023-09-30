@@ -88,7 +88,7 @@ public class EmailServiceImpl implements IEmailService {
     }
     
     @Override
-    public void enviarMensajeRegistro3(Integer num_asientos, String nombre,String toUser, String subject, Integer monto_pagar, String evento,String link, String mesa) {
+    public void enviarMensajeRegistro3(Integer num_asientos, String nombre,String toUser, String subject, Integer monto_pagar, String evento,String link, String mesa, String dias) {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
 
@@ -99,6 +99,7 @@ public class EmailServiceImpl implements IEmailService {
         ctx.setVariable("link", link);
         ctx.setVariable("mesa", mesa);
         ctx.setVariable("asientos", num_asientos);
+        ctx.setVariable("dias", dias);
 
         final String htmlContent = templateEngine.process("Ticket/compraEmail3.html", ctx);
         
@@ -114,7 +115,7 @@ public class EmailServiceImpl implements IEmailService {
     }
 
     @Override
-    public void enviarMensajeRegistro2(String toUser, String subject, Integer monto_pagar, String evento, String link, String mesa) {
+    public void enviarMensajeRegistro2(String toUser, String subject, Integer monto_pagar, String evento, String link, String mesa, String dias) {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
@@ -124,6 +125,7 @@ public class EmailServiceImpl implements IEmailService {
         ctx.setVariable("evento", evento);
         ctx.setVariable("link", link);
         ctx.setVariable("mesa", mesa);
+        ctx.setVariable("dias", dias);
 
         final String htmlContent = templateEngine.process("Ticket/compraEmail2.html", ctx);
         

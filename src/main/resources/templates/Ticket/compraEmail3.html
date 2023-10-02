@@ -72,7 +72,7 @@
 
             <center><a th:href="${'https://touch-and-treat.up.railway.app/'+link+'/3'}" class="btn">Realizar el Pago</a></center>
 
-            <p style="color: red;" ><b>* Usted tiene 14 DÍAS para realizar el pago correspondiente, pasados los 14 DÍAS, su reserva quedará anulada y deberá volver a realizar el proceso de reserva y compra.</b></p>
+            <p style="color: red;" ><b>* Usted tiene <b style="color: dodgerblue;" th:text="${dias}"></b> para realizar el pago correspondiente, pasados los <b style="color: dodgerblue;" th:text="${dias}"></b>, su reserva quedará anulada y deberá volver a realizar el proceso de reserva y compra.</b></p>
         </div>
 
         <div class="email-footer">

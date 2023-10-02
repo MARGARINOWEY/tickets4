@@ -96,17 +96,14 @@ public class TickeController {
         }else{ //================================================================
             if (usuarioService.RecuperarUsuario(correo, "C8") != null) {
 
-                Long id_compra =  compraService.InsertCompra2(correo, id_sector, num_asientos, "AC1");
-
-                System.out.println("compra"+id_compra);
+                Long id_compra =  compraService.InsertCompra2(correo, id_sector, num_asientos, "AC1");                
                 
                 Compra compra = compraService.findOne(id_compra);
                 if (id_compra != 0) {
-                    Usuario usuario = usuarioService.findOne(compra.getUsuario().getId_usuario());
-
-                    System.out.println("================================================================");
-                    System.out.println(usuario.getCorreo());
-                    System.out.println("================================================================");
+                    Usuario usuario = usuarioService.findOne(compra.getUsuario().getId_usuario());           
+                    
+                    String[] t1 = compraService.T1(Math.toIntExact(compra.getId_compra()), "T1");
+			        String[] t1_x = t1[0].split(",");
 
                     emailService.enviarMensajeRegistro3(
                         num_asientos,
@@ -116,7 +113,7 @@ public class TickeController {
                         compra.getMonto_pagar(), 
                         sector.getEvento().getDesc_evento(),
                         "CompraC4Email/"+compra.getId_compra(),
-                        sector.getDesc_sector()
+                        sector.getDesc_sector(), t1_x[4]
                         );
                     return "redirect:/BuscarTickets";
                 }else{

@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+    <head th:replace="layout/layoutMain :: head"></head>
+
+    <body data-col="2-columns" class=" 2-columns hidden">
+        <div class="centreadooo" id="onload">
+            <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        </div>
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+    <div class="wrapper nav-collapsed menu-collapsed">
+        <div th:replace="layout/layoutMain :: menuLateral"></div>
+        <div th:replace="layout/layoutMain :: menuNavbar"></div>
+
+        <div class="main-panel">
+            <div class="main-content">
+                <div class="content-wrapper">
+                    <div class="container-fluid">
+                        <section id="alert">
+                            <!--Alert States Starts-->
+                            <div class="row match-height">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="card-block">
+                                                <table  style="font-size: 11px;" class="table display nowrap table-striped table-bordered scroll-horizontal-vertical">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ID_U</th>
+                                                            <th>Nombre</th>
+                                                            <th>Celular</th>
+                                                            <th>Correo</th>
+                                                            <th>Monto</th>
+                                                            <th>Mesa</th>
+                                                            <th>N° C</th>
+                                                            <th>F. Compra</th>
+                                                            <th>Pago-1</th>
+                                                            <th>Pago-2</th>
+                                                            <th>Pago-3</th>
+                                                            <th>Imprimir TKs</th>
+                                                            <th>Estado</th>
+                                                            <th>Cancelar</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr th:each ="c : ${compras}" th:if="${c.estado != 'X'}" >
+                                                            <td th:text="${c.usuario.id_usuario}" ></td>
+                                                            <td th:text = "${c.usuario.persona.nombre+' '+c.usuario.persona.apellido_p+' '+c.usuario.persona.apellido_m}" ></td> 
+                                                            <!-- <td>
+                                                                <p style="font-size: 11px;" th:text = "${c.usuario.persona.nombre}" ></p>
+                                                                <p style="font-size: 11px;" th:text = "${c.usuario.persona.apellido_p}"></p>
+                                                                <p style="font-size: 11px;" th:text = "${c.usuario.persona.apellido_m}"></p>
+                                                            </td> -->
+                                                            <td th:text = "${c.usuario.persona.num_celular}"></td>
+                                                            <td th:text = "${c.usuario.correo}"></td>
+                                                            <td th:text = "${c.monto_pagar+' Bs.'}"></td>
+                                                            <th:block th:each="tks : ${c.tickets[0]}" th:if="${tks.compra.id_compra == c.id_compra}" >
+                                                                <td th:text="${tks.sector.desc_sector}" ></td>
+                                                            </th:block>
+                                                            <th:block th:each="tks, iterStat : ${c.tickets[0]}" th:if="${tks.compra.id_compra == c.id_compra}" >
+                                                                <td th:text="${iterStat.count}" ></td>
+                                                            </th:block>
+                                                            <td th:text = "${#dates.format(c.fecha_compra, 'dd/MM/yyyy')}"></td>
+                                                                                                    
+                                                            <td>
+                                                                <button style="width: 30%;" th:id="${c.id_compra}" onclick="MandarId(this.id)" type="button" class="btn btn-outline-info" data-toggle="modal">
+                                                                    <i class="fa fa-eye font-medium-3"></i>
+                                                                </button>
+                                                                <!-- <button style="width: 30%;"  type="button" class="btn btn-outline-info" data-toggle="modal"  th:attr="data-target='#default2'+${c.id_compra}" ><i class="fa fa-eye font-medium-3"></i></button> -->
+                                                                
+                                                                <a style="width: 30%;" th:href="${'../../../../reiniciarC_A2/'+c.id_compra+'/1'}" type="button" class="btn btn-outline-dark" ><i class="fa fa-repeat font-medium-3"></i></a>
+
+                                                                <a style="width: 30%;" th:href="${'../../../../enviarCorreoConfirmacion1/'+c.id_compra+'/1'}" type="button" class="btn btn-outline-success" ><i class="fa fa-envelope-o font-medium-3"></i></a>
+                                                            </td>
+                                                            <td>
+                                                                <button style="width: 50%;" th:id="${c.id_compra}" onclick="MandarId2(this.id)" type="button" class="btn btn-outline-info" data-toggle="modal">
+                                                                    <i class="fa fa-eye font-medium-3"></i>
+                                                                </button>
+
+                                                                <!-- <button style="width: 50%;"  type="button" class="btn btn-outline-info" data-toggle="modal"  th:attr="data-target='#default3'+${c.id_compra}" ><i class="fa fa-eye font-medium-3"></i></button> -->
+                                                    
+                                                                <button style="width: 50%;" type="button" class="btn btn-outline-dark" data-toggle="modal"  th:attr="data-target='#mordalR2'+${c.id_compra}"><i class="fa fa-repeat font-medium-3"></i></button>
+
+                                                            </td>
+                                                            <td>
+                                                                <button style="width: 50%;" th:id="${c.id_compra}" onclick="MandarId3(this.id)" type="button" class="btn btn-outline-info" data-toggle="modal">
+                                                                    <i class="fa fa-eye font-medium-3"></i>
+                                                                </button>
+
+                                                                <!-- <button style="width: 50%;"  type="button" class="btn btn-outline-info" data-toggle="modal"  th:attr="data-target='#default4'+${c.id_compra}" ><i class="fa fa-eye font-medium-3"></i></button> -->
+                                                    
+                                                                <a style="width: 50%;" th:href="${'../../../../reiniciarC_A2/'+c.id_compra+'/3'}" type="button" class="btn btn-outline-dark" ><i class="fa fa-repeat font-medium-3"></i></a>
+                                                            </td>
+
+                                                            
+                                                            <td>
+                                                                <a class="btn btn-dark" style="width: 100%;" th:href="${'../../../../imprimirR/'+c.id_compra}">🏷️</a>
+                                                            </td>
+                                                            <td>
+                                                                <th:block th:if="${c.estado == 'NT'}">
+                                                                    <button style="width: 100%;" type="button" class="btn btn-primary">NT</button>
+                                                                </th:block>
+                                                                <th:block th:if="${c.estado == 'P'}">
+                                                                    <a th:href="${'../../../../Compra_editarA/'+c.id_compra}" style="width: 100%;" type="button" class="btn btn-warning">P</a>
+                                                                </th:block>
+                                                                <th:block th:if="${c.estado == 'V'}">
+                                                                    <a style="width: 100%;" th:href="${'../../../../enviarCorreoConfirmacion1/'+c.id_compra+'/2'}" type="button" class="btn btn-success">V</a>
+                                                                </th:block>
+                                                            </td>
+                                                            <td>
+                                                                <a th:href="${'../../../../Cancelar_CA/'+c.id_compra}" style="width: 100%;" type="button" class="btn btn-danger"><i class="fa fa-trash-o" ></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <!--
+                                                    <table class="table display nowrap table-striped table-bordered scroll-horizontal">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Evento</th>
+                                                                <th>Id_usuario</th>
+                                                                <th>Nombre</th>
+                                                                <th>N_celular</th>
+                                                                <th>Correo</th>
+                                                                <th>Id_sector</th>
+                                                                <th>Sector</th>
+                                                                <th>Cantidad</th>
+                                                                <th>Total</th>
+                                                                <th>F_Compra</th>
+                                                                <th>id_compra</th>
+                                                                <th>Estado-P</th>
+                                                                <th>Pagado</th>
+                                                                <th>ESTADO</th>
+                                                                <th>Cancelar</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr th:each ="pru : ${pruebas}">
+                                                                <td th:text="${pru.id_c1}"></td>
+                                                                <td th:text="${pru.id_usuario}"></td>
+                                                                <td th:text="${pru.Nombre}"></td>
+                                                                <td th:text="${pru.num_celular}"></td>
+                                                                <td th:text="${pru.CORREO}"></td>
+                                                                <td th:text="${pru.id_sector}"></td>
+                                                                <td th:text="${pru.desc_sector}"></td>
+                                                                <td th:text="${pru.Cantidad}"></td>
+                                                                <td th:text="${pru.TOTAL_PAGAR}"></td>
+                                                                <td th:text="${pru.F_COMPRA}"></td>
+                                                                <td th:text="${pru.id_compra}"></td>
+                                                                <td th:text="${pru.estado_compra_porcentaje}"></td>
+                                                                <td th:text="${pru.PAGADO}"></td>
+                                                                <td th:text="${pru.ESTADO}"></td>
+                                                                <td>
+                                                                    <a th:href="${'../../../../Cancelar_CA/'+pru.id_compra}" style="width: 100%;" type="button" class="btn btn-danger">❕</a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    -->
+                                                
+                                                <!-- <th:block th:each="c1 : ${compras}">
+                                                    <div class="modal fade text-left" th:id="${'mordalR2'+c1.id_compra}" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title" id="myModalLabel1">Motivo del rechazo Pago - 2</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form id="formR2" th:action="${'../../../../reiniciarC_A/'+c1.id_compra+'/2'}" method="post">
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                                <div class="controls">
+                                                                                    <input type="text" class="form-control" placeholder="Motivo" name="motivosR" required data-validation-required-message="Debe introducir el motivo">
+                                                                                </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer text-center" >     
+                                                                    <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>
+                                                                    <button type="submit" class="btn btn-warning">Enviar rechazo</button>
+                                                                </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                </th:block> -->
+
+
+                                                <!-- <th:block  th:each ="c2 : ${compras}">
+                                                    <div class="modal fade text-left" th:id="${'default2'+c2.id_compra}" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true" >
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content" >
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title" id="myModalLabel1">Imagen del comprobante 1</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                
+                                                                <div class="modal-body">
+                                                                    <th:block th:if="${c2.img_comprobante == null}">
+                                                                        <h4>El comprador tadavia no cargo su comprobante</h4>
+                                                                    </th:block>
+                                                                    <th:block th:if="${c2.img_comprobante != null}">
+                                                                        <div class="row">
+                                                                            <div class="col-12 text-center" >
+                                                                            <img th:src="@{'data:image/jpg;base64,' + ${c2.img_comprobante}}" style="width: 100%; height: 100%;" alt="Sin imagen">
+                                                                            </div>
+                                                                        </div>    
+                                                                    </th:block>
+                                                                    
+                                                                    <div class="modal-footer text-center" >
+                                                                        <a href="#" th:href="@{'../../../../uploads/'+${c2.img_comprobante}}" class="btn btn-warning" download>Descargar Imagen</a>                             
+                                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </th:block> -->
+
+                                                <!--                                                 
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal fade text-left" id="myModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true" >
+                                                        <div class="modal-content" >
+                                                            <div class="modal-content" id="modalContent">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+
+                                                <div class="modal fade text-left" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content" id="modalContent">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="modal fade text-left" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content" id="modalContent2">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal fade text-left" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content" id="modalContent3">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+
+                                                <!-- <th:block  th:each ="c2 : ${compras}">
+                                                    <div class="modal fade text-left" th:id="${'default3'+c2.id_compra}" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true" >
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content" >
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title" id="myModalLabel1">Imagen del comprobante 2</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                
+                                                                <div class="modal-body">
+                                                                    <th:block th:if="${c2.img_comprobante2 == null}">
+                                                                        <h4>El comprador tadavia no cargo su comprobante 2</h4>
+                                                                    </th:block>
+                                                                    <th:block th:if="${c2.img_comprobante2 != null}">
+                                                                        <div class="row">
+                                                                            <div class="col-12 text-center" >
+                                                                            <img th:src="@{'data:image/jpg;base64,' + ${c2.img_comprobante2}}" style="width: 100%; height: 100%;" alt="Sin imagen">
+                                                                            </div>
+                                                                        </div>    
+                                                                    </th:block>
+                                                                    
+                                                                    <div class="modal-footer text-center" >
+                                                                        <a href="#" th:href="@{'../../../../uploads/'+${c2.img_comprobante2}}" class="btn btn-warning" download>Descargar Imagen</a>                             
+                                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>                                                                
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </th:block> -->
+
+
+                                                <!-- <th:block  th:each ="c2 : ${compras}">
+                                                    <div class="modal fade text-left" th:id="${'default4'+c2.id_compra}" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true" >
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content" >
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title" id="myModalLabel1">Imagen del comprobante 3</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                
+                                                                <div class="modal-body">
+                                                                    <th:block th:if="${c2.img_comprobante3 == null}">
+                                                                        <h4>El comprador tadavia no cargo su comprobante 3</h4>
+                                                                    </th:block>
+                                                                    <th:block th:if="${c2.img_comprobante3 != null}">
+                                                                        <div class="row">
+                                                                            <div class="col-12 text-center" >
+                                                                            <img th:src="@{'data:image/jpg;base64,' + ${c2.img_comprobante3}}" style="width: 100%; height: 100%;" alt="Sin imagen">
+                                                                            </div>
+                                                                        </div>    
+                                                                    </th:block>
+                                                                    
+                                                                    <div class="modal-footer text-center" >
+                                                                        <a href="#" th:href="@{'../../../../uploads/'+${c2.img_comprobante3}}" class="btn btn-warning" download>Descargar Imagen</a>                             
+                                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>                                                                
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </th:block> -->
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+        <div th:replace="layout/layoutMain :: scripts"></div>
+        <script>
+            function MandarId(param) {
+      
+            $.ajax({
+                url: '/modal/modalCompra1/'+param,
+                type: 'GET',
+                success: function(data) {
+                    $("#modalContent").html(data);
+                    $("#myModal").modal('show');
+                }
+            });
+            
+            };
+            function MandarId2(param) {
+      
+            $.ajax({
+                url: '/modal/modalCompra2/'+param,
+                type: 'GET',
+                success: function(data) {
+                    $("#modalContent2").html(data);
+                    $("#myModal2").modal('show');
+                }
+            });
+            
+            };
+            function MandarId3(param) {
+      
+            $.ajax({
+                url: '/modal/modalCompra3/'+param,
+                type: 'GET',
+                success: function(data) {
+                    $("#modalContent3").html(data);
+                    $("#myModal3").modal('show');
+                }
+            });
+            
+            };
+            
+            
+            
+        </script>
+        <script>
+            window.onload = function() {
+                $('#onload').fadeOut();
+                $('body').removeClass('hidden');
+            }
+        </script>
+
+        <script>
+            $(document).ready(function(){
+                $(".dataTables_scrollBody").css({
+                    "height": "400px"
+                });
+
+                
+            });
+        </script>
+
+    </body>
+</html>

@@ -164,4 +164,32 @@ public class CompraA_Controller {
 		return "redirect:/ComprasAR";
 		
 	}
+
+	@GetMapping("/modal/modalCompra1/{id_compra}")
+    public String modalCompra1(@PathVariable("id_compra") Long id_compra,Model model) {
+        
+        Compra compra = compraService.findOne(id_compra);
+        model.addAttribute("compra", compra);
+
+        return "Compra/modalCompra :: modalContent";
+    }
+
+	@GetMapping("/modal/modalCompra2/{id_compra}")
+    public String modalCompra2(@PathVariable("id_compra") Long id_compra,Model model) {
+        
+        Compra compra = compraService.findOne(id_compra);
+        model.addAttribute("compra", compra);
+
+
+        return "Compra/modalCompra :: modalContent2";
+    }
+
+	@GetMapping("/modal/modalCompra3/{id_compra}")
+    public String modalCompra3(@PathVariable("id_compra") Long id_compra,Model model) {
+        
+        Compra compra = compraService.findOne(id_compra);
+        model.addAttribute("compra", compra);
+
+        return "Compra/modalCompra :: modalContent3";
+    }
 }

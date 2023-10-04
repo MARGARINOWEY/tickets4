@@ -124,6 +124,35 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <th:block th:each="c1 : ${compras}" th:if="${c1.estado != 'X'}">
+                                                    <div class="modal fade text-left" th:id="${'mordalR2'+c1.id_compra}" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title" id="myModalLabel1">Motivo del rechazo Pago - 2</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form id="formR2" th:action="${'../../../../reiniciarC_A/'+c1.id_compra+'/2'}" method="post">
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                                <div class="controls">
+                                                                                    <input type="text" class="form-control" placeholder="Motivo" name="motivosR" required data-validation-required-message="Debe introducir el motivo">
+                                                                                </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer text-center" >     
+                                                                    <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar ventana</button>
+                                                                    <button type="submit" class="btn btn-warning">Enviar rechazo</button>
+                                                                </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                </th:block>
                                             </div>
                                         </div>
                                     </div>
